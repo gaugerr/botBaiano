@@ -97,7 +97,7 @@ const vcard = 'BEGIN:VCARD\n'
             + 'ORG:Owner Bot;\n' 
             + 'TEL;type=CELL;type=VOICE;waid=555180614158:+55 51 8061-4158\n' 
             + 'END:VCARD'
-prefix = '+'
+prefix = '!'
 blocked = ['556993899391']
 limitawal = '1000'
 const timestamp = speed();
@@ -1527,15 +1527,24 @@ case 'jokerlogo':
  
 
 ┌──────────────┐
-├ ⚄ *𝗥𝗘𝗚𝗜𝗦𝗧𝗥𝗢*
+├ 💡 *𝙉𝙊𝙑𝙄𝘿𝘼𝘿𝙀𝙎*
 ├──────────────────┐
-├〘✘${prefix}registrar (seu nome)
-├─────────────────┤
-├〘✘${prefix}perfil
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘥𝘪𝘤𝘪𝘰𝘯𝘢𝘥𝘰𝘴:
+!modos
+𝘮𝘰𝘴𝘵𝘳𝘢 𝘶𝘮 𝘮𝘦𝘯𝘶 𝘦𝘮 𝘭𝘪𝘴𝘵𝘢 𝘱𝘢𝘳𝘢 𝘢𝘵𝘪𝘷𝘢𝘳/𝘥𝘦𝘴𝘢𝘵𝘪𝘷𝘢𝘳 𝘮𝘰𝘥𝘰𝘴 𝘦 𝘴𝘪𝘴𝘵𝘦𝘮𝘢𝘴
+ 
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘭𝘵𝘦𝘳𝘢𝘥𝘰𝘴:
+!f
+𝘢𝘨𝘰𝘳𝘢 𝘢 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 𝘷𝘦𝘮 𝘭𝘪𝘮𝘱𝘢, 𝘴𝘦𝘮 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦
+
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘳𝘦𝘮𝘰𝘷𝘪𝘥𝘰𝘴:
+!rename
+!steal
+𝘮𝘰𝘵𝘪𝘷𝘰: 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦 𝘯𝘢𝘰 𝘧𝘶𝘯𝘤𝘪𝘰𝘯𝘢𝘮 𝘯𝘰 𝘴𝘦𝘳𝘷𝘪𝘥𝘰𝘳
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗠𝗢𝗗𝗢𝗦*
+├ ⬆️⬇️ *𝗠𝗢𝗗𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}bemvindo 1/0
@@ -1550,35 +1559,35 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗬𝗢𝗨𝗧𝗨𝗕𝗘*
+├🔥 *𝗬𝗢𝗨𝗧𝗨𝗕𝗘*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}play  
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗜𝗠𝗔𝗚𝗘𝗠*
+├ 📸 *𝗜𝗠𝗔𝗚𝗘𝗠*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}img
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
+├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}ttthelp
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗦𝗜𝗠𝗜 𝗜.𝗔*
+├ 👻 *𝗦𝗜𝗠𝗜 𝗜.𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}simi
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗙𝗜𝗚𝗨𝗥𝗜𝗡𝗛𝗔*
+├ 🎆 *𝗙𝗜𝗚𝗨𝗥𝗜𝗡𝗛𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}f 𝘮𝘪𝘥𝘪𝘢 » 𝘧𝘪𝘨𝘶𝘪𝘯𝘩𝘢
@@ -1588,8 +1597,6 @@ case 'jokerlogo':
 ├〘✘${prefix}foto 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 » 𝘧𝘰𝘵𝘰
 ├─────────────────┤
 ├〘✘${prefix}tomp4 𝘧𝘪𝘨 𝘢𝘯𝘪𝘮𝘢𝘥𝘢 » mp4
-├─────────────────┤
-├〘✘${prefix}rename 𝘵𝘹𝘵|𝘵𝘹𝘵
 ├─────────────────┤
 ├〘✘${prefix}attp 𝘵𝘹𝘵
 ├─────────────────┤
@@ -1627,9 +1634,11 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗢𝗦*
+├ 🎉 *𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
+├〘✘${prefix}perfil
+├─────────────────┤
 ├〘✘${prefix}gay 
 ├─────────────────┤
 ├〘✘${prefix}lgbt
@@ -1666,7 +1675,7 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌───────────────┐
-├ ⚃ *𝗔𝗨𝗗𝗜𝗢𝗦*
+├ 🎶 *𝗔𝗨𝗗𝗜𝗢𝗦*
 └───────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}esquilo
@@ -1699,7 +1708,7 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗚𝗥𝗨𝗣𝗢𝗦*
+├ 🫂 *𝗚𝗥𝗨𝗣𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}ownergp
@@ -1742,7 +1751,7 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗟𝗢𝗚𝗢𝗦*
+├ 📲 *𝗟𝗢𝗚𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}marvel
@@ -1817,7 +1826,7 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚄ *𝗔𝗡𝗜𝗠𝗘*
+├ 🈯 *𝗔𝗡𝗜𝗠𝗘*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}animeneko
@@ -1840,7 +1849,7 @@ case 'jokerlogo':
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚃ *+𝟭𝟴*
+├ 🔞 *+𝟭𝟴*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}sexyloli
@@ -1856,12 +1865,12 @@ case 'jokerlogo':
 
 ╔──────¤◎¤──────╗
 
-       𝘤𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵© 𝘣𝘺 𝘨𝘢𝘶𝘨𝘦𝘳
+       📵𝘤𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵© 𝘣𝘺 𝘨𝘢𝘶𝘨𝘦𝘳📵
 
 *Faça uma doação via pix e me ajude a manter este bot*
 *Você pode até ganhar a script liberada deste bot ;)*
-*Chave disponível em ${prefix}pix
-   
+*Chave disponível em ${prefix}pix*
+    
 ╚──────¤◎¤──────╝
 `                                             
              client.sendMessage(from, gaugerxyz, text, { quoted: gauger, contextInfo: {forwardingScore: 508, isForwarded: true}})		
@@ -2488,7 +2497,7 @@ case 'swm':
 
 
 
-case  'rename':
+/* case  'rename':
 
 		    		if (!isQuotedSticker) return reply('Apenas figuriha tio')
 		            encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -2509,7 +2518,7 @@ if (!isOwner) return reply('Isso é só pro meu dono')
 					require('./lib/fetcher.js').modStick(media, client, mek, from)
 					break
 						
-
+*/
 	
 		case 'safada':        
 		
@@ -3538,8 +3547,123 @@ case 'aviso':
 					break
 
 
-
+//FIGURINHA 
+				case 'f':
    
+        if (!isGroup) return reply(mess.only.group)
+				if (isBanned) return reply('Banido!')
+					await limitAdd(sender)
+				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						ran = getRandom('.webp')
+						await ffmpeg(`./${media}`)
+							.input(media)
+							.on('start', function (cmd) {
+								console.log(`Started : ${cmd}`)
+							})
+							.on('error', function (err) {
+								console.log(`Error : ${err}`)
+								fs.unlinkSync(media)
+								reply(mess.stikga)
+							})
+							.on('end', function () {
+								console.log('Finish')
+								buffer = fs.readFileSync(ran)
+								client.sendMessage(from, buffer, sticker, {quoted: mek})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)
+							})
+							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+							.toFormat('webp')
+							.save(ran)
+					} else if ((isMedia && mek.message.videoMessage.seconds < 10 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 10) && args.length == 0) {
+						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						ran = getRandom('.webp')
+						reply(mess.wait) 
+						await ffmpeg(`./${media}`)
+							.inputFormat(media.split('.')[1])
+							.on('start', function (cmd) {
+								console.log(`Started : ${cmd}`)
+							})
+							.on('error', function (err) {
+								console.log(`Error : ${err}`)
+								fs.unlinkSync(media)
+								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+								reply(mess.stikga)
+							})
+							.on('end', function () {
+								console.log('Finish')
+								buffer = fs.readFileSync(ran)
+								client.sendMessage(from, buffer, sticker, {quoted: mek})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)
+							})
+							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+							.toFormat('webp')
+							.save(ran)
+							} else {
+						reply(`Enviar imagem / vídeo / gif com legenda \n${prefix}sticker (duração do adesivo de vídeo de 1 a 9 segundos)`)
+					}
+					addFilter(from)
+					break
+
+/*//COMANDO ST STICKER
+case 'st':
+
+if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+const media = await client.downloadAndSaveMediaMessage(encmedia)                      
+rano = getRandom('.webp')
+await ffmpeg(`./${media}`)
+.input(media)
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+exec(`webpmux -set exif ${addMetadata('AKAME-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
+fs.unlinkSync(media)
+reply('ERROR')
+})
+})
+exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 800:800 ${rano}`, (err) => {
+fs.unlinkSync(media)
+buffer = fs.readFileSync(rano)
+client.sendMessage(from, buffer, sticker, {quoted: mek})
+fs.unlinkSync(rano)
+})
+} else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
+const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+const media = await client.downloadAndSaveMediaMessage(encmedia)
+rano = getRandom('.webp')
+reply('*「 ❗ 」 Espere só um pouquinho amigo, a sua figurinha está sendo feita...*',)
+await ffmpeg(`./${media}`)
+.inputFormat(media.split('.')[1])
+.on('start', function (cmd) {
+console.log(`Started : ${cmd}`)
+})
+.on('error', function (err) {
+console.log(`Error : ${err}`)
+exec(`webpmux -set exif ${addMetadata('AKAME-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
+fs.unlinkSync(media)
+tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+reply(`Falha na conversão de ${tipe} para sticker`)
+})
+})
+exec(`ffmpeg -i ${media} -vcodec libwebp -filter:v fps=fps=15 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 200:200 ${rano}`, (err) => {
+fs.unlinkSync(media)
+buffer = fs.readFileSync(rano)
+client.sendMessage(from, buffer, sticker, {quoted: mek})
+fs.unlinkSync(rano)
+})
+} else {
+reply(`Você precisa enviar ou marcar uma imagem ou vídeo com no máximo 10 segundos.`)
+}
+addFilter(from)
+break*/
+  /* 
 
 				case 'f':
 				case 'figu':
@@ -3626,7 +3750,7 @@ case 'aviso':
 						reply(`Envie uma imagem com a legenda ${prefix}f ou imagem marcada já enviada`)
 					}
 					break
-			
+			*/
 
 				case 'foto':
 				 if (isLimit(sender)) return reply(mess.limitC)
@@ -5895,15 +6019,24 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
  
 
 ┌──────────────┐
-├ ⚄ *𝗥𝗘𝗚𝗜𝗦𝗧𝗥𝗢*
+├ 💡 *𝙉𝙊𝙑𝙄𝘿𝘼𝘿𝙀𝙎*
 ├──────────────────┐
-├〘✘${prefix}registrar (seu nome)
-├─────────────────┤
-├〘✘${prefix}perfil
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘥𝘪𝘤𝘪𝘰𝘯𝘢𝘥𝘰𝘴:
+!modos
+𝘮𝘰𝘴𝘵𝘳𝘢 𝘶𝘮 𝘮𝘦𝘯𝘶 𝘦𝘮 𝘭𝘪𝘴𝘵𝘢 𝘱𝘢𝘳𝘢 𝘢𝘵𝘪𝘷𝘢𝘳/𝘥𝘦𝘴𝘢𝘵𝘪𝘷𝘢𝘳 𝘮𝘰𝘥𝘰𝘴 𝘦 𝘴𝘪𝘴𝘵𝘦𝘮𝘢𝘴
+ 
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘭𝘵𝘦𝘳𝘢𝘥𝘰𝘴:
+!f
+𝘢𝘨𝘰𝘳𝘢 𝘢 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 𝘷𝘦𝘮 𝘭𝘪𝘮𝘱𝘢, 𝘴𝘦𝘮 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦
+
+𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘳𝘦𝘮𝘰𝘷𝘪𝘥𝘰𝘴:
+!rename
+!steal
+𝘮𝘰𝘵𝘪𝘷𝘰: 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦 𝘯𝘢𝘰 𝘧𝘶𝘯𝘤𝘪𝘰𝘯𝘢𝘮 𝘯𝘰 𝘴𝘦𝘳𝘷𝘪𝘥𝘰𝘳
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗠𝗢𝗗𝗢𝗦*
+├ ⬆️⬇️ *𝗠𝗢𝗗𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}bemvindo 1/0
@@ -5918,35 +6051,35 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗬𝗢𝗨𝗧𝗨𝗕𝗘*
+├🔥 *𝗬𝗢𝗨𝗧𝗨𝗕𝗘*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}play  
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗜𝗠𝗔𝗚𝗘𝗠*
+├ 📸 *𝗜𝗠𝗔𝗚𝗘𝗠*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}img
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
+├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}ttthelp
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗦𝗜𝗠𝗜 𝗜.𝗔*
+├ 👻 *𝗦𝗜𝗠𝗜 𝗜.𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}simi
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗙𝗜𝗚𝗨𝗥𝗜𝗡𝗛𝗔*
+├ 🎆 *𝗙𝗜𝗚𝗨𝗥𝗜𝗡𝗛𝗔*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}f 𝘮𝘪𝘥𝘪𝘢 » 𝘧𝘪𝘨𝘶𝘪𝘯𝘩𝘢
@@ -5956,8 +6089,6 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 ├〘✘${prefix}foto 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 » 𝘧𝘰𝘵𝘰
 ├─────────────────┤
 ├〘✘${prefix}tomp4 𝘧𝘪𝘨 𝘢𝘯𝘪𝘮𝘢𝘥𝘢 » mp4
-├─────────────────┤
-├〘✘${prefix}rename 𝘵𝘹𝘵|𝘵𝘹𝘵
 ├─────────────────┤
 ├〘✘${prefix}attp 𝘵𝘹𝘵
 ├─────────────────┤
@@ -5995,9 +6126,11 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚂ *𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗢𝗦*
+├ 🎉 *𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
+├〘✘${prefix}perfil
+├─────────────────┤
 ├〘✘${prefix}gay 
 ├─────────────────┤
 ├〘✘${prefix}lgbt
@@ -6034,7 +6167,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌───────────────┐
-├ ⚃ *𝗔𝗨𝗗𝗜𝗢𝗦*
+├ 🎶 *𝗔𝗨𝗗𝗜𝗢𝗦*
 └───────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}esquilo
@@ -6067,7 +6200,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚅ *𝗚𝗥𝗨𝗣𝗢𝗦*
+├ 🫂 *𝗚𝗥𝗨𝗣𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}ownergp
@@ -6110,7 +6243,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚁ *𝗟𝗢𝗚𝗢𝗦*
+├ 📲 *𝗟𝗢𝗚𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}marvel
@@ -6185,7 +6318,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚄ *𝗔𝗡𝗜𝗠𝗘*
+├ 🈯 *𝗔𝗡𝗜𝗠𝗘*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}animeneko
@@ -6208,7 +6341,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 └──────────────────┘
 
 ┌──────────────┐
-├ ⚃ *+𝟭𝟴*
+├ 🔞 *+𝟭𝟴*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}sexyloli
@@ -6224,7 +6357,7 @@ if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu reg
 
 ╔──────¤◎¤──────╗
 
-       𝘤𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵© 𝘣𝘺 𝘨𝘢𝘶𝘨𝘦𝘳
+       📵𝘤𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵© 𝘣𝘺 𝘨𝘢𝘶𝘨𝘦𝘳📵
 
 *Faça uma doação via pix e me ajude a manter este bot*
 *Você pode até ganhar a script liberada deste bot ;)*
@@ -6623,18 +6756,7 @@ client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:
 	}
 		
 
-      
-    if   (messagesC.includes("728")){
-		client.updatePresence(from, Presence.composing)
-        const d = fs.readFileSync('./figurinhas/teste.png');
-        client.sendMessage(from, d, image, {quoted: mek})
-      }
-      if   (messagesC.includes("júlia")){
-      	 julia = `${Math.floor(Math.random() * 14)}`            	 
-		client.updatePresence(from, Presence.composing)
-        const d = fs.readFileSync(`./vibrat/.${julia}.png`);
-        client.sendMessage(from, d, image, {quoted: mek, caption:'😏', thumbnail:null})
-      }
+     
       if (messagesC.includes("petra")) {
                  data = await fetchJson('https://waifu.pics/api/sfw/waifu')
             
