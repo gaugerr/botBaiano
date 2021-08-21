@@ -54,8 +54,6 @@ const request = require('request')
 const cd = 4.32e+7
 //const { Sticker } = require('wa-sticker-formatter')
 
-
-
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
 const antilink = JSON.parse(fs.readFileSync('./json/antilink.json'))
@@ -191,6 +189,16 @@ client.on('CB:action,,battery', json => {
 		global.batrei.push(batterylevel)
 	    })
 	    
+	    function kyun(seconds){
+  function pad(s){
+    return (s < 10 ? '0' : '') + s;
+  }
+  var hours = Math.floor(seconds / (60*60));
+  var minutes = Math.floor(seconds % (60*60) / 60);
+  var seconds = Math.floor(seconds % 60);
+  return `${pad(hours)} Horas ${pad(minutes)} Minutos ${pad(seconds)} Segundos`
+}
+	    
 	client.on('chat-update', async (mek) => {
 		try {
             if (!mek.hasNewMessage) return             
@@ -210,8 +218,7 @@ client.on('CB:action,,battery', json => {
             const hr = moment.tz('America/Sao_Paulo').format('HH:mm:ss')
             const timi = moment.tz('America/Sao_Paulo').add(30, 'days').calendar();
             const timu = moment.tz('America/Sao_Paulo').add(20, 'days').calendar();
-            const hour_now = moment().format('HH:mm:ss')
-            
+            const hour_now = moment().format('HH:mm:ss')            
 			body = (type === 'conversation' && mek.message.conversation.startsWith(prefix)) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption.startsWith(prefix) ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption.startsWith(prefix) ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text.startsWith(prefix) ? mek.message.extendedTextMessage.text : ''
 			var pes = (type === 'conversation' && mek.message.conversation) ? mek.message.conversation : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : (type == 'extendedTextMessage') && mek.message.extendedTextMessage.text ? mek.message.extendedTextMessage.text : ''
 			budy = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : '' 
@@ -222,7 +229,7 @@ client.on('CB:action,,battery', json => {
             const tescuk = ["0@s.whatsapp.net"]
             const q = args.join(' ')
             sender = mek.key.fromMe ? client.user.jid : mek.key.remoteJid.endsWith('@g.us') ? mek.participant : mek.key.remoteJid
-
+ 
 			mess = {
 				wait: 'Aguarde, estou fazendo.. 🥃',
 				twotxt: `Precido de 2 textos para essa logo, use da seguinte forma\n${prefix}${command} texto/texto`,
@@ -230,7 +237,7 @@ client.on('CB:action,,battery', json => {
 				success: 'Funciona',
 				limitC: '*não quero responder você*',
 				error: {
-					stick: 'Arquivo .exif criado, tente novamente'
+					stick: 'Erro, tente novamente'
 				},
 				only: {
 				    pv: '*❌ Esse comando só pode ser usado no pv amigo ❌*',
@@ -266,7 +273,7 @@ client.on('CB:action,,battery', json => {
             const isBanned = ban.includes(sender)
 			const isOwner = ownerNumber.includes(sender)
             const isLevelingOn = isGroup ? _leveling.includes(from) : true
-            const NomerOwner = '554884393825@s.whatsapp.net,555180614158@s.whatsapp.net'
+            const NomerOwner = '555180614158@s.whatsapp.net'
             const isEventon = isGroup ? event.includes(from) : false            
             pushname = client.contacts[sender] != undefined ? client.contacts[sender].vname || client.contacts[sender].notify : undefined        
             const botName = 'BOT BAIANO'
@@ -320,139 +327,45 @@ client.on('CB:action,,battery', json => {
             const buttonsRM = (type === 'buttonsResponseMessage') ? mek.message.buttonsResponseMessage.selectedDisplayText : ''                            
 
             const listRM = (type === 'listResponseMessage') ? mek.message.listResponseMessage.singleSelectReply.selectedRowId : ''
-    
+            
+            const {
+                wa_version,
+                mcc,
+                mnc,
+                os_version,
+                device_manufacturer,
+                device_model
+            } = client.user.phone
+            
+            colors = ['red','white','black','blue','yellow','green']
+            
+      //_TIPO DE MENSAGEM
+            const isImage = type == 'imageMessage'
+            const isVideo = type == 'videoMessage'
+            const isAudio = type == 'audioMessage'
+            const isSticker = type == 'stickerMessage'
+            const isContact = type == 'contactMessage'
+            const isLocation = type == 'locationMessage'
+            const isMedia = (type === 'imageMessage' || type === 'videoMessage' || type === 'audioMessage')
+            typeMessage = body.substr(0, 50).replace(/\n/g, '')
+            if (isImage) typeMessage = "Image"
+            else if (isVideo) typeMessage = "Video"
+            else if (isAudio) typeMessage = "Audio"
+            else if (isSticker) typeMessage = "Sticker"
+            else if (isContact) typeMessage = "Contact"
+            else if (isLocation) typeMessage = "Location"
+            const isQuotedMsg = type === 'extendedTextMessage' && content.includes('textMessage')
+            const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+            const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+            const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
+            const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+            const isQuotedContact = type === 'extendedTextMessage' && content.includes('contactMessage')
+            const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
+							
 
-
-
-////FINALIZAR TTT AUTOMATICAMENTE By: Resen
-if (tttset.tttstatus == "off" && tttset.autoEndTime == "on") {
-tttset.autoEndTime = "off"
-} else if (tttset.tttstatus == "on" && tttset.autoEndTime == "on") {
-if (isCmd) {
-const randomEndTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
-addLevelingXp(tttset.player, randomEndTTTXP)
-const checkTTTIdEnd = getTTTId(tttset.player)
-if (checkTTTIdEnd === undefined) addTTTId(tttset.player)
-addTTTpoints(tttset.player, randomEndTTTXP)
-client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌\n\n➣  PUNIÇÃO: ${randomEndTTTXP} XP 🔮`, text, {quoted: tttset.mentionPlayer})
-} else {
-client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌`, text, {quoted: tttset.mentionPlayer})
-}
-esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
-esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
-esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
-tttset.tttstatus = "off"
-tttset.autoEndTime = "off"
-}
-
-
-        const addATM = (sender) => {
-                const obj = {id: sender, uang : 0}
-            uang.push(obj)
-            fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-        }
-
-        const addKoinUser = (sender, amount) => {
-            let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                uang[position].uang += amount
-                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-            }
-        }
-
-        const checkATMuser = (sender) => {
-                let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                return uang[position].uang
-            }
-        }
-
-        const bayarLimit = (sender, amount) => {
-                let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit -= amount
-                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
-            }
-        }
-
-        const confirmATM = (sender, amount) => {
-                let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                uang[position].uang -= amount
-                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-            }
-        }
-
-        const limitAdd = (sender) => {
-             let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id == sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit += 1
-                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
-            }
-        }
-        
-                const addLimit = (mentioned) => {
-             let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id == mentioned) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit -= 100000
-                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
-            }
-        }
-        
-        const removeLimit = (mentioned) => {
-             let position = false
-            Object.keys(_limit).forEach((i) => {
-                if (_limit[i].id == mentioned) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                _limit[position].limit += 10000
-                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
-            }
-        }     
-
-function kyun(seconds){
-  function pad(s){
-    return (s < 10 ? '0' : '') + s;
-  }
-  var hours = Math.floor(seconds / (60*60));
-  var minutes = Math.floor(seconds % (60*60) / 60);
-  var seconds = Math.floor(seconds % 60);
-  return `${pad(hours)} Horas ${pad(minutes)} Minutos ${pad(seconds)} Segundos`
-}
-
-
+            const gauger ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 0,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `🥵🥵🥵\n⊳${ucapanFakereply}`, orderTitle: '𝘨𝘢𝘶𝘨𝘦𝘳', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
+            const gauger1 = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "gaugerrt","groupName": "...", "caption": `🥵`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
+      
             
         	const sekarang = new Date().getTime();
 			var ase = new Date();
@@ -515,9 +428,6 @@ function kyun(seconds){
                 case 23: waktoonyabro = `𝗕𝗼𝗮 𝗡𝗼𝗶𝘁𝗲 🌛`; break;
             }
             var ucapanFakereply = '' + waktoonyabro;
-            
-            const gauger ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 0,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `🥵🥵🥵\n⊳${ucapanFakereply}`, orderTitle: '𝘨𝘢𝘶𝘨𝘦𝘳', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-            const gauger1 = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "gaugerrt","groupName": "...", "caption": `🥵`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
           
 
             const nivelAtual = getLevelingLevel(sender)
@@ -615,15 +525,113 @@ function kyun(seconds){
                 var tuser = '*Registrado✅*'  
             } else {
                 var tuser = '*Membro comum🗿*'
-            }
-            
+            }            
             
             if(pushname === undefined || isBot) {
             var pushname = '*botBaiano🔥*'
             }
             
+
+
+
+
             
-                    
+        const addATM = (sender) => {
+                const obj = {id: sender, uang : 0}
+            uang.push(obj)
+            fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
+        }
+
+        const addKoinUser = (sender, amount) => {
+            let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                uang[position].uang += amount
+                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
+            }
+        }
+
+        const checkATMuser = (sender) => {
+                let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return uang[position].uang
+            }
+        }
+
+        const bayarLimit = (sender, amount) => {
+                let position = false
+            Object.keys(_limit).forEach((i) => {
+                if (_limit[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _limit[position].limit -= amount
+                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
+            }
+        }
+
+        const confirmATM = (sender, amount) => {
+                let position = false
+            Object.keys(uang).forEach((i) => {
+                if (uang[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                uang[position].uang -= amount
+                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
+            }
+        }
+
+        const limitAdd = (sender) => {
+             let position = false
+            Object.keys(_limit).forEach((i) => {
+                if (_limit[i].id == sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _limit[position].limit += 1
+                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
+            }
+        }
+        
+                const addLimit = (mentioned) => {
+             let position = false
+            Object.keys(_limit).forEach((i) => {
+                if (_limit[i].id == mentioned) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _limit[position].limit -= 100000
+                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
+            }
+        }
+        
+        const removeLimit = (mentioned) => {
+             let position = false
+            Object.keys(_limit).forEach((i) => {
+                if (_limit[i].id == mentioned) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                _limit[position].limit += 10000
+                fs.writeFileSync('./json/limit.json', JSON.stringify(_limit))
+            }
+        }     
+                                                                                                        
                                     
             //_XP COM LEVELING ATIVO
                if (!mek.key.fromMe) {
@@ -708,7 +716,6 @@ Seu limite restante : ${limitCounts}`
            return false
        }
      }
-
 
             //function balance
             if (isGroup ) {
@@ -933,23 +940,7 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
           }
      }     
      
-		    colors = ['red','white','black','blue','yellow','green']
-			const isMedia = (type === 'imageMessage' || type === 'videoMessage')
-			const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
-			const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
-			const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
-			const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-							
-			
-			
-const {
-                wa_version,
-                mcc,
-                mnc,
-                os_version,
-                device_manufacturer,
-                device_model
-            } = client.user.phone
+		    			
 
             
             client.chatRead(from)
@@ -1011,44 +1002,7 @@ if (!isCmd && !isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻
 if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\x1b[1;37m]', color('NOME', 'white'), color(pushname, 'green'), color('ENVIOU', 'white'), color('UMA', 'white'), color('MENSAGEM', 'white'), color('NO GRUPO', 'white'), color(groupName, 'green'))
 		
 	
-/**
-					function addMetadata(packname, author) {	
-				author = author.replace(/[^a-zA-Z0-9]/g, '');	
-				let name = `${author}_${packname}`
-				if (fs.existsSync(`./exif/${name}.exif`)) return `./exif/${name}.exif`
-				const json = {	
-					"sticker-pack-name": packname,
-					"sticker-pack-publisher": author,
-				}
-				const littleEndian = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00])	
-				const bytes = [0x00, 0x00, 0x16, 0x00, 0x00, 0x00]	
 
-				let len = JSON.stringify(json).length	
-				let last	
-
-				if (len > 256) {	
-					len = len - 256	
-					bytes.unshift(0x01)	
-				} else {	
-					bytes.unshift(0x00)	
-				}	
-
-				if (len < 16) {	
-					last = len.toString(16)	
-					last = "0" + len	
-				} else {	
-					last = len.toString(16)	
-				}	
-
-				const buf2 = Buffer.from(last, "hex")	
-				const buf3 = Buffer.from(bytes)	
-				const buf4 = Buffer.from(JSON.stringify(json))	
-
-				const buffer = Buffer.concat([littleEndian, buf2, buf3, buf4])	
-
-				fs.writeFile(`./exif/${name}.exif`, buffer, (err) => {	
-					return `./exif/${name}.exif`	
-				})}   */
 				
 				 	 	
 			const ftroli2 ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "6289523258649-1604595598@g.us"  }, "message": {orderMessage: {itemCount: 10,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `Made with ❣️ `, orderTitle: 'zeeoneofc', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
@@ -1110,16 +1064,16 @@ reply('Use fotos/adesivos!')
 }
 await limitAdd(sender)
 break
-
-/* case 'stickerformat': //by gauger
+/*
+case 'stickerf': //by gauger
 if (!isQuotedSticker) return reply('Apenas figuriha tio')
-sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-media = await client.downloadAndSaveMediaMessage(sticker)
-gg = body.slice(6)
-var txt1 = gg.split("/")[0];
-var txt2 = gg.split("/")[1];
-  (async () => {
-      const stickerMetadata = {
+const sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+const media = await client.downloadAndSaveMediaMessage(sticker)
+gg = body.slice(10)
+ txt1 = gg.split("/")[0];
+  txt2 = gg.split("/")[1];
+
+   const stickerMetadata = {
         type: 'full',
         pack: `${txt1}`,
         author: `${txt2}`,
@@ -1128,14 +1082,19 @@ var txt2 = gg.split("/")[1];
         ]
     }
     sticker = await new Sticker(image, stickerMetadata).build()
-})
+
 client.sendMessage(from, sticker, sticker, {quoted: mek})
-break  */
+break  
 
 
-
-
-
+case 'stickerfm':
+if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
+                  const encmediia = JSON.parse(JSON.stringify(msg).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+                  const meidia = await cash.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
+                  const webpWithMetadata = await WSF.setMetadata
+                  cash.sendMessage(from, webpWithMetadata, MessageType.sticker, {quoted: msg, sendEphemeral: true, contextInfo: {"forwardingScore": 9999, "isForwarded": true}})
+                  fs.unlinkSync(meidia)
+break */
 case 'quoted1':
 client.sendMessage(from, 'test', text, {quoted: ftroli2})
 break
@@ -1166,7 +1125,7 @@ break
 case 'quoted10':
 client.sendMessage(from, 'test', text, {quoted: menu})
 break
-
+/*
 case 'coala':
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/koala?apikey=apiteam`)
 buffer = await getBuffer(team.resultado)
@@ -1402,7 +1361,7 @@ case 'jokerlogo':
                       client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
                       break
 
-
+*/
 	/*-------------[ Tictactoe Handler ]-------------*/
                 case 'jogodavelha':
                 if (!isUser) return reply('usuario nao registrado')                                 
