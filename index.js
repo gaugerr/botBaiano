@@ -3550,7 +3550,7 @@ case 'aviso':
 //FIGURINHA 
 				case 'f':
    
-        if (!isGroup) return reply(mess.only.group)
+       i
 				if (isBanned) return reply('Banido!')
 					await limitAdd(sender)
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
@@ -5825,14 +5825,10 @@ console.log('\x1b[1;37m>', '[', '\x1b[1;32mEXEC\x1b[1;37m', ']', time, color(">"
       
       if (msgReceived == "bot") {
         client.updatePresence(from, Presence.composing);
-        reply("oq foi agr");
+        reply("ooi ;)");
       }
       
-      if (msgReceived == "Bot") {
-        client.updatePresence(from, Presence.composing);
-        reply("q foi fdp");
-      }
-            
+     
        if (msgReceived == "bot fdp") {
         client.updatePresence(from, Presence.composing);
         reply("kkk fodase vc");
@@ -5865,7 +5861,8 @@ console.log('\x1b[1;37m>', '[', '\x1b[1;32mEXEC\x1b[1;37m', ']', time, color(">"
 
       if (msgReceived == "bom dia") {
         client.updatePresence(from, Presence.composing);
-        reply("Bomm dia😎");
+        reply("Bomm dia😎")
+        client.sendMessage(from, `fs.readFileSync('./figurinhas/bomdia.webp')` ,sticker, {quoted: mek})
       }
             if (msgReceived == "Bot, vc me ama?") {
         client.updatePresence(from, Presence.composing);
@@ -6766,11 +6763,6 @@ client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:
            addFilter(from)
 }
 
-if (messagesC.includes("testefig")){
-		client.updatePresence(from, Presence.composing)
-        const d = fs.readFileSync('./figurinhas/teste.webp');
-        client.sendMessage(from, d, sticker, {quoted: mek})
-      }
       
               if (messagesC.includes("://chat.whatsapp.com/")){
 		if (!isGroup) return
