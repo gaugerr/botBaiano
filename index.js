@@ -3550,7 +3550,7 @@ case 'aviso':
 //FIGURINHA 
 				case 'f':
    
-       i
+       
 				if (isBanned) return reply('Banido!')
 					await limitAdd(sender)
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
