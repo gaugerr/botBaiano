@@ -34,6 +34,8 @@ const { wait, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, bann
 const { addTTTId, addTTTwin, addTTTdefeat, addTTTtie, addTTTpoints, getTTTId, getTTTwins, getTTTdefeats, getTTTties, getTTTpoints } = require('./lib/tictactoe.js')
 const { WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC } = require('./lib/tictactoeIA.js')
 const { validmove, setGame } = require('./lib/jogodavelha.js')
+const { EmojiAPI } = require("emoji-api");
+const emoji = new EmojiAPI()
 //-------------------------------------LOAD npm PACKAGE-----------------------------------------------//
 
 const fs = require('fs')
@@ -101,6 +103,7 @@ limitawal = '1000'
 const timestamp = speed();
 const latensi = speed() - timestamp
 fromMe = false
+//const antibot = m.isBaileys
 
 
 
@@ -288,6 +291,20 @@ client.on('CB:action,,battery', json => {
 			const reply = (teks) => {
 				client.sendMessage(from, teks, text, {quoted:mek, contextInfo: {forwardingScore: 508, isForwarded: true}})
 			}
+			
+			try {
+		pporang = await client.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
+		      } catch {
+		pporang = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+		      }
+		const ofrply = await getBuffer(pporang)
+		//	if (antibot === true) return
+		const catalogo = (teks) => {
+             res = client.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 321, "message": teks, "footerText": "*_© Dcode Denpa_*", "thumbnail": ofrply, "surface": 'CATALOG'}}, {quoted: mek})
+             client.relayWAMessage(res)
+        }
+        
+        
 			const replyA = (tujuh) => {
 		     	client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
 }
@@ -733,26 +750,7 @@ Seu limite restante : ${limitCounts}`
 
 
 
-////FINALIZAR TTT AUTOMATICAMENTE By: Resen
-if (tttset.tttstatus == "off" && tttset.autoEndTime == "on") {
-tttset.autoEndTime = "off"
-} else if (tttset.tttstatus == "on" && tttset.autoEndTime == "on") {
-if (isCmd) {
-const randomEndTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
-addLevelingXp(tttset.player, randomEndTTTXP)
-const checkTTTIdEnd = getTTTId(tttset.player)
-if (checkTTTIdEnd === undefined) addTTTId(tttset.player)
-addTTTpoints(tttset.player, randomEndTTTXP)
-client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌\n\n➣  PUNIÇÃO: ${randomEndTTTXP} XP 🔮`, text, {quoted: tttset.mentionPlayer})
-} else {
-client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌`, text, {quoted: tttset.mentionPlayer})
-}
-esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
-esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
-esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
-tttset.tttstatus = "off"
-tttset.autoEndTime = "off"
-}
+
 
         /*--------------------[ Tictactoe jogo Function ]--------------------*/
 const cmde = budy.toLowerCase().split(" ")[0] || "";
@@ -980,32 +978,8 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 		
 	
 
-				
-				 	 	
-			const ftroli2 ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "6289523258649-1604595598@g.us"  }, "message": {orderMessage: {itemCount: 10,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `Made with ❣️ `, orderTitle: 'zeeoneofc', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-			const say1 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "6283136505591-1614953337@g.us" } : {}) }, message: { "documentMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "application/octet-stream", "title": `「 client 」\n*${kyun(process.uptime())}*`, "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": fs.readFileSync(`logos/.fkreply.jpg`)}}}
-			const ffoto = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: '6283136505591-1614953337@g.us' } : {}) }, message: { 'imageMessage': { 'url': 'https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc', 'mimetype': 'image/png', 'caption': `client`, 'fileSha256': '+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=', 'fileLength': '28777', 'height': 1080, 'width': 1079, 'mediaKey': 'vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=', 'fileEncSha256': 'sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=', 'directPath': '/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69', 'mediaKeyTimestamp': '1610993486', 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)} } }
-			const say2 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: `6283136505591-1614953337@g.us` } : {}) }, message: { 'contactMessage': { 'displayName': `${pushname}\n❦  *${prefix + command}*`, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;client,;;;\nFN:client,\nitem1.TEL;waid=${sender.split('@')[0]}:${sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`), thumbnail:fs.readFileSync(`logos/.fkreply.jpg`),sendEphemeral: true}}}
-const gp = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "PINGHIN GAY","groupName": "client", "caption": `client-BOT️`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
 
-const gxyz = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "556181496039-1625944593@g.us" } : {}) }, message: { "liveLocationMessage": { "caption": ucapanFakereply}}}
-
-
-const fkontak = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "stickerMessage": { "caption":`${ucapanFakereply}\n🪀comando: *${prefix + command}*\n⏱horário: *${hr}* `}}} 
-
-const fdoc  = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: {"LocationMessage": {"caption": `「 gauger 」\n*${kyun(process.uptime())}*`, 'jpegThumbnail': fs.readFileSync('./logos/.fkreply.jpg')}}}
-
-
-const cdd = `client`
-const menu ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "6289523258649-1604595598@g.us"  }, "message": {orderMessage: {itemCount: 10,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `Made with ❣️ `, orderTitle: 'zeeoneofc', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-
-
-const say3 ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${ucapanFakereply}`, orderTitle: 'sayo', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-                     // Load Commands
-const gauger ={key: { fromMe: false, participant: "0@s.whatsapp.net", remoteJid: "555196741133-1490367661@g.us" }, message: {orderMessage: {itemCount:"777", status: "200", thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `🥵🥵🥵\n⊳${ucapanFakereply}`, orderTitle: "𝘨𝘢𝘶𝘨𝘦𝘳", sellerJid: '0@s.whatsapp.net'}}}
-
-            const gauger1 = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "gaugerrt","groupName": "...", "caption": `🥵`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
-
+const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `Olá ${pushname}\n⎇ ${command}\n`, 'jpegThumbnail': ofrply} } }
 
 const useLevel = getLevelingLevel(sender)                                
                     const requireXp = 5 * Math.pow(useLevel, (5 / 2)) + 50 * useLevel + 100
@@ -1053,8 +1027,11 @@ const useLevel = getLevelingLevel(sender)
 ├!smeme txt/txt
 ├escreve dois textos em uma fig, em cima e embaixo
 ├
-├!semoji 😈
-├Transforma o emoji em uma figurinha //by gauger
+├!femoji 😈
+├Transforma o emoji em uma foto idêntica
+├
+├!emoji
+├Transforma o emoji em figurinha(módulo)
 ├
 ├!metadinha
 ├Manda metadinha de anime
@@ -1446,6 +1423,25 @@ const useLevel = getLevelingLevel(sender)
 	
 	
 	
+case 'doc':
+tope = fs.readFileSync('./teste.html')
+client.sendMessage(from, tope, MessageType.document, {mimetype: 'document/html', title: 'teste'})
+break
+	
+case 'catalogo':
+catalogo(gaugerxyz)
+break
+	
+	case 'emoji':
+            if (!q) return reply('Y el emoji?')
+            qes = args.join(' ')
+            emoji.get(`${qes}`).then(emoji => {
+            const emojitext = `${emoji.images[4].url}`
+            sendStickerFromUrl(from,`${emojitext}`) 
+            console.log(emojitext)
+            })
+            break
+
 	case 'addgift':
 	if (!isOwner) return reply('Sem permissão para isso')
 	 const giftCode = createCode(10)
@@ -1571,8 +1567,12 @@ case 'quoted9':
 client.sendMessage(from, 'test', text, {quoted: say3})
 break
 case 'quoted10':
-client.sendMessage(from, 'test', text, {quoted: menu})
+client.sendMessage(from, 'test', text, {quoted: foto3})
 break
+case 'quoted11':
+client.sendMessage(from, 'test', text, {quoted: foto2})
+break
+
 
 case 'coala':
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/koala?apikey=apiteam`)
@@ -1604,7 +1604,7 @@ buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
-case 'semoji':
+case 'femoji':
 addFilter(from)  
 reply(mess.wait)
 if (args.length == 0) return reply(`Usage: ${prefix + command} query\nExample: ${prefix + command} 😭`)
@@ -3054,8 +3054,45 @@ case 'rapido':
 	           })
                   break
 
+case 'fix':
+	              client.updatePresence(from, Presence.composing) 
+	              if (!isOwner) return reply(mess.only.ownerB)
+	               const cmdgt = `git add . && git commit -am "melhorias adicionadas"`
+	               exec(cmdgt, (err, stdout) => {
+		           if(err) return client.sendMessage(from, "Comando errado", text, { quoted: mek })
+		           if (stdout) {
+			       client.sendMessage(from, stdout, text, { quoted: mek })
+		           }
+	           })
+                  break
 
-		
+		case 'deploy':
+	              client.updatePresence(from, Presence.composing) 
+	              if (!isOwner) return reply(mess.only.ownerB)
+	              reply('deploying the bot on the heroku server..')
+	               const cmdgit = `git push heroku master`
+	               exec(cmdgit, (err, stdout) => {
+		           if(err) return client.sendMessage(from, "Comando errado", text, { quoted: mek })
+		           if (stdout) {
+			       client.sendMessage(from, stdout, text, { quoted: mek })
+		           }
+	           })
+	           setTimeout( () => {
+					reply('full deployment, starting worker:1') 
+					}, 60000)
+					setTimeout( () => {
+					reply('worker was started') 
+					}, 10000)
+                  break
+case 'kjj':
+
+					setTimeout( () => {
+					reply('worker started') 
+					}, 10000)
+					setTimeout( () => {
+					reply('full deployment, starting worker:1') 
+					}, 20000)
+break
 		
 				case 'testime':
 					setTimeout( () => {
@@ -3469,7 +3506,7 @@ console.log(`Started : ${cmd}`)
 })
 .on('error', function (err) {
 console.log(`Error : ${err}`)
-exec(`webpmux -set exif ${addMetadata('AKAME-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
+exec(`webpmux -set exif ${addMetadata('client-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
 fs.unlinkSync(media)
 reply('ERROR')
 })
@@ -3492,7 +3529,7 @@ console.log(`Started : ${cmd}`)
 })
 .on('error', function (err) {
 console.log(`Error : ${err}`)
-exec(`webpmux -set exif ${addMetadata('AKAME-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
+exec(`webpmux -set exif ${addMetadata('client-BOT', 'sayo')} ${rano} -o ${rano}`, async (error) => {
 fs.unlinkSync(media)
 tipe = media.endsWith('.mp4') ? 'video' : 'gif'
 reply(`Falha na conversão de ${tipe} para sticker`)
@@ -6449,6 +6486,26 @@ client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:
 		}, 2000)
 	}
 	
+	////FINALIZAR TTT AUTOMATICAMENTE By: Resen
+if (tttset.tttstatus == "off" && tttset.autoEndTime == "on") {
+tttset.autoEndTime = "off"
+} else if (tttset.tttstatus == "on" && tttset.autoEndTime == "on") {
+if (isCmd) {
+const randomEndTTTXP = 0 - (Math.floor(Math.random() * 75) + 75)
+addLevelingXp(tttset.player, randomEndTTTXP)
+const checkTTTIdEnd = getTTTId(tttset.player)
+if (checkTTTIdEnd === undefined) addTTTId(tttset.player)
+addTTTpoints(tttset.player, randomEndTTTXP)
+client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌\n\n➣  PUNIÇÃO: ${randomEndTTTXP} XP 🔮`, text, {quoted: tttset.mentionPlayer})
+} else {
+client.sendMessage(tttset.local,`❌ O TEMPO DE JOGO EXPIROU ❌`, text, {quoted: tttset.mentionPlayer})
+}
+esp.a1 = "🔲"; esp.a2 = "🔲"; esp.a3 = "🔲"
+esp.b1 = "🔲"; esp.b2 = "🔲"; esp.b3 = "🔲"
+esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
+tttset.tttstatus = "off"
+tttset.autoEndTime = "off"
+}
 	
 	
 }
