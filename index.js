@@ -29,12 +29,11 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { cmdadd } = require('./lib/totalcmd.js')
 const { addMetadata } = require('./lib/addMetadata.js')
 const { getLevelingXp, getLevelingId, addLevelingXp, addLevelingLevel, addLevelingId, getLevelingLevel, getUserRank, addCooldown, leveltab } = require('./lib/leveling.js')
-const { getRegisterNo, getRegisterName, getRegisterSerial, /*getRegisterAge, */getRegisterTime, getRegisteredRandomId, addRegisteredUser, createSerial, checkRegisteredUser } = require('./lib/register.js')
+const { getRegisterNo, getRegisterName, getRegisterSerial, getRegisterTime, getRegisteredRandomId, addRegisteredUser, createSerial, checkRegisteredUser } = require('./lib/register.js')
 const { wait, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, banner, start, info, success, close } = require('./lib/functions.js')
 const { addTTTId, addTTTwin, addTTTdefeat, addTTTtie, addTTTpoints, getTTTId, getTTTwins, getTTTdefeats, getTTTties, getTTTpoints } = require('./lib/tictactoe.js')
 const { WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC } = require('./lib/tictactoeIA.js')
 const { validmove, setGame } = require('./lib/jogodavelha.js')
-
 //-------------------------------------LOAD npm PACKAGE-----------------------------------------------//
 
 const fs = require('fs')
@@ -68,8 +67,9 @@ const uang = JSON.parse(fs.readFileSync('./json/uang.json'))
 const samih = JSON.parse(fs.readFileSync('./json/simi.json'))
 const antifake = JSON.parse(fs.readFileSync('./json/antifake.json'))
 const totalcmd = JSON.parse(fs.readFileSync('./json/totalcmd.json'))[0].totalcmd
-const _registered = JSON.parse(fs.readFileSync('./json/registered.json'));
-const tictactoe = JSON.parse(fs.readFileSync('./lib/ttt/tictactoe.json'));
+const _registered = JSON.parse(fs.readFileSync('./json/registered.json'))
+const tictactoe = JSON.parse(fs.readFileSync('./lib/ttt/tictactoe.json'))
+const giftC = JSON.parse(fs.readFileSync('./json/giftcard.json'))
 var tttset = require('./lib/ttt/TTTconfig/tttset.json');
 var esp = require('./lib/ttt/TTTconfig/tttframe.json');
 
@@ -230,6 +230,7 @@ client.on('CB:action,,battery', json => {
             const q = args.join(' ')
             sender = mek.key.fromMe ? client.user.jid : mek.key.remoteJid.endsWith('@g.us') ? mek.participant : mek.key.remoteJid
  
+        
 			mess = {
 				wait: 'Aguarde, estou fazendo.. 🥃',
 				twotxt: `Precido de 2 textos para essa logo, use da seguinte forma\n${prefix}${command} texto/texto`,
@@ -275,9 +276,13 @@ client.on('CB:action,,battery', json => {
             const isLevelingOn = isGroup ? _leveling.includes(from) : true
             const NomerOwner = '555180614158@s.whatsapp.net'
             const isEventon = isGroup ? event.includes(from) : false            
+            const isGift = giftC.includes(q)
             pushname = client.contacts[sender] != undefined ? client.contacts[sender].vname || client.contacts[sender].notify : undefined        
             const botName = 'BOT BAIANO'
             const ownerName = 'gauger'
+            const createCode = (size) => {
+            return crypto.randomBytes(size).toString('hex').slice(0, size)
+        }
 			const isUrl = (url) => {return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
 			}
 			const reply = (teks) => {
@@ -361,10 +366,11 @@ client.on('CB:action,,battery', json => {
             const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
             const isQuotedContact = type === 'extendedTextMessage' && content.includes('contactMessage')
             const isQuotedLocation = type === 'extendedTextMessage' && content.includes('locationMessage')
+			
 							
+	       
 
-            const gauger ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 0,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `🥵🥵🥵\n⊳${ucapanFakereply}`, orderTitle: '𝘨𝘢𝘶𝘨𝘦𝘳', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-            const gauger1 = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "gaugerrt","groupName": "...", "caption": `🥵`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
+            
       
             
         	const sekarang = new Date().getTime();
@@ -531,10 +537,6 @@ client.on('CB:action,,battery', json => {
             var pushname = '*botBaiano🔥*'
             }
             
-
-
-
-
             
         const addATM = (sender) => {
                 const obj = {id: sender, uang : 0}
@@ -793,18 +795,7 @@ Sua vez... : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
                               ],
                          },
                     });
-               } /*else {
-                    client.sendMessage(
-                         from,
-                         `『❗』 Esta e uma opção apenas para o @${boardnow.O} !`,
-                         MessageType.text, {
-                         quoted: mek,
-                         contextInfo: {
-                              mentionedJid: [boardnow.O + "@s.whatsapp.net"],
-                         },
-                    }
-                    );
-               } */
+               } 
           } else if (
                budy.toLowerCase() == "n" ||
                budy.toLowerCase() == "não" ||
@@ -824,18 +815,7 @@ Sua vez... : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
                          },
                     }
                     );
-               } /*else {
-                    client.sendMessage(
-                         from,
-                         `『❗』 Esta e uma opção apenas para o @${boardnow.O} !`,
-                         MessageType.text, {
-                         quoted: mek,
-                         contextInfo: {
-                              mentionedJid: [boardnow.O + "@s.whatsapp.net"],
-                         },
-                    }
-                    );
-               } */
+               }
           } 
      }
 
@@ -859,7 +839,7 @@ Jogo termina empatado 😐
                     fs.unlinkSync(`./lib/jogodavelha/${from}.json`);
                     cmd = `rm ${from}.json`
                exec(cmd, (err, stdout) => {
-		           if(err) console.log(`rm ${from}.json`)//return client.sendMessage(from, `Erro ao executar o comando rm ${from}.json`, text, { quoted: mek })
+		           if(err) console.log(`rm ${from}.json`)
 		           if (stdout) {
 			       client.sendMessage(from, stdout, text, { quoted: mek })
 		           }
@@ -875,8 +855,7 @@ Jogo termina empatado 😐
           
 Vencido por @${winnerJID} 😎👑
 `;
-            //    giftLimit(winnerJID + "@s.whatsapp.net", limWin);
-            //    pushLimit(looseJID + "@s.whatsapp.net", limLoose);
+         
             addKoinUser(winnerJID + "@s.whatsapp.net", dinherowin)           
                client.sendMessage(from, chatWon, MessageType.text, {
                     quoted: mek,
@@ -894,7 +873,7 @@ if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
  reply(`*🕹️JOGO DA VELHA RESETADO...🕹️*`);
  cmd = `rm ${from}.json`
                exec(cmd, (err, stdout) => {
-		           if(err) console.log(`rm ${from}.json`)//return client.sendMessage(from, `Erro ao executar o comando rm ${from}.json`, text, { quoted: mek })
+		           if(err) console.log(`rm ${from}.json`)
 		           if (stdout) {
 			       client.sendMessage(from, stdout, text, { quoted: mek })
 		           }
@@ -907,7 +886,7 @@ console.log(color(time, "red"), color("[ ESPIRADO ]", "magenta"), color('Jogo da
                fs.unlinkSync(`./lib/jogodavelha/${from}.json`);
                cmd = `rm ${from}.json`
                exec(cmd, (err, stdout) => {
-		           if(err) console.log(`rm ${from}.json`)//return client.sendMessage(from, `Erro ao executar o comando rm ${from}.json`, text, { quoted: mek })
+		           if(err) console.log(`rm ${from}.json`)
 		           if (stdout) {
 			       client.sendMessage(from, stdout, text, { quoted: mek })
 		           }
@@ -938,9 +917,7 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
                     },
                });
           }
-     }     
-     
-		    			
+     }     		    			
 
             
             client.chatRead(from)
@@ -1010,459 +987,40 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 			const ffoto = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: '6283136505591-1614953337@g.us' } : {}) }, message: { 'imageMessage': { 'url': 'https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc', 'mimetype': 'image/png', 'caption': `client`, 'fileSha256': '+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=', 'fileLength': '28777', 'height': 1080, 'width': 1079, 'mediaKey': 'vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=', 'fileEncSha256': 'sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=', 'directPath': '/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69', 'mediaKeyTimestamp': '1610993486', 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)} } }
 			const say2 = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: `6283136505591-1614953337@g.us` } : {}) }, message: { 'contactMessage': { 'displayName': `${pushname}\n❦  *${prefix + command}*`, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;client,;;;\nFN:client,\nitem1.TEL;waid=${sender.split('@')[0]}:${sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`), thumbnail:fs.readFileSync(`logos/.fkreply.jpg`),sendEphemeral: true}}}
 const gp = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "PINGHIN GAY","groupName": "client", "caption": `client-BOT️`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
-const gxyz = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "556181496039-1625944593@g.us" } : {}) }, message: { "liveLocationMessage": { "caption": ucapanFakereply}, 'jpegThumbnail': fs.readFileSync('./logos/.fkreply.jpg')}}
+
+const gxyz = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "556181496039-1625944593@g.us" } : {}) }, message: { "liveLocationMessage": { "caption": ucapanFakereply}}}
+
+
 const fkontak = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "stickerMessage": { "caption":`${ucapanFakereply}\n🪀comando: *${prefix + command}*\n⏱horário: *${hr}* `}}} 
 
-const fdoc  = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: {"imageMessage": {"caption": `「 client 」\n*${kyun(process.uptime())}*`, 'jpegThumbnail': fs.readFileSync('./logos/.fkreply.jpg')}}}
+const fdoc  = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: {"LocationMessage": {"caption": `「 gauger 」\n*${kyun(process.uptime())}*`, 'jpegThumbnail': fs.readFileSync('./logos/.fkreply.jpg')}}}
+
+
 const cdd = `client`
 const menu ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "6289523258649-1604595598@g.us"  }, "message": {orderMessage: {itemCount: 10,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `Made with ❣️ `, orderTitle: 'zeeoneofc', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
+
+
 const say3 ={"key": {   "fromMe": false,"participant":"0@s.whatsapp.net",   "remoteJid": "556181496039-1625944593@g.us"  }, "message": {orderMessage: {itemCount: 999999,status: 200, thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `⊳ Comando : ${prefix}${command}\n⊳${ucapanFakereply}`, orderTitle: 'sayo', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
                      // Load Commands
+const gauger ={key: { fromMe: false, participant: "0@s.whatsapp.net", remoteJid: "555196741133-1490367661@g.us" }, message: {orderMessage: {itemCount:"777", status: "200", thumbnail: fs.readFileSync(`logos/.fkreply.jpg`), surface: 200, message: `🥵🥵🥵\n⊳${ucapanFakereply}`, orderTitle: "𝘨𝘢𝘶𝘨𝘦𝘳", sellerJid: '0@s.whatsapp.net'}}}
+
+            const gauger1 = { key: {fromMe: false,participant: "0@s.whatsapp.net",remoteJid: "0@s.whatsapp.net"},message: {"groupInviteMessage": {"groupJid": "6288213840883-1616169743@g.us","inviteCode": "gaugerrt","groupName": "...", "caption": `🥵`, 'jpegThumbnail': fs.readFileSync(`logos/.fkreply.jpg`)}}}
 
 
-
-	switch(command) {
-	
-	
-	case 'tban':
-
-if (!isGroup) return reply(mess.only.group)
-if (!isGroupAdmins) return reply(mess.only.admin)
-if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-client.updatePresence(from, Presence.composing) 
-if (args[1]=="s") {var timer = args[0]+"000"
-} else if (args[1]=="m") {var timer = args[0]+"0000"
-} else if (args[1]=="h") {var timer = args[0]+"00000"
-} else {return reply("*Selecionar:*\nsegundos\nminutos\nhora\n\n*Exemplo*\n10 segundos")}
-setTimeout( () => {
-const close = {
-text: `Grupo fechado pelo administrador @${sender.split("@s.whatsapp.net")[0]}\nagora* apenas admin* pode enviar mensagens`, contextInfo: { mentionedJid: [sender] }
-}
-client.groupSettingChange (from, GroupSettingChange.messageSend, true);
-reply(close)
-}, timer)
-break
-	
-	
-	
-case 'smeme': case 'stickmeme':
-gh = body.slice(7)           
-var top = gh.split('/')[0]
-var bottom = gh.split('/')[1]
-var imgbb = require('imgbb-uploader')
-if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedSticker) && args.length > 0) {
-ger = isQuotedImage || isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek 
-owgi = await  client.downloadAndSaveMediaMessage(ger)
-anu = await imgbb("cedeb44b8d204947a6833ca1412ca77d", owgi)
-teks = `${anu.display_url}`
-ranp = getRandom('.gif')
-rano = getRandom('.webp')
-anu1 = `https://api.memegen.link/images/custom/${top}/${bottom}.png?background=${teks}`
-sendStickerFromUrl(from, `${anu1}`)
-} else {
-reply('Use fotos/adesivos!')
-}
-await limitAdd(sender)
-break
-/*
-case 'stickerf': //by gauger
-if (!isQuotedSticker) return reply('Apenas figuriha tio')
-const sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-const media = await client.downloadAndSaveMediaMessage(sticker)
-gg = body.slice(10)
- txt1 = gg.split("/")[0];
-  txt2 = gg.split("/")[1];
-
-   const stickerMetadata = {
-        type: 'full',
-        pack: `${txt1}`,
-        author: `${txt2}`,
-        categories: [
-            '🌹'
-        ]
-    }
-    sticker = await new Sticker(image, stickerMetadata).build()
-
-client.sendMessage(from, sticker, sticker, {quoted: mek})
-break  
-
-
-case 'stickerfm':
-if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
-                  const encmediia = JSON.parse(JSON.stringify(msg).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-                  const meidia = await cash.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
-                  const webpWithMetadata = await WSF.setMetadata
-                  cash.sendMessage(from, webpWithMetadata, MessageType.sticker, {quoted: msg, sendEphemeral: true, contextInfo: {"forwardingScore": 9999, "isForwarded": true}})
-                  fs.unlinkSync(meidia)
-break */
-case 'quoted1':
-client.sendMessage(from, 'test', text, {quoted: ftroli2})
-break
-case 'quoted2':
-client.sendMessage(from, 'test', text, {quoted: say1})
-break
-case 'quoted3':
-client.sendMessage(from, 'test', text, {quoted: ffoto})
-break
-case 'quoted4':
-client.sendMessage(from, 'test', text, {quoted: say2})
-break
-case 'quoted5':
-client.sendMessage(from, 'test', text, {quoted: gp})
-break
-case 'quoted6':
-client.sendMessage(from, 'test', text, {quoted: gxyz})
-break
-case 'quoted7':
-client.sendMessage(from, 'test', text, {quoted: fkontak})
-break
-case 'quoted8':
-client.sendMessage(from, 'test', text, {quoted: fdoc})
-break
-case 'quoted9':
-client.sendMessage(from, 'test', text, {quoted: say3})
-break
-case 'quoted10':
-client.sendMessage(from, 'test', text, {quoted: menu})
-break
-/*
-case 'coala':
-team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/koala?apikey=apiteam`)
-buffer = await getBuffer(team.resultado)
-team.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
-break
-
-case 'panda':
-team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/panda?apikey=apiteam`)
-buffer = await getBuffer(team.resultado)
-team.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
-break
-
-case 'raposas':
-team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/shiba?apikey=apiteam`)
-buffer = await getBuffer(team.resultado)
-team.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
-break
-
-case 'gatinhos':
-team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/gato?apikey=apiteam`)
-buffer = await getBuffer(team.resultado)
-team.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
-break
-
-case 'cachorro':
-team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/cachorro?apikey=apiteam&tipo=dog`)
-buffer = await getBuffer(team.resultado)
-team.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
-break
-
-
-//TEXT PRO ME
-
-case 'glitch2':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(8)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/glitch1?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'glitch':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(7)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/glitch2?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'toxic':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(6)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/toxic?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-
-case 'transformer':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(12)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/transformer?apikey=apiteam&texto=team=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'graffiti':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(9)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/graffiti?apikey=apiteam&texto1=${teks1}&texto2={teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'blackpink':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(10)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/glitch1?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'thunderv2':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(10)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/thunderv2?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'harrypotter':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(12)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/harrypotter2?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'pornhub':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(8)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/pornhub?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'neon3d':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(7)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/neon3d?texto=${teks}&apikey=apiteam`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'horrorblood':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(12)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/horror-blood?texto=${teks}&apikey=apiteam`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'neondevil':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(10)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/neon-devil?texto=${teks}&apikey=apiteam`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'wonderfulgraffiti':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(18)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/wonderful-graffiti?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'dropwater':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(10)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/dropwater?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'advancedglow':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(13)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/advanced-glow?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'captainamerica':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(15)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/captain-america?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-case 'jokerlogo':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(10)
-                      reply('[❗]ESPERE ...')
-                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/jokerlogo?apikey=apiteam&texto=${teks}`)
-                      buff = await getBuffer(anu.resultado)
-                      team.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'marvel':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(7)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/marvel?apikey=apiteam&texto1=${teks1}&texto2={teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      akame.sendMessage(from, buff, image, {quoted: mek})
-                      break
-                      case 'space':
-                      team = body.slice(6)
-                      teks1 = team.split("|")[0];
-                      teks2 = team.split("|")[1];
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/space-3d?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-                      case 'lavatext':
-                      team = body.slice(9)
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/lava-text?apikey=apiteam&texto1=${team}`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-                      case 'magma':
-                      team = body.slice(6)
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/magma-text?apikey=apiteam&texto=${team}`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-                      case 'matrix':
-                      team = body.slice(7)
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/matrix-text?texto=${team}&apikey=apiteam`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-                      case 'break-wall':
-                      team = body.slice(10)
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/break-wall?apikey=apiteam&texto=${team}`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-                      case 'avengers':
-                      team = body.slice(10)
-                      teks1 = team.split("|")[0];
-                      teks2 = team.split("|")[1];                  
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/avengers-logo?texto1=${teks1}&texto2=${teks2}&apikey=apiteam`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: hero})
-                      break
-
-*/
-	/*-------------[ Tictactoe Handler ]-------------*/
-                case 'jogodavelha':
-                if (!isUser) return reply('usuario nao registrado')                                 
-						if(!isGroup) return reply('comando apenas para grupos')
-                    if (fs.existsSync(`./lib/jogodavelha/${from}.json`)) {
-                         const boardnow = setGame(`${from}`);
-                         const matrix = boardnow._matrix;
-                         const chatMove = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
-     
-     [❗] Alguém está jogando no momento...\n\n@${boardnow.X} VS @${boardnow.O}
-     
-     ❌ : @${boardnow.X}
-     ⭕ : @${boardnow.O}
-     
-     Sua vez : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
-     
-     
-          ${matrix[0][0]}  ${matrix[0][1]}  ${matrix[0][2]}
-          ${matrix[1][0]}  ${matrix[1][1]}  ${matrix[1][2]}
-          ${matrix[2][0]}  ${matrix[2][1]}  ${matrix[2][2]}
-     
-     se estiver bugado, null e null, use ${prefix}reset
-     `;
-                         client.sendMessage(from, chatMove, MessageType.text, {
-                              quoted: gauger,
-                              contextInfo: {
-                                   mentionedJid: [
-                                        boardnow.X + "@s.whatsapp.net",
-                                        boardnow.O + "@s.whatsapp.net",
-                                   ],
-                              },
-                         });
-                         return;
-                    }
-                    if (argss.length === 1)
-                         return reply(
-                              `*⟅❗⟆ Jogue com Alghem!!!!*
-*para inicar a partida : ${prefix + command} @membro do gp*`
-                         );
-                    const boardnow = setGame(`${from}`);
-                    console.log(`Start Tictactore ${boardnow.session}`);
-                    boardnow.status = false;
-                    boardnow.X = sender.replace("@s.whatsapp.net", "");
-                    boardnow.O = argss[1].replace("@", "");
-                    fs.writeFileSync(
-                         `./lib/jogodavelha/${from}.json`,
-                         JSON.stringify(boardnow, null, 2)
-                    );
-                    const strChat = `*『📌ᎬՏᏢᎬᎡᎪΝᎠϴ ϴ ϴᏢϴΝᎬΝͲᎬ⚔️』*
-     
-     @${sender.replace(
-                         "@s.whatsapp.net",
-                         ""
-                    )} _está te desafiando para uma partida de jogo da velha..._
-     
-     _[ ${argss[1]} ] Use *『S』* para aceitar ou *『N』* para não aceitar..._     
-     `;
-                    client.sendMessage(from, strChat, MessageType.text, {
-                         quoted: gauger,
-                         contextInfo: {
-                              mentionedJid: [sender, argss[1].replace("@", "") + "@s.whatsapp.net"],
-                         },
-                    });
-                    await limitAdd(sender)
-                    break
-                      case  'reset':
-                    if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
-
-                         fs.unlinkSync("./lib/jogodavelha/" + from + ".json");
-
-                         reply(`Jogo da velha resetado com sucesso nesse grupo!`);
-
-                    } else {
-
-                         reply(`Não a nenhuma sessão em andamento...`);
-
-                    }
-                    break
-
-
-
-                                                  
-                          case 'comandos':
-               
-                                
-           if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu registro com o comando ${prefix}registrar (nome)\nExemplo: ${prefix}registrar gauger❌`)  
-           
-                    const useLevel = getLevelingLevel(sender)                                
+const useLevel = getLevelingLevel(sender)                                
                     const requireXp = 5 * Math.pow(useLevel, (5 / 2)) + 50 * useLevel + 100
                     const chec = getLevelingId(sender)
                     if (useLevel === undefined && chec === undefined) addLevelingId(sender)
                     uptime = process.uptime()                   
                     const users = `${_registered.length}`
                     const chatss = `${totalchat.length}`                   
-                            
+ 														
         const gaugerxyz = `
 ╔────────¤◎¤────────╗
     
                 𝗕𝗼𝘁𝗕𝗮𝗶𝗮𝗻𝗼
                              
-*Bem Vindo ao menu ${pushname}*
+*Bem Vindo ao menu @${sender.split("@s.whatsapp.net")[0]}*
 
 *Tipo de usuário: ${tuser}*   
     
@@ -1488,24 +1046,26 @@ case 'jokerlogo':
 ┌──────────────┐
 ├ 💡 *𝙉𝙊𝙑𝙄𝘿𝘼𝘿𝙀𝙎*
 ├──────────────────┐
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘥𝘪𝘤𝘪𝘰𝘯𝘢𝘥𝘰𝘴:
-!modos
-𝘮𝘰𝘴𝘵𝘳𝘢 𝘶𝘮 𝘮𝘦𝘯𝘶 𝘦𝘮 𝘭𝘪𝘴𝘵𝘢 𝘱𝘢𝘳𝘢 𝘢𝘵𝘪𝘷𝘢𝘳/𝘥𝘦𝘴𝘢𝘵𝘪𝘷𝘢𝘳 𝘮𝘰𝘥𝘰𝘴 𝘦 𝘴𝘪𝘴𝘵𝘦𝘮𝘢𝘴
- 
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘭𝘵𝘦𝘳𝘢𝘥𝘰𝘴:
-!f
-𝘢𝘨𝘰𝘳𝘢 𝘢 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 𝘷𝘦𝘮 𝘭𝘪𝘮𝘱𝘢, 𝘴𝘦𝘮 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦
-
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘳𝘦𝘮𝘰𝘷𝘪𝘥𝘰𝘴:
-!rename
-!steal
-𝘮𝘰𝘵𝘪𝘷𝘰: 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦 𝘯𝘢𝘰 𝘧𝘶𝘯𝘤𝘪𝘰𝘯𝘢𝘮 𝘯𝘰 𝘴𝘦𝘳𝘷𝘪𝘥𝘰𝘳
+├𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘥𝘪𝘤𝘪𝘰𝘯𝘢𝘥𝘰𝘴:
+├Várias logos novas
+├Alguns comandos de imagem
+├
+├!smeme txt/txt
+├escreve dois textos em uma fig, em cima e embaixo
+├
+├!semoji 😈
+├Transforma o emoji em uma figurinha //by gauger
+├
+├!metadinha
+├Manda metadinha de anime
 └──────────────────┘
 
 ┌──────────────┐
 ├ ⬆️⬇️ *𝗠𝗢𝗗𝗢𝗦*
 └──────────────┘
 ┌──────────────────┐
+├〘✘${prefix}modos
+├─────────────────┤
 ├〘✘${prefix}bemvindo 1/0
 ├─────────────────┤
 ├〘✘${prefix}leveis 1/0
@@ -1528,14 +1088,29 @@ case 'jokerlogo':
 ├ 📸 *𝗜𝗠𝗔𝗚𝗘𝗠*
 └──────────────┘
 ┌──────────────────┐
-├〘✘${prefix}img
+├〘✘${prefix}coala
+├─────────────────┤
+├〘✘${prefix}panda
+├─────────────────┤
+├〘✘${prefix}gato
+├─────────────────┤
+├〘✘${prefix}dog
+├─────────────────┤
+├〘✘${prefix}raposakk
 └──────────────────┘
 
 ┌──────────────┐
-├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
+├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔 𝘅 𝗕𝗢𝗧*
 └──────────────┘
 ┌──────────────────┐
 ├〘✘${prefix}ttthelp
+└──────────────────┘
+
+┌──────────────┐
+├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔 𝘅 𝗣𝗟𝗔𝗬𝗘𝗥*
+└──────────────┘
+┌──────────────────┐
+├〘✘${prefix}jogodavelha @adversário
 └──────────────────┘
 
 ┌──────────────┐
@@ -1558,6 +1133,8 @@ case 'jokerlogo':
 ├〘✘${prefix}tomp4 𝘧𝘪𝘨 𝘢𝘯𝘪𝘮𝘢𝘥𝘢 » mp4
 ├─────────────────┤
 ├〘✘${prefix}attp 𝘵𝘹𝘵
+├─────────────────┤
+├〘✘${prefix}smeme txt/txt
 ├─────────────────┤
 ├〘✘${prefix}figulixo
 ├─────────────────┤
@@ -1782,6 +1359,38 @@ case 'jokerlogo':
 ├〘✘${prefix}phlogo
 ├─────────────────┤
 ├〘✘${prefix}glitch
+├─────────────────┤
+├〘✘${prefix}glitch1
+├─────────────────┤
+├〘✘${prefix}glitch2
+├─────────────────┤
+├〘✘${prefix}toxic
+├─────────────────┤
+├〘✘${prefix}transformer
+├─────────────────┤
+├〘✘${prefix}graffiti
+├─────────────────┤
+├〘✘${prefix}harrypotter
+├─────────────────┤
+├〘✘${prefix}neon3d
+├─────────────────┤
+├〘✘${prefix}horrorblood
+├─────────────────┤
+├〘✘${prefix}neondevil
+├─────────────────┤
+├〘✘${prefix}dropwater
+├─────────────────┤
+├〘✘${prefix}glow
+├─────────────────┤
+├〘✘${prefix}captainamerica
+├─────────────────┤
+├〘✘${prefix}jokerlogo
+├─────────────────┤
+├〘✘${prefix}magma
+├─────────────────┤
+├〘✘${prefix}matrix
+├─────────────────┤
+├〘✘${prefix}breakwall
 └──────────────────┘
 
 ┌──────────────┐
@@ -1831,7 +1440,285 @@ case 'jokerlogo':
 *Chave disponível em ${prefix}pix*
     
 ╚──────¤◎¤──────╝
-`                                             
+`                                      
+
+	switch(command) {
+	
+	
+	
+	case 'addgift':
+	if (!isOwner) return reply('Sem permissão para isso')
+	 const giftCode = createCode(10)
+   giftC.push(`${giftCode}`)
+fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
+   reply('GiftCard adicionado com sucesso')
+   reply(`${giftCode}`)
+   break
+
+case 'gift':
+if (args.lengh < 1) return reply('Cade o GiftCard?')
+if (!isGift) return reply('GifCard incorreto ou já foi usado')
+if (isGift) return 
+reply('GiftCard ativado com sucesso!')
+giftC.splice(`${q}`)
+fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
+
+break
+
+	case '78':
+	reply(q)
+	break
+	
+	
+	
+	
+	case 'tban':
+
+if (!isGroup) return reply(mess.only.group)
+if (!isGroupAdmins) return reply(mess.only.admin)
+if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+client.updatePresence(from, Presence.composing) 
+if (args[1]=="s") {var timer = args[0]+"000"
+} else if (args[1]=="m") {var timer = args[0]+"0000"
+} else if (args[1]=="h") {var timer = args[0]+"00000"
+} else {return reply("*Selecionar:*\nsegundos\nminutos\nhora\n\n*Exemplo*\n10 segundos")}
+setTimeout( () => {
+const close = {
+text: `Grupo fechado pelo administrador @${sender.split("@s.whatsapp.net")[0]}\nagora* apenas admin* pode enviar mensagens`, contextInfo: { mentionedJid: [sender] }
+}
+client.groupSettingChange (from, GroupSettingChange.messageSend, true);
+reply(close)
+}, timer)
+break
+	
+	
+	
+case 'smeme': case 'stickmeme':
+gh = body.slice(7)           
+var top = gh.split('/')[0]
+var bottom = gh.split('/')[1]
+var imgbb = require('imgbb-uploader')
+if ((isMedia && !mek.message.videoMessage || isQuotedImage || isQuotedSticker) && args.length > 0) {
+ger = isQuotedImage || isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek 
+owgi = await  client.downloadAndSaveMediaMessage(ger)
+anu = await imgbb("cedeb44b8d204947a6833ca1412ca77d", owgi)
+teks = `${anu.display_url}`
+ranp = getRandom('.gif')
+rano = getRandom('.webp')
+anu1 = `https://api.memegen.link/images/custom/${top}/${bottom}.png?background=${teks}`
+sendStickerFromUrl(from, `${anu1}`)
+} else {
+reply('Use fotos/adesivos!')
+}
+await limitAdd(sender)
+break
+/*
+case 'stickerf': //by gauger
+if (!isQuotedSticker) return reply('Apenas figuriha tio')
+const sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+const media = await client.downloadAndSaveMediaMessage(sticker)
+gg = body.slice(10)
+ txt1 = gg.split("/")[0];
+  txt2 = gg.split("/")[1];
+
+   const stickerMetadata = {
+        type: 'full',
+        pack: `${txt1}`,
+        author: `${txt2}`,
+        categories: [
+            '🌹'
+        ]
+    }
+    sticker = await new Sticker(image, stickerMetadata).build()
+
+client.sendMessage(from, sticker, sticker, {quoted: mek})
+break  
+
+
+case 'stickerfm':
+if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
+                  const encmediia = JSON.parse(JSON.stringify(msg).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+                  const meidia = await cash.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
+                  const webpWithMetadata = await WSF.setMetadata
+                  cash.sendMessage(from, webpWithMetadata, MessageType.sticker, {quoted: msg, sendEphemeral: true, contextInfo: {"forwardingScore": 9999, "isForwarded": true}})
+                  fs.unlinkSync(meidia)
+break */
+case 'quoted1':
+client.sendMessage(from, 'test', text, {quoted: ftroli2})
+break
+case 'quoted2':
+client.sendMessage(from, 'test', text, {quoted: say1})
+break
+case 'quoted3':
+client.sendMessage(from, 'test', text, {quoted: ffoto})
+break
+case 'quoted4':
+client.sendMessage(from, 'test', text, {quoted: say2})
+break
+case 'quoted5':
+client.sendMessage(from, 'test', text, {quoted: gauger})
+break
+case 'quoted6':
+client.sendMessage(from, 'test', text, {quoted: gxyz})
+break
+case 'quoted7':
+client.sendMessage(from, 'test', text, {quoted: fkontak})
+break
+case 'quoted8':
+client.sendMessage(from, 'test', text, {quoted: fdoc})
+break
+case 'quoted9':
+client.sendMessage(from, 'test', text, {quoted: say3})
+break
+case 'quoted10':
+client.sendMessage(from, 'test', text, {quoted: menu})
+break
+
+case 'coala':
+team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/koala?apikey=apiteam`)
+buffer = await getBuffer(team.resultado)
+client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
+break
+
+case 'panda':
+team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/panda?apikey=apiteam`)
+buffer = await getBuffer(team.resultado)
+client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
+break
+
+case 'raposakk':
+team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/shiba?apikey=apiteam`)
+buffer = await getBuffer(team.resultado)
+client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
+break
+
+case 'gato':
+team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/gato?apikey=apiteam`)
+buffer = await getBuffer(team.resultado)
+client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
+break
+
+case 'dog':
+team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/cachorro?apikey=apiteam&tipo=dog`)
+buffer = await getBuffer(team.resultado)
+client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
+break
+
+case 'semoji':
+addFilter(from)  
+reply(mess.wait)
+if (args.length == 0) return reply(`Usage: ${prefix + command} query\nExample: ${prefix + command} 😭`)
+emoji = args[0]
+try {
+emoji = encodeURI(emoji[0])
+} catch {
+emoji = encodeURI(emoji)
+}
+anu = await fetchJson(`https://api-gdr2.herokuapp.com/api/emoji2png?text=${emoji}`)
+buffer = await getBuffer(anu.result)
+client.sendMessage(from, buffer, image, { quoted: mek , thumbnail:null})
+break
+
+case 'metadinha':
+               
+			
+				reply(mess.urachin)
+				anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/ppcouple?apikey=dappakntlll`) 
+				cowo = await getBuffer(anu.result.male)
+				client.sendMessage(from, cowo, image, {quoted: mek, thumbnail:null})
+				cewe = await getBuffer(anu.result.female)
+				client.sendMessage(from, cewe, image, {quoted: mek, thumbnail:null})
+				
+				break
+	/*-------------[ Tictactoe Handler ]-------------*/
+                case 'jogodavelha':
+                if (!isUser) return reply('usuario nao registrado')                                 
+						if(!isGroup) return reply('comando apenas para grupos')
+                    if (fs.existsSync(`./lib/jogodavelha/${from}.json`)) {
+                         const boardnow = setGame(`${from}`);
+                         const matrix = boardnow._matrix;
+                         const chatMove = `*🎮Ꮐ̸Ꭺ̸Ꮇ̸Ꭼ̸ Ꭰ̸Ꭺ̸ Ꮩ̸Ꭼ̸Ꮮ̸Ꮋ̸Ꭺ̸🕹️*
+     
+     [❗] Alguém está jogando no momento...\n\n@${boardnow.X} VS @${boardnow.O}
+     
+     ❌ : @${boardnow.X}
+     ⭕ : @${boardnow.O}
+     
+     Sua vez : @${boardnow.turn == "X" ? boardnow.X : boardnow.O}
+     
+     
+          ${matrix[0][0]}  ${matrix[0][1]}  ${matrix[0][2]}
+          ${matrix[1][0]}  ${matrix[1][1]}  ${matrix[1][2]}
+          ${matrix[2][0]}  ${matrix[2][1]}  ${matrix[2][2]}
+     
+     se estiver bugado, null e null, use ${prefix}reset
+     `;
+                         client.sendMessage(from, chatMove, MessageType.text, {
+                              quoted: gauger,
+                              contextInfo: {
+                                   mentionedJid: [
+                                        boardnow.X + "@s.whatsapp.net",
+                                        boardnow.O + "@s.whatsapp.net",
+                                   ],
+                              },
+                         });
+                         return;
+                    }
+                    if (argss.length === 1)
+                         return reply(
+                              `*⟅❗⟆ Jogue com Alghem!!!!*
+*para inicar a partida : ${prefix + command} @membro do gp*`
+                         );
+                    const boardnow = setGame(`${from}`);
+                    console.log(`Start Tictactore ${boardnow.session}`);
+                    boardnow.status = false;
+                    boardnow.X = sender.replace("@s.whatsapp.net", "");
+                    boardnow.O = argss[1].replace("@", "");
+                    fs.writeFileSync(
+                         `./lib/jogodavelha/${from}.json`,
+                         JSON.stringify(boardnow, null, 2)
+                    );
+                    const strChat = `*『📌ᎬՏᏢᎬᎡᎪΝᎠϴ ϴ ϴᏢϴΝᎬΝͲᎬ⚔️』*
+     
+     @${sender.replace(
+                         "@s.whatsapp.net",
+                         ""
+                    )} _está te desafiando para uma partida de jogo da velha..._
+     
+     _[ ${argss[1]} ] Use *『S』* para aceitar ou *『N』* para não aceitar..._     
+     `;
+                    client.sendMessage(from, strChat, MessageType.text, {
+                         quoted: gauger,
+                         contextInfo: {
+                              mentionedJid: [sender, argss[1].replace("@", "") + "@s.whatsapp.net"],
+                         },
+                    });
+                    await limitAdd(sender)
+                    break
+                      case  'reset':
+                    if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
+
+                         fs.unlinkSync("./lib/jogodavelha/" + from + ".json");
+
+                         reply(`Jogo da velha resetado com sucesso nesse grupo!`);
+
+                    } else {
+
+                         reply(`Não a nenhuma sessão em andamento...`);
+
+                    }
+                    break
+
+
+
+                                                  
+                          case 'comandos':
+               
+                                
+           if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu registro com o comando ${prefix}registrar (nome)\nExemplo: ${prefix}registrar gauger❌`)  
+           
+             
+                            
              client.sendMessage(from, gaugerxyz, text, { quoted: gauger, contextInfo: {forwardingScore: 508, isForwarded: true}})		
                    addFilter(from)
                             break  
@@ -1930,7 +1817,7 @@ if (args.length < 1) return reply(`Use ${prefix}simi texto`)
 try { 
 anu = await fetchJson(`https://simsumi.herokuapp.com/api?text=${encodeURIComponent(body.slice(5))}`, {method: 'get'})
 if (anu.error) return reply('Não sei ler o que não existe 🐤 (converse cmg)')
-client.sendMessage(from, `${anu.success} 🐤`, text, {quoted: mek})
+client.sendMessage(from, `${anu.success}`, text, {quoted: mek})
 } catch {
 reply("erro ao executar comando")
 }
@@ -2142,7 +2029,7 @@ break
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi ativado nesse grupo')
 					} else if (Number(args[0]) === 0) {
-						welkom.splice(from, disable)
+						welkom.splice(from)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi desativado nesse grupo')
 					} else {
@@ -3469,7 +3356,7 @@ case 'aviso':
                  if (args.length < 1) return reply('*Cade o link?�?*')
                 if (isLimit(sender)) return reply(mess.limitC)
                 buff = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?data=${body.slice(8)}&size=1080%C3%971080`)
-				client.sendMessage(from, buff, image, {quoted: mek})
+				client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                                 addFilter(from)
 				break
 
@@ -5166,7 +5053,7 @@ break
 
 
 				case 'marvel':
-				if (args.leght < 1) return reply(mess.twotxt)
+				if (args.length < 1) return reply(mess.twotxt)
 					var gh = body.slice(8)
 					var txt1 = gh.split("/")[0];
 					var txt2 = gh.split("/")[1];								
@@ -5249,7 +5136,7 @@ case 'pmake':
 			    addFilter(from) 
 			    break  
 
-                case 'bitext':if (args.leght < 1) return reply(mess.onetxt)
+                case 'bitext':if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(7)
 			
 			
@@ -5258,7 +5145,7 @@ case 'pmake':
 					break
 
         case 'caderno':
-           if (args.leght < 1) return reply(mess.onetxt)
+           if (args.length < 1) return reply(mess.onetxt)
 					nul = body.slice(9)
 		
 					tak = await getBuffer(`https://api.zeks.xyz/api/nulis?text=${nul}&apikey=apivinz`)
@@ -5267,7 +5154,7 @@ case 'pmake':
 				break			
 			
 			   case 'chatlogo':
-		if (args.leght < 1) return reply(mess.onetxt)
+		if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(10)
 					if (teks.length > 8) return reply('O texto é longo, até 8 caracteres')
 				
@@ -5276,7 +5163,7 @@ case 'pmake':
 					break
 
 case 'leao':
-     if (args.leght < 1) return reply(mess.onetxt)
+     if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(6)
 					if (teks.length > 9) return reply('O texto é longo, até 9 caracteres')
 			
@@ -5293,7 +5180,7 @@ case 'leao':
 					if (ligh.length > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
 					
 					lawak = await getBuffer(`https://api.zeks.xyz/api/tlight?text=${ligh}&apikey=gaugerkkkxyz`)
-			    	client.sendMessage(from, lawak, image, {quoted: mek})
+			    	client.sendMessage(from, lawak, image, {quoted: mek, thumbnail:null})
 			   	 addFilter(from)
 		  	  break        
          
@@ -5301,7 +5188,7 @@ case 'leao':
 
 case 'naruto':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/naruto?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5310,7 +5197,7 @@ break
 
 case 'matrix':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/matrix?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5319,7 +5206,7 @@ break
 
 case 'neon':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(6)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/bneon?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5329,7 +5216,7 @@ break
 
 case 'breakwall':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/breakwall?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5338,7 +5225,7 @@ break
 
 case 'vidro':
  
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/dropwater?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5347,7 +5234,7 @@ break
 
 case 'wolflogo':
  
-if (args.leght < 1) return reply(mess.twotxt)
+if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5358,7 +5245,7 @@ break
 
 case 'crossfire':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/crosslogo?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5367,7 +5254,7 @@ break
 
 case 'flametext':
  
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/flametext?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5376,7 +5263,7 @@ break
 
 case 'silktext':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/silktext?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5386,7 +5273,7 @@ break
 
 case 'bokeh':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/glowtext?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5394,7 +5281,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'pubg':
-  if (args.leght < 1) return reply(mess.twotxt)
+  if (args.length < 1) return reply(mess.twotxt)
 txt = body.slice(6)
 var teks = txt.split("/")[0];
 var teks2 = txt.split("/")[1];
@@ -5405,7 +5292,7 @@ break
 
 case 'cslogo':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/cslogo?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5414,7 +5301,7 @@ break
 
 case 'night':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/lithgtext?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5425,7 +5312,7 @@ break
 
 case 'inverno':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/crismes?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5434,7 +5321,7 @@ break
 
 case 'snow':
   
-if (args.leght < 1) return reply(mess.twotxt)
+if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(6)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5445,7 +5332,7 @@ break
 
 case 'pinkpaper':
   
-if (args.leght < 1) return reply(mess.twoxt)
+if (args.length < 1) return reply(mess.twoxt)
 gh = body.slice(11)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5456,7 +5343,7 @@ break
 
 case 'spark':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/tfire?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5465,7 +5352,7 @@ break
 
 case 'beach':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/sandw?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5474,7 +5361,7 @@ break
 
 case 'fogolivre':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/epep?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5484,7 +5371,7 @@ break
 
 case 'ytgolden':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/gplaybutton?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5494,7 +5381,7 @@ break
 
 case '3dtextb':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/text3dbox?apikey=gaugerkkkxyz&text=${texto}`)
 
@@ -5503,7 +5390,7 @@ break
 
 case 'avengers':
   
-if (args.leght < 1) return reply(mess.twotxt)
+if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5514,7 +5401,7 @@ break
 
 case 'texto3d2':
   
-if (args.leght < 1) return reply(mess.onetxt)
+if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.xyz/api/text3d?apikey=gaugerkkkxyz&text=${texto}`)
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
@@ -5522,7 +5409,7 @@ break
 
 case 'phlogo':
   
-if (args.leght < 1) return reply(mess.twotxt)
+if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5533,7 +5420,7 @@ break
 
 case 'glitch':
   
-if (args.leght < 1) return reply(mess.twotxt)
+if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
@@ -5542,7 +5429,190 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break  
 
 
+case 'glitch1':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(8)
+                      teks1 = teks.split("|")[0];
+                      teks2 = teks.split("|")[1];
+                      reply('[❗]ESPERE ...')
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/glitch1?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
+                      buff = await getBuffer(team.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'glitch2':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(9)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/glitch2?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'toxic':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(6)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/toxic?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
 
+case 'transformer':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(12)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/transformer?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+                      case 'graffiti':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(9)
+                      teks1 = teks.split("|")[0];
+                      teks2 = teks.split("|")[1];
+                      reply('[❗]ESPERE ...')
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/graffiti?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
+                      buff = await getBuffer(team.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+                     
+case 'thunder':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(9)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/thunderv2?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'harrypotter':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(12)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/harrypotter2?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+
+case 'neon3d':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(7)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/neon3d?texto=${teks}&apikey=apiteam`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'horrorblood':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(12)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/horror-blood?texto=${teks}&apikey=apiteam`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'neondevil':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(10)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/neon-devil?texto=${teks}&apikey=apiteam`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'graffiti2':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(10)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/wonderful-graffiti?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+                      case 'dropwater':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(10)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/dropwater?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+                      case 'glow':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(6)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/advanced-glow?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'captainamerica':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(15)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/captain-america?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+case 'jokerlogo':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(10)
+                      reply('[❗]ESPERE ...')
+                      anu = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/jokerlogo?apikey=apiteam&texto=${teks}`)
+                      buff = await getBuffer(anu.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break
+              /*        case 'marvel':
+                      if (args.length < 1) return reply('Cadê o texto?')
+                      teks = body.slice(7)
+                      teks1 = teks.split("|")[0];
+                      teks2 = teks.split("|")[1];
+                      reply('[❗]ESPERE ...')
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/marvel?apikey=apiteam&texto1=${teks1}&texto2={teks2}`)
+                      buff = await getBuffer(team.resultado)
+                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
+                      break */
+                      case 'space':
+                      team = body.slice(6)
+                      teks1 = team.split("|")[0];
+                      teks2 = team.split("|")[1];
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/space-3d?apikey=apiteam&texto1=${teks1}&texto2=${teks2}`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break
+           /*           case 'lavatext':
+                      team = body.slice(9)
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/lava-text?apikey=apiteam&texto1=${team}`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break */
+                      case 'magma':
+                      team = body.slice(6)
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/magma-text?apikey=apiteam&texto=${team}`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break
+                      case 'matrix':
+                      team = body.slice(7)
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/matrix-text?texto=${team}&apikey=apiteam`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break
+                      case 'breakwall':
+                      team = body.slice(11)
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/break-wall?apikey=apiteam&texto=${team}`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break
+           /*           case 'avengers':
+                      team = body.slice(10)
+                      teks1 = team.split("|")[0];
+                      teks2 = team.split("|")[1];                  
+                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/avengers-logo?texto1=${teks1}&texto2=${teks2}&apikey=apiteam`)
+                      of = await getBuffer(team.resultado)
+                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
+                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
+                      break
+*/
 //---------------------------------------------------------------IMAGENS-ANIME----------------------------------------------------------------------//
 
 
@@ -5938,389 +6008,8 @@ client.relayWAMessage(prep)
 if (buttonsRM === 'menu✅') {
 if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu registro com o comando ${prefix}registrar ou clique no botão registrar📍❌`)  
            
-                    const useLevel = getLevelingLevel(sender)                                
-                    const requireXp = 5 * Math.pow(useLevel, (5 / 2)) + 50 * useLevel + 100
-                    const chec = getLevelingId(sender)
-                    if (useLevel === undefined && chec === undefined) addLevelingId(sender)
-                    uptime = process.uptime()                   
-                    const users = `${_registered.length}`
-                    const chatss = `${totalchat.length}`                   
-                            
-        const gaugerxyz = `
-╔────────¤◎¤────────╗
-    
-                𝗕𝗼𝘁𝗕𝗮𝗶𝗮𝗻𝗼
-                             
-*Bem Vindo ao menu @${sender.split("@s.whatsapp.net")[0]}*
-
-*Tipo de usuário: ${tuser}*   
-    
-*Total de usuários registrados: ${users}*
-
-*Total de chats: ${chatss}*
-
-*Total de comandos usados: ${comandost}*
-
-*Sistema online à ${kyun(uptime)}*
-
-*Tempo de resposta: ${latensi.toFixed(4)}*
-       
-*Versão do whatsapp: ${wa_version}*
-
-*Android: ${os_version}*
-
-*Cell: ${device_manufacturer} ${device_model}*
-
- ╚────────¤◎¤────────╝
- 
-
-┌──────────────┐
-├ 💡 *𝙉𝙊𝙑𝙄𝘿𝘼𝘿𝙀𝙎*
-├──────────────────┐
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘥𝘪𝘤𝘪𝘰𝘯𝘢𝘥𝘰𝘴:
-!modos
-𝘮𝘰𝘴𝘵𝘳𝘢 𝘶𝘮 𝘮𝘦𝘯𝘶 𝘦𝘮 𝘭𝘪𝘴𝘵𝘢 𝘱𝘢𝘳𝘢 𝘢𝘵𝘪𝘷𝘢𝘳/𝘥𝘦𝘴𝘢𝘵𝘪𝘷𝘢𝘳 𝘮𝘰𝘥𝘰𝘴 𝘦 𝘴𝘪𝘴𝘵𝘦𝘮𝘢𝘴
- 
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘢𝘭𝘵𝘦𝘳𝘢𝘥𝘰𝘴:
-!f
-𝘢𝘨𝘰𝘳𝘢 𝘢 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 𝘷𝘦𝘮 𝘭𝘪𝘮𝘱𝘢, 𝘴𝘦𝘮 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦
-
-𝘤𝘰𝘮𝘢𝘯𝘥𝘰𝘴 𝘳𝘦𝘮𝘰𝘷𝘪𝘥𝘰𝘴:
-!rename
-!steal
-𝘮𝘰𝘵𝘪𝘷𝘰: 𝘢𝘶𝘵𝘩𝘰𝘳/𝘱𝘢𝘤𝘬-𝘯𝘢𝘮𝘦 𝘯𝘢𝘰 𝘧𝘶𝘯𝘤𝘪𝘰𝘯𝘢𝘮 𝘯𝘰 𝘴𝘦𝘳𝘷𝘪𝘥𝘰𝘳
-└──────────────────┘
-
-┌──────────────┐
-├ ⬆️⬇️ *𝗠𝗢𝗗𝗢𝗦*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}bemvindo 1/0
-├─────────────────┤
-├〘✘${prefix}leveis 1/0
-├─────────────────┤
-├〘✘${prefix}antilink 1/0
-├─────────────────┤
-├〘✘${prefix}antifake 1/0
-├─────────────────┤
-├〘✘𝘢𝘯𝘵𝘪𝘳𝘦𝘷𝘰𝘬𝘦 𝘦𝘮 𝘣𝘳𝘦𝘷𝘦...
-└──────────────────┘
-
-┌──────────────┐
-├🔥 *𝗬𝗢𝗨𝗧𝗨𝗕𝗘*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}play  
-└──────────────────┘
-
-┌──────────────┐
-├ 📸 *𝗜𝗠𝗔𝗚𝗘𝗠*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}img
-└──────────────────┘
-
-┌──────────────┐
-├ 👾 *𝗝𝗢𝗚𝗢 𝗗𝗔 𝗩𝗘𝗟𝗛𝗔*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}ttthelp
-└──────────────────┘
-
-┌──────────────┐
-├ 👻 *𝗦𝗜𝗠𝗜 𝗜.𝗔*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}simi
-└──────────────────┘
-
-┌──────────────┐
-├ 🎆 *𝗙𝗜𝗚𝗨𝗥𝗜𝗡𝗛𝗔*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}f 𝘮𝘪𝘥𝘪𝘢 » 𝘧𝘪𝘨𝘶𝘪𝘯𝘩𝘢
-├─────────────────┤
-├〘✘${prefix}fg 𝘮𝘪𝘥𝘪𝘢 » 𝘧𝘪𝘨 𝘮𝘢𝘪𝘰𝘳
-├─────────────────┤
-├〘✘${prefix}foto 𝘧𝘪𝘨𝘶𝘳𝘪𝘯𝘩𝘢 » 𝘧𝘰𝘵𝘰
-├─────────────────┤
-├〘✘${prefix}tomp4 𝘧𝘪𝘨 𝘢𝘯𝘪𝘮𝘢𝘥𝘢 » mp4
-├─────────────────┤
-├〘✘${prefix}attp 𝘵𝘹𝘵
-├─────────────────┤
-├〘✘${prefix}figulixo
-├─────────────────┤
-├〘✘${prefix}figurip
-├─────────────────┤
-├〘✘${prefix}figulgbt
-├─────────────────┤
-├〘✘${prefix}figublur
-├─────────────────┤
-├〘✘${prefix}figupalito
-├─────────────────┤
-├〘✘${prefix}figuface
-├─────────────────┤
-├〘✘${prefix}figuquadro
-├─────────────────┤
-├〘✘${prefix}figuwanted
-├─────────────────┤
-├〘✘${prefix}figuwasted
-├─────────────────┤
-├〘✘${prefix}figuarma
-├─────────────────┤
-├〘✘${prefix}figudrip
-├─────────────────┤
-├〘✘${prefix}figuinvert
-├─────────────────┤
-├〘✘${prefix}figupreso
-├─────────────────┤
-├〘✘${prefix}figutrigger
-├─────────────────┤
-├〘✘${prefix}figupet
-├─────────────────┤
-├〘✘${prefix}missing
-└──────────────────┘
-
-┌──────────────┐
-├ 🎉 *𝗗𝗜𝗩𝗘𝗥𝗧𝗜𝗗𝗢𝗦*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}perfil
-├─────────────────┤
-├〘✘${prefix}gay 
-├─────────────────┤
-├〘✘${prefix}lgbt
-├─────────────────┤
-├〘✘${prefix}gado
-├─────────────────┤
-├〘✘${prefix}safadeza
-├─────────────────┤
-├〘✘${prefix}lesbica
-├─────────────────┤
-├〘✘${prefix}gatinha
-├─────────────────┤
-├〘✘${prefix}corno
-├─────────────────┤
-├〘✘${prefix}perfect
-├─────────────────┤
-├〘✘${prefix}cringe
-├─────────────────┤
-├〘✘${prefix}golpe
-├─────────────────┤
-├〘✘${prefix}chato 
-├─────────────────┤
-├〘✘${prefix}gostosa 
-├─────────────────┤
-├〘✘${prefix}amor 
-├─────────────────┤
-├〘✘${prefix}ship 
-├─────────────────┤
-├〘✘${prefix}ppp
-├─────────────────┤
-├〘✘𝘦𝘯𝘷𝘪𝘦 𝘴𝘶𝘨𝘦𝘴𝘵õ𝘦𝘴 𝘤𝘰𝘮 𝘰 𝘤𝘰𝘮𝘢𝘯𝘥𝘰:
-├─────────────────┤
-├〘✘${prefix}sugest 
-└──────────────────┘
-
-┌───────────────┐
-├ 🎶 *𝗔𝗨𝗗𝗜𝗢𝗦*
-└───────────────┘
-┌──────────────────┐
-├〘✘${prefix}esquilo
-├─────────────────┤
-├〘✘${prefix}grave
-├─────────────────┤
-├〘✘${prefix}tirargrave
-├─────────────────┤
-├〘✘${prefix}slow
-├─────────────────┤
-├〘✘${prefix}rapido
-├─────────────────┤
-├〘✘${prefix}bebado
-├─────────────────┤
-├〘✘${prefix}demonio
-├─────────────────┤
-├〘✘${prefix}diabolico
-├─────────────────┤
-├〘✘${prefix}estourar
-├─────────────────┤
-├〘✘${prefix}estourar1
-├─────────────────┤
-├〘✘${prefix}estourar2
-├─────────────────┤
-├〘✘${prefix}tomp3
-├─────────────────┤
-├〘✘${prefix}tts
-├─────────────────┤
-├〘✘${prefix}siglas
-└──────────────────┘
-
-┌──────────────┐
-├ 🫂 *𝗚𝗥𝗨𝗣𝗢𝗦*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}ownergp
-├─────────────────┤
-├〘✘${prefix}linkgp
-├─────────────────┤
-├〘✘${prefix}fechargp
-├─────────────────┤
-├〘✘${prefix}abrirgp
-├─────────────────┤
-├〘✘${prefix}setname
-├─────────────────┤
-├〘✘${prefix}setdesc
-├─────────────────┤
-├〘✘${prefix}promover
-├─────────────────┤
-├〘✘${prefix}rebaixar
-├─────────────────┤
-├〘✘${prefix}add
-├─────────────────┤
-├〘✘${prefix}kick
-├─────────────────┤
-├〘✘${prefix}kickgp
-├─────────────────┤
-├〘✘${prefix}admins
-├─────────────────┤
-├〘✘${prefix}hidetag
-├─────────────────┤
-├〘✘${prefix}tag
-├─────────────────┤
-├〘✘${prefix}level
-├─────────────────┤
-├〘✘${prefix}map
-├─────────────────┤
-├〘✘${prefix}qrcod
-├─────────────────┤
-├〘✘${prefix}fakereply 𝘵𝘢𝘨/𝘵𝘹𝘵/𝘳𝘦𝘱𝘭𝘺
-├─────────────────┤
-├〘✘𝘦𝘮 𝘣𝘳𝘦𝘷𝘦...
-└──────────────────┘
-
-┌──────────────┐
-├ 📲 *𝗟𝗢𝗚𝗢𝗦*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}marvel
-├─────────────────┤
-├〘✘${prefix}plaquinha
-├─────────────────┤
-├〘✘${prefix}bpink
-├─────────────────┤
-├〘✘${prefix}3dtext
-├─────────────────┤
-├〘✘${prefix}pornhub
-├─────────────────┤
-├〘✘${prefix}glogo
-├─────────────────┤
-├〘✘${prefix}bitext
-├─────────────────┤
-├〘✘${prefix}caderno
-├─────────────────┤
-├〘✘${prefix}chatlogo
-├─────────────────┤
-├〘✘${prefix}leao
-├─────────────────┤
-├〘✘${prefix}modern
-├─────────────────┤
-├〘✘${prefix}naruto
-├─────────────────┤
-├〘✘${prefix}matrix
-├─────────────────┤
-├〘✘${prefix}neon
-├─────────────────┤
-├〘✘${prefix}breakwall
-├─────────────────┤
-├〘✘${prefix}vidro
-├─────────────────┤
-├〘✘${prefix}wolflogo
-├─────────────────┤
-├〘✘${prefix}crossfire
-├─────────────────┤
-├〘✘${prefix}flametext
-├─────────────────┤
-├〘✘${prefix}silktext
-├─────────────────┤
-├〘✘${prefix}bokeh
-├─────────────────┤
-├〘✘${prefix}pubg
-├─────────────────┤
-├〘✘${prefix}csgo
-├─────────────────┤
-├〘✘${prefix}night
-├─────────────────┤
-├〘✘${prefix}inverno
-├─────────────────┤
-├〘✘${prefix}snow
-├─────────────────┤
-├〘✘${prefix}pinkpaper
-├─────────────────┤
-├〘✘${prefix}spark
-├─────────────────┤
-├〘✘${prefix}beach
-├─────────────────┤
-├〘✘${prefix}fogolivre
-├─────────────────┤
-├〘✘${prefix}ytgolden
-├─────────────────┤
-├〘✘${prefix}3dtextb
-├─────────────────┤
-├〘✘${prefix}avengers
-├─────────────────┤
-├〘✘${prefix}phlogo
-├─────────────────┤
-├〘✘${prefix}glitch
-└──────────────────┘
-
-┌──────────────┐
-├ 🈯 *𝗔𝗡𝗜𝗠𝗘*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}animeneko
-├─────────────────┤
-├〘✘${prefix}animewaifu
-├─────────────────┤
-├〘✘${prefix}smile
-├─────────────────┤
-├〘✘${prefix}lick
-├─────────────────┤
-├〘✘${prefix}kiss
-├─────────────────┤
-├〘✘${prefix}cry
-├─────────────────┤
-├〘✘${prefix}hug
-├─────────────────┤
-├〘✘${prefix}nekonime
-├─────────────────┤
-├〘✘${prefix}nekofig
-└──────────────────┘
-
-┌──────────────┐
-├ 🔞 *+𝟭𝟴*
-└──────────────┘
-┌──────────────────┐
-├〘✘${prefix}sexyloli
-├─────────────────┤
-├〘✘${prefix}blowjob
-├─────────────────┤
-├〘✘${prefix}waifu
-├─────────────────┤
-├〘✘${prefix}neko
-├─────────────────┤
-├〘✘${prefix}trap
-└──────────────────┘
-
-╔──────¤◎¤──────╗
-
-       📵𝘤𝘰𝘱𝘺𝘳𝘪𝘨𝘩𝘵© 𝘣𝘺 𝘨𝘢𝘶𝘨𝘦𝘳📵
-
-*Faça uma doação via pix e me ajude a manter este bot*
-*Você pode até ganhar a script liberada deste bot ;)*
-*Chave disponível em ${prefix}pix*
-    
-╚──────¤◎¤──────╝
-`                                             
+                    
+          
              client.sendMessage(from, gaugerxyz, text, { quoted: gauger, contextInfo: {forwardingScore: 508, isForwarded: true}})		
                    addFilter(from)
 }
@@ -6531,7 +6220,7 @@ if (mek.message.listResponseMessage){
     
     if (!isGroup) return reply(mess.only.group)
 						if (!isWelkom) return reply('o recurso não stá ativo')
-						welkom.splice(from, disable)
+						welkom.splice(from) // disable)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi desativado nesse grupo')
 					}}
@@ -6760,14 +6449,9 @@ client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:
 		}, 2000)
 	}
 	
+	
+	
 }
-
-
-
-
-
-
-
 		} catch (e) {
 			console.log(color(e, 'red'))
 		}  
