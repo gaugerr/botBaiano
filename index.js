@@ -1422,7 +1422,18 @@ const useLevel = getLevelingLevel(sender)
 
 	switch(command) {
 	
-	
+	case 'play':
+if (args.length == 0) return reply(`Exemplo: ${prefix + command} Musica Sad`)
+reply('Baixando.. aguarde 🥃')
+query = args.join(" ")
+get_result = await fetchJson(`http://brizas-api.herokuapp.com/sociais/ytplaymp3?apikey=brizaloka&query=${query}`)
+get_result = get_result
+ini_buffer = await getBuffer(get_result.thumb)
+//client.sendMessage(from, ini_buffer, image, { quoted: mek, caption: `Titulo: ${get_result.titulo}\nEnviando sua música, aguarde 🎬`})
+get_audio = await getBuffer(get_result.audio)
+client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:-99999999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${get_result.titulo}\nDuração: ${get_result.duration}\n`, 'jpegThumbnail': ini_buffer} } }, ptt:true})
+
+break
 	
 case 'doc':
 tope = fs.readFileSync('./teste.html')
@@ -1827,7 +1838,7 @@ break
 	
 	
 
-case 'play':
+case 'play1':
   
   if (!isGroup) return reply(mess.only.group)
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
