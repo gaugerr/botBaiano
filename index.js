@@ -283,6 +283,8 @@ client.on('CB:action,,battery', json => {
             pushname = client.contacts[sender] != undefined ? client.contacts[sender].vname || client.contacts[sender].notify : undefined        
             const botName = 'BOT BAIANO'
             const ownerName = 'gauger'
+
+
             const createCode = (size) => {
             return crypto.randomBytes(size).toString('hex').slice(0, size)
         }
@@ -299,6 +301,8 @@ client.on('CB:action,,battery', json => {
 		      }
 		const ofrply = await getBuffer(pporang)
 		//	if (antibot === true) return
+const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `Olá ${pushname}\n⎇ ${command}\n`, 'jpegThumbnail': ofrply} } }
+
 		const catalogo = (teks) => {
              res = client.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 321, "message": teks, "footerText": "*_© Dcode Denpa_*", "thumbnail": ofrply, "surface": 'CATALOG'}}, {quoted: mek})
              client.relayWAMessage(res)
@@ -322,7 +326,7 @@ client.on('CB:action,,battery', json => {
                     let asw = './exif' + names + '.webp'
                     exec(`ffmpeg -i ${filess} -vf "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=60, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse" ${asw}`, (err) => {
                         let media = fs.readFileSync(asw)
-                        client.sendMessage(to, media, MessageType.sticker,{sendEphemeral: true, contextInfo: { forwardingScore: 508, isForwarded: true}, quoted: say1})
+                        client.sendMessage(to, media, MessageType.sticker,{sendEphemeral: true, contextInfo: { forwardingScore: 508, isForwarded: true}, quoted: gauger})
                         fs.unlinkSync(filess)
                         fs.unlinkSync(asw)
                     });
@@ -978,9 +982,6 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 		
 	
 
-
-const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `Olá ${pushname}\n⎇ ${command}\n`, 'jpegThumbnail': ofrply} } }
-
 const useLevel = getLevelingLevel(sender)                                
                     const requireXp = 5 * Math.pow(useLevel, (5 / 2)) + 50 * useLevel + 100
                     const chec = getLevelingId(sender)
@@ -1454,7 +1455,6 @@ fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
 case 'gift':
 if (args.lengh < 1) return reply('Cade o GiftCard?')
 if (!isGift) return reply('GifCard incorreto ou já foi usado')
-if (isGift) return 
 reply('GiftCard ativado com sucesso!')
 giftC.splice(`${q}`)
 fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
@@ -1616,7 +1616,7 @@ emoji = encodeURI(emoji)
 }
 anu = await fetchJson(`https://api-gdr2.herokuapp.com/api/emoji2png?text=${emoji}`)
 buffer = await getBuffer(anu.result)
-client.sendMessage(from, buffer, image, { quoted: mek , thumbnail:null})
+client.sendMessage(from, buffer, image, { quoted: mek })
 break
 
 case 'metadinha':
@@ -3069,6 +3069,12 @@ case 'fix':
 		case 'deploy':
 	              client.updatePresence(from, Presence.composing) 
 	              if (!isOwner) return reply(mess.only.ownerB)
+	                  setTimeout( () => {
+					reply('full deployment, starting worker:1') 
+					}, 60000)
+					setTimeout( () => {
+					reply('worker was started') 
+					}, 10000)
 	              reply('deploying the bot on the heroku server..')
 	               const cmdgit = `git push heroku master`
 	               exec(cmdgit, (err, stdout) => {
@@ -3077,12 +3083,7 @@ case 'fix':
 			       client.sendMessage(from, stdout, text, { quoted: mek })
 		           }
 	           })
-	           setTimeout( () => {
-					reply('full deployment, starting worker:1') 
-					}, 60000)
-					setTimeout( () => {
-					reply('worker was started') 
-					}, 10000)
+	       
                   break
 case 'kjj':
 
