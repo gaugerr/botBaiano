@@ -28,6 +28,7 @@ const { recognize } = require('./lib/ocr.js')
 const { webp2gifFile } = require("./lib/gif.js")
 const { cmdadd } = require('./lib/totalcmd.js')
 const { addMetadata } = require('./lib/addMetadata.js')
+const { addATM, addMoney, checkMoney, confirmMoney } = require('./lib/money.js')
 const { getLevelingXp, getLevelingId, addLevelingXp, addLevelingLevel, addLevelingId, getLevelingLevel, getUserRank, addCooldown, leveltab } = require('./lib/leveling.js')
 const { getRegisterNo, getRegisterName, getRegisterSerial, getRegisterTime, getRegisteredRandomId, addRegisteredUser, createSerial, checkRegisteredUser } = require('./lib/register.js')
 const { wait, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, banner, start, info, success, close } = require('./lib/functions.js')
@@ -36,6 +37,7 @@ const { WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC } = require('./li
 const { validmove, setGame } = require('./lib/jogodavelha.js')
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI()
+
 //-------------------------------------LOAD npm PACKAGE-----------------------------------------------//
 
 const fs = require('fs')
@@ -65,13 +67,16 @@ const _leveling = JSON.parse(fs.readFileSync('./json/leveling.json'))
 const _level = JSON.parse(fs.readFileSync('./json/level.json'))
 const event = JSON.parse(fs.readFileSync('./json/event.json'))
 const _limit = JSON.parse(fs.readFileSync('./json/limit.json'))
-const uang = JSON.parse(fs.readFileSync('./json/uang.json'))
+const money = JSON.parse(fs.readFileSync('./json/money.json'))
 const samih = JSON.parse(fs.readFileSync('./json/simi.json'))
 const antifake = JSON.parse(fs.readFileSync('./json/antifake.json'))
 const totalcmd = JSON.parse(fs.readFileSync('./json/totalcmd.json'))[0].totalcmd
 const _registered = JSON.parse(fs.readFileSync('./json/registered.json'))
 const tictactoe = JSON.parse(fs.readFileSync('./lib/ttt/tictactoe.json'))
 const giftC = JSON.parse(fs.readFileSync('./json/giftcard.json'))
+const atsticker = JSON.parse(fs.readFileSync('./json/atsticker.json'))
+const vip = JSON.parse(fs.readFileSync('./json/vip.json'))
+            
 var tttset = require('./lib/ttt/TTTconfig/tttset.json');
 var esp = require('./lib/ttt/TTTconfig/tttframe.json');
 
@@ -103,7 +108,7 @@ limitawal = '1000'
 const timestamp = speed();
 const latensi = speed() - timestamp
 fromMe = false
-//const antibot = m.isBaileys
+
 
 
 
@@ -273,8 +278,10 @@ client.on('CB:action,,battery', json => {
 			const isAntiLink = isGroup ? antilink.includes(from) : false
             const isSimi = isGroup ? samih.includes(from) : false
             const isAntiFake = isGroup ? antifake.includes(from) : false
+            const isAuto = isGroup ? atsticker.includes(from) : true
             const isUser = checkRegisteredUser(sender)
             const isBanned = ban.includes(sender)
+            const isVip = vip.includes(sender)
 			const isOwner = ownerNumber.includes(sender)
             const isLevelingOn = isGroup ? _leveling.includes(from) : true
             const NomerOwner = '555180614158@s.whatsapp.net'
@@ -367,6 +374,7 @@ const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from
             
       //_TIPO DE MENSAGEM
             const isImage = type == 'imageMessage'
+            const isCatalog = type == 'orderMessage'
             const isVideo = type == 'videoMessage'
             const isAudio = type == 'audioMessage'
             const isSticker = type == 'stickerMessage'
@@ -559,37 +567,7 @@ const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from
             }
             
             
-        const addATM = (sender) => {
-                const obj = {id: sender, uang : 0}
-            uang.push(obj)
-            fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-        }
-
-        const addKoinUser = (sender, amount) => {
-            let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                uang[position].uang += amount
-                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-            }
-        }
-
-        const checkATMuser = (sender) => {
-                let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                return uang[position].uang
-            }
-        }
-
+        
         const bayarLimit = (sender, amount) => {
                 let position = false
             Object.keys(_limit).forEach((i) => {
@@ -603,19 +581,7 @@ const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from
             }
         }
 
-        const confirmATM = (sender, amount) => {
-                let position = false
-            Object.keys(uang).forEach((i) => {
-                if (uang[i].id === sender) {
-                    position = i
-                }
-            })
-            if (position !== false) {
-                uang[position].uang -= amount
-                fs.writeFileSync('./json/uang.json', JSON.stringify(uang))
-            }
-        }
-
+        
         const limitAdd = (sender) => {
              let position = false
             Object.keys(_limit).forEach((i) => {
@@ -742,17 +708,15 @@ Seu limite restante : ${limitCounts}`
 
             //function balance
             if (isGroup ) {
-            const checkATM = checkATMuser(sender)
+            const checkMoneyUser = checkMoney(sender)
             try {
-                if (checkATM === undefined) addATM(sender)
-                const uangsaku = Math.floor(Math.random() * 10) + 90
-                addKoinUser(sender, uangsaku)
+                if (checkMoneyUser === undefined) addATM(sender)
+                const uangsaku = Math.floor(Math.random() * 50)
+                addMoney(sender, uangsaku)
             } catch (err) {
                 console.error(err)
             }
         } 
-
-
 
 
 
@@ -858,7 +822,7 @@ Jogo termina empatado 😐
 Vencido por @${winnerJID} 😎👑
 `;
          
-            addKoinUser(winnerJID + "@s.whatsapp.net", dinherowin)           
+            addMoney(winnerJID + "@s.whatsapp.net", dinherowin)           
                client.sendMessage(from, chatWon, MessageType.text, {
                     quoted: mek,
                     contextInfo: {
@@ -1422,22 +1386,98 @@ const useLevel = getLevelingLevel(sender)
 
 	switch(command) {
 	
-	case 'play':
+	case 'addvip':
+if (!isGroup) return reply(mess.only.group)
+if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
+if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return 
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+vip.push(`${mentioned}`)
+fs.writeFileSync('./json/vip.json', JSON.stringify(vip))
+vip = `✅@${mentioned[0].split('@')[0]}você virou Vip no bot✅`
+mentions(`${vip}`, mentioned, true)   
+break
+
+case 'rmvip':
+
+if (!isGroup) return reply(mess.only.group)
+if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
+if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return 
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+vip.splice(`${mentioned}`)
+fs.writeFileSync('./json/vip.json', JSON.stringify(vip))
+vip = `❎Lista vip limpa com sucesso❎`
+mentions(`${vip}`, mentioned, true)   
+break
+	
+	case 'autostk':
+                    if (!isGroup) return reply(ptbr.group())
+                    if (!isGroupAdmins) return reply(ptbr.admin())
+                    if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}autostk 1 para ativar `)
+                    if (Number(args[0]) === 1) {
+                        if (isAuto) return reply('❎O recurso AUTO STICKER já está ativado no grupo❎')
+                        atsticker.push(from)
+                        fs.writeFileSync('./json/atisticker.json', JSON.stringify(_leveling))
+                        reply('✅O recurso AUTO STICKER foi ativado✅')
+                    } else if (Number(args[0]) === 0) {
+                        if (!isAuto) return reply('❎O recurso AUTO STICKER não está ativado no grupo❎')
+                        let position = false
+                        Object.keys(atsticker).forEach((i) => {
+                            if (atsticker[i] === from) {
+                                position = i
+                            }
+                        })
+                        if (position !== false) {
+                            atsticker.splice(position, 1)
+                            fs.writeFileSync('./json/atisticker.json', JSON.stringify(atsticker))
+                        }
+                        reply('❌O recurso AUTO STICKER foi desativado❌')
+                    } else {
+                        reply(`Digite da forma correta:\nComando: ${prefix}autostk 1, para ativar e 0 para desativar`)
+                    }
+                    break
+	
+	
+	case 'play1':
 if (args.length == 0) return reply(`Exemplo: ${prefix + command} Musica Sad`)
 reply('Baixando.. aguarde 🥃')
 query = args.join(" ")
 get_result = await fetchJson(`http://brizas-api.herokuapp.com/sociais/ytplaymp3?apikey=brizaloka&query=${query}`)
 get_result = get_result
 ini_buffer = await getBuffer(get_result.thumb)
-//client.sendMessage(from, ini_buffer, image, { quoted: mek, caption: `Titulo: ${get_result.titulo}\nEnviando sua música, aguarde 🎬`})
 get_audio = await getBuffer(get_result.audio)
-client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:-99999999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${get_result.titulo}\nDuração: ${get_result.duration}\n`, 'jpegThumbnail': ini_buffer} } }, ptt:true})
+client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${get_result.titulo}\nDuração: ${get_result.duration}\n`, 'jpegThumbnail': ini_buffer} } }, ptt:true})
 
 break
 	
+	case 'play':
+  
+  if (!isGroup) return reply(mess.only.group)
+					  if (args.length < 1) return reply('Cadê o nome da música ?')
+            reply('Baixando.. aguarde 🥃')
+                const ytbt = args.join(" ")
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)
+                 infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
+if (anu.error) return reply('deu erro bro')
+if (anu.duration > 1) return reply('Teste de limite de duração')
+                buffer = await getBuffer(anu.result.thumbnail)
+                lagu = await getBuffer(anu.result.url_video)
+               // client.sendMessage(from, buffer, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${anu.result.title}.mp3/n${anu.result.size}`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)}}}, caption: infomp3})
+                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': buffer} } }, ptt:true})
+
+                break
+
+
 case 'doc':
 tope = fs.readFileSync('./teste.html')
-client.sendMessage(from, tope, MessageType.document, {mimetype: 'document/html', title: 'teste'})
+client.sendMessage(from, tope, MessageType.document, {mimetype: 'text/html', title: 'teste'})
 break
 	
 case 'catalogo':
@@ -1469,7 +1509,6 @@ if (!isGift) return reply('GifCard incorreto ou já foi usado')
 reply('GiftCard ativado com sucesso!')
 giftC.splice(`${q}`)
 fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
-
 break
 
 	case '78':
@@ -1838,21 +1877,6 @@ break
 	
 	
 
-case 'play1':
-  
-  if (!isGroup) return reply(mess.only.group)
-					  if (args.length < 1) return reply('Cadê o nome da música ?')
-                reply('🔎 Procurando música, aguarde...🔎')
-                const ytbt = body.slice(6)
-                anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)
-                 infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
-if (anu.error) return reply(mess.error.play)
-if (anu.duration > 1) return reply('Teste de limite de duração')
-                buffer = await getBuffer(anu.result.thumbnail)
-                lagu = await getBuffer(anu.result.url_video)
-                client.sendMessage(from, buffer, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${anu.result.title}.mp3/n${anu.result.size}`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)}}}, caption: infomp3})
-                client.sendMessage(from, lagu, MessageType.audio, {quoted: gauger, mimetype: 'audio/mp4', ptt:true})
-                break
 
 case 'playmp4':
   
@@ -1860,7 +1884,7 @@ case 'playmp4':
 					  if (args.length < 1) return reply('Cadê o nome do vídeo?')
                 reply('🔎 Procurando vídeo, aguarde...🔎')
             const tytbt = body.slice(9)
-                anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp4?apikey=gaugerkkkxyz&q=${tytbt}`)
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${tytbt}`)
                  infomp3 = `𒊹︎︎︎ Enviando seu vídeo..🎬`
 if (anu.error) return reply(mess.error.play)
 if (anu.duration > 1) return reply('Teste de limite de duração')
@@ -1887,7 +1911,7 @@ case 'playa':
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
                 reply('🔎 Procurando música, aguarde...🔎')
                 const ytbtt = body.slice(6)
-                anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?apikey=gaugerkkkxyz&q=${ytbtt}`, {method: 'get'})
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp3?apikey=gaugerkkkxyz&q=${ytbtt}`, {method: 'get'})
                  infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
 if (anu.error) return reply(mess.error.play)
 if (anu.duration > 1) return reply('Teste de limite de duração')
@@ -1900,7 +1924,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                           if (isLimit(sender)) return reply(mess.limitC)
                          if (args.length < 1) return reply('*Digite o nome da música desejada \n\nObs: a música demora até 2 minutos para ser enviada, paciência�?*')
 			mus = body.slice(6)
-                mus1 = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${mus}&apikey=gaugerkkkxyz`, {method: 'get'})
+                mus1 = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${mus}&apikey=gaugerkkkxyz`, {method: 'get'})
                 
                if (isLimit(sender)) return reply(mess.limitC)
                if (mus1.error) return reply(mus1.error)
@@ -3743,9 +3767,9 @@ case 'bal':
                                         break
                                 
                                 case 'money':
-                                      const moneyy = `❏ *Nome* : ${pushname}\n  ❏ *Numero* : ${sender.split("@")[0]}\n  ❏ *Dinheiro* : ${uangkau}`
-                                        const kantong = checkATMuser(sender)
-                                        reply(moneyy)
+                                const kantong = checkMoney(sender)
+                                      const moneyy = `❏ *Nome* : ${pushname}\n  ❏ *Numero* : ${sender.split("@")[0]}\n  ❏ *Dinheiro* : ${kantong}`
+     reply(moneyy)
                                         break
                                 case 'buylimite':
                                         if (args.length < 1) return reply(`Qual é o limite que você quer comprar?\n\ndigite ${prefix}buylimite 1 por exemplo\n\nCertifique-se de ter dinheiro suficiente, mana! \n\nComo verificar dinheiro: .bal`)
@@ -3753,11 +3777,11 @@ case 'bal':
                                         payout = body.slice(10)
                                         const koinPerlimit = 2000
                                         const total = koinPerlimit * payout
-                                        if ( checkATMuser(sender) <= total) return reply(`desculpe, seu dinheiro não é suficiente. por favor colete e compre mais tarde`)
-                                        if ( checkATMuser(sender) >= total ) {
-                                                confirmATM(sender, total)
+                                        if ( checkMoney(sender) <= total) return reply(`desculpe, seu dinheiro não é suficiente. por favor colete e compre mais tarde`)
+                                        if ( checkMoney(sender) >= total ) {
+                                                confirmMoney(sender, total)
                                                 bayarLimit(sender, payout)
-                                                await reply(`*PAGAMENTO CONCLUIDO*\n\n*remetente* : Admin\n*receptor* : ${pushname}\n*compra nominal* : ${payout} \n *limite de preço* : ${koinPerlimit}/limit\n *o resto do seu dinheiro* : ${checkATMuser(sender)}\n\nprocesso bem sucedido com número de pagamento`)
+                                                await reply(`*PAGAMENTO CONCLUIDO*\n\n*remetente* : Admin\n*receptor* : ${pushname}\n*compra nominal* : ${payout} \n *limite de preço* : ${koinPerlimit}/limit\n *o resto do seu dinheiro* : ${checkMoney(sender)}\n\nprocesso bem sucedido com número de pagamento`)
                                         }
                                         break
                                 case 'limite':                                        
@@ -3903,7 +3927,7 @@ case 'hidetag':
 
                         imgtrg = `${anu.display_url}`
 
-				     	anu = await getBuffer(`https://api.zeks.xyz/api/missing-image?apikey=gaugerkkkxyz&image=${imgtrg}&text1=DESAPARECIDO&text2=LIGUE&text3=5180614158`, {method: 'get'})
+				     	anu = await getBuffer(`https://api.zeks.me/api/missing-image?apikey=gaugerkkkxyz&image=${imgtrg}&text1=DESAPARECIDO&text2=LIGUE&text3=5180614158`, {method: 'get'})
 		
 			     		client.sendMessage(from, anu, image, {quoted: mek, thumbnail: null})
     
@@ -5106,7 +5130,7 @@ break
 					var gh = body.slice(8)
 					var txt1 = gh.split("/")[0];
 					var txt2 = gh.split("/")[1];								
-					buffer = await getBuffer(`https://api.zeks.xyz/api/marvellogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`, {method: 'get'})
+					buffer = await getBuffer(`https://api.zeks.me/api/marvellogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`, {method: 'get'})
 					
 					client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 					break
@@ -5168,7 +5192,7 @@ case 'pmake':
 			    no = nobg.split("/")[0];
 			    bg = nobg.split("/")[1];
 			  
-			    buffer = await getBuffer(`https://api.zeks.xyz/api/phub?apikey=gaugerkkkxyz&img=https://1.bp.blogspot.com/-x8KhcOBG-yw/XiU4pi1yWVI/AAAAAAAADBA/gK8tsLyc1lQ808A348IKzDCjf6fUBKONwCLcBGAsYHQ/s1600/cara%2Bbuat%2Bfoto%2Bprofil%2Bdi%2Bwhatsapp%2Bmenjadi%2Bunik.jpg&username=${no}&msg=${bg}`, {method: 'get'})
+			    buffer = await getBuffer(`https://api.zeks.me/api/phub?apikey=gaugerkkkxyz&img=https://1.bp.blogspot.com/-x8KhcOBG-yw/XiU4pi1yWVI/AAAAAAAADBA/gK8tsLyc1lQ808A348IKzDCjf6fUBKONwCLcBGAsYHQ/s1600/cara%2Bbuat%2Bfoto%2Bprofil%2Bdi%2Bwhatsapp%2Bmenjadi%2Bunik.jpg&username=${no}&msg=${bg}`, {method: 'get'})
 			    client.sendMessage(from, buffer, image, {quoted: mek, caption: '*PRONTINHO �?*'})
 			    addFilter(from) 
 					break
@@ -5197,7 +5221,7 @@ case 'pmake':
            if (args.length < 1) return reply(mess.onetxt)
 					nul = body.slice(9)
 		
-					tak = await getBuffer(`https://api.zeks.xyz/api/nulis?text=${nul}&apikey=apivinz`)
+					tak = await getBuffer(`https://api.zeks.me/api/nulis?text=${nul}&apikey=apivinz`)
 					client.sendMessage(from, tak, image, {quoted: mek, caption: 'Pronto 🤙'})
 					addFilter(from)				
 				break			
@@ -5228,7 +5252,7 @@ case 'leao':
 					ligh = body.slice(8)
 					if (ligh.length > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
 					
-					lawak = await getBuffer(`https://api.zeks.xyz/api/tlight?text=${ligh}&apikey=gaugerkkkxyz`)
+					lawak = await getBuffer(`https://api.zeks.me/api/tlight?text=${ligh}&apikey=gaugerkkkxyz`)
 			    	client.sendMessage(from, lawak, image, {quoted: mek, thumbnail:null})
 			   	 addFilter(from)
 		  	  break        
@@ -5239,7 +5263,7 @@ case 'naruto':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/naruto?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/naruto?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break
@@ -5248,7 +5272,7 @@ case 'matrix':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/matrix?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/matrix?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break
@@ -5257,7 +5281,7 @@ case 'neon':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(6)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/bneon?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/bneon?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break
@@ -5267,7 +5291,7 @@ case 'breakwall':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/breakwall?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/breakwall?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break
@@ -5276,7 +5300,7 @@ case 'vidro':
  
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/dropwater?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/dropwater?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break
@@ -5287,7 +5311,7 @@ if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/wolflogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/wolflogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5296,7 +5320,7 @@ case 'crossfire':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/crosslogo?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/crosslogo?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5305,7 +5329,7 @@ case 'flametext':
  
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/flametext?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/flametext?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5314,7 +5338,7 @@ case 'silktext':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/silktext?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/silktext?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5324,7 +5348,7 @@ case 'bokeh':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/glowtext?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/glowtext?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5343,7 +5367,7 @@ case 'cslogo':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/cslogo?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/cslogo?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5352,7 +5376,7 @@ case 'night':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/lithgtext?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/lithgtext?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5363,7 +5387,7 @@ case 'inverno':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/crismes?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/crismes?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5374,7 +5398,7 @@ if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(6)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/snowwrite?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/snowwrite?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5385,7 +5409,7 @@ if (args.length < 1) return reply(mess.twoxt)
 gh = body.slice(11)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/watercolour?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/watercolour?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5394,7 +5418,7 @@ case 'spark':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/tfire?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/tfire?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5403,7 +5427,7 @@ case 'beach':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/sandw?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/sandw?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5412,7 +5436,7 @@ case 'fogolivre':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/epep?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/epep?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5422,7 +5446,7 @@ case 'ytgolden':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/gplaybutton?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/gplaybutton?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5432,7 +5456,7 @@ case '3dtextb':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/text3dbox?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/text3dbox?apikey=gaugerkkkxyz&text=${texto}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5443,7 +5467,7 @@ if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/logoaveng?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/logoaveng?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
@@ -5452,7 +5476,7 @@ case 'texto3d2':
   
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/text3d?apikey=gaugerkkkxyz&text=${texto}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/text3d?apikey=gaugerkkkxyz&text=${texto}`)
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
 
@@ -5462,7 +5486,7 @@ if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/phlogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/phlogo?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break 
 
@@ -5473,7 +5497,7 @@ if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
 var txt2 = gh.split("/")[1];
-imagelogo = await getBuffer(`https://api.zeks.xyz/api/gtext?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
+imagelogo = await getBuffer(`https://api.zeks.me/api/gtext?apikey=gaugerkkkxyz&text1=${txt1}&text2=${txt2}`)
 client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, caption: 'tá na mão'})
 break  
 
@@ -6519,6 +6543,62 @@ tttset.tttstatus = "off"
 tttset.autoEndTime = "off"
 }
 	
+	if (isCatalog){
+	reply('para d mandar esses catalogo q gay')
+	}
+	
+	/*
+	                        if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
+                            const encmedia = mek
+                            const media = await client.downloadAndSaveMediaMessage(encmedia)
+                            ran = getRandom('.webp')
+                            await ffmpeg(`./${media}`)
+                                .input(media)
+                                .on('start', function(cmd) {
+                                    console.log(`Started : ${cmd}`)
+                                })
+                                .on('error', function(err) {
+                                    console.log(`Error : ${err}`)
+                                })
+                                .on('end', function() {
+                                    console.log('Finish')
+                                    buffer = fs.readFileSync(ran)
+                                    client.sendMessage(from, buffer, sticker, {
+                                        quoted: mek
+                                    })
+                                })
+                                .addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `crop=w='min(min(iw\,ih)\,650)':h='min(min(iw\,ih)\,650)',scale=320:320,setsar=1,fps=15`, `-loop`, `0`, `-ss`, `00:00:00.0`, `-t`, `00:00:10.0`, `-preset`, `default`, `-an`, `-vsync`, `0`, `-s`, `512:512`])
+                                .toFormat('webp')
+                                .save(ran)
+                            fs.unlinkSync(media)
+                        }
+                        if ((isGroup && isMedia & isAuto && !mek.message.imageMessage || isQuotedVideo)) {
+                            const encmedia = mek
+                            const media = await client.downloadAndSaveMediaMessage(encmedia)
+                            if (Buffer.byteLength(media) >= 6186598.4) return
+                            ran = getRandom('.webp')
+                            await ffmpeg(`./${media}`)
+                                .inputFormat(media.split('.')[1])
+                                .on('start', function(cmd) {
+                                    console.log(`Started : ${cmd}`)
+                                })
+                                .on('error', function(err) {
+                                    console.log(`Error : ${err}`)
+                                    tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+                                })
+                                .on('end', function() {
+                                    console.log('Finish')
+                                    buff = fs.readFileSync(ran)
+                                    client.sendMessage(from, buff, sticker)
+                                })
+                                .addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `crop=w='min(min(iw\,ih)\,650)':h='min(min(iw\,ih)\,650)',scale=320:320,setsar=1,fps=15`, `-loop`, `0`, `-ss`, `00:00:00.0`, `-t`, `00:00:10.0`, `-preset`, `default`, `-an`, `-vsync`, `0`, `-s`, `512:512`])
+                                .toFormat('webp')
+                                .save(ran)
+                            fs.unlinkSync(media)
+                        }
+	
+	*/
+                        
 	
 }
 		} catch (e) {
@@ -6529,3 +6609,4 @@ tttset.autoEndTime = "off"
 starts()
 
 
+			
