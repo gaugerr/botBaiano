@@ -1386,6 +1386,44 @@ const useLevel = getLevelingLevel(sender)
 
 	switch(command) {
 	
+	
+	
+	
+	case 'ytsrc':     
+teks = body.slice(7)  
+anu = await fetchJson(`http://brizas-api.herokuapp.com/sociais/youtubesrc?apikey=brizaloka&query=${teks}`)
+const objs = []
+for(i=0;i< anu.resultados.length; ++i) {
+let data = {
+rowId: `${prefix}play `+ anu.resultados[i].title,
+title: `${prefix}play`,
+description: anu.resultados[i].title
+}
+objs.push(data)
+}
+payload = {
+listMessage: {
+title: "✅ Músicas encotradas ✅",
+buttonText: "Mostra lista de músicas",
+description: `Palavra chave: ${teks}`,
+listType: 1,
+sections: [
+{
+title: "Músicas relacionadas",
+rows: objs
+}
+]
+}
+}
+let preparedPayload = await client.prepareMessageFromContent(from, payload,{});
+await client.relayWAMessage(preparedPayload, {waitForAck: true})
+break
+	
+	
+	
+	
+	
+	
 	case 'addvip':
 if (!isGroup) return reply(mess.only.group)
 if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
@@ -6201,9 +6239,7 @@ listMessage = {
 
                    
                     
-if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("leveis0")){
+if (listRM.includes("leveis0")){
     
              if (!isLevelingOn) return reply('❎O recurso LEVEIS não está ativado no grupo❎')
                         let position = false
@@ -6217,11 +6253,9 @@ if (mek.message.listResponseMessage){
                             fs.writeFileSync('./json/leveling.json', JSON.stringify(_leveling))
                         }
                         reply('❌O recurso LEVEIS foi desativado❌')
-                        }}
+                        }
 
-if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("antilink1")){
+if (listRM.includes("antilink1")){
 
 	if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -6230,12 +6264,10 @@ if (mek.message.listResponseMessage){
 						antilink.push(from)
 						fs.writeFileSync('./json/antilink.json', JSON.stringify(antilink))
 						reply('Grupo anti-link ativado com sucesso neste grupo ✔️')
-						}}
+						}
 						
 						
-	if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("antilink0")){
+	if (listRM.includes("antilink0")){
     
     					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -6245,12 +6277,10 @@ if (mek.message.listResponseMessage){
 						antilink.splice(ini, 1)
 						fs.writeFileSync('./json/antilink.json', JSON.stringify(antilink))
 						reply('Desativar grupo anti-link com sucesso neste grupo ✔️')
-}}
+}
 
 						
-	if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("antifake1")){
+	if (listRM.includes("antifake1")){
 
 	if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -6259,11 +6289,9 @@ if (mek.message.listResponseMessage){
 						antifake.push(from)
 						fs.writeFileSync('./json/antifake.json', JSON.stringify(antifake))
 						reply('Ativou com sucesso o recurso de antifake neste grupo✔️')
-						}}
+						}
 						
-						if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("antifake0")){
+						if (listRM.includes("antifake0")){
     
     if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -6272,33 +6300,40 @@ if (mek.message.listResponseMessage){
 						antifake.splice(from, 1)
 						fs.writeFileSync('./json/antifake.json', JSON.stringify(antifake))
 						reply('Desativou com sucesso o recurso de antifake neste grupo✔️')
- 				}}
+ 				}
 
 
-					if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("bv1")){
+					if (listRM.includes("bv1")){
     
     if (!isGroup) return reply(mess.only.group)
 						if (isWelkom) return reply('o recurso está ativo')
 						welkom.push(from)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi ativado nesse grupo')
-						}}
+						}
 						
 						
-					if (mek.message.listResponseMessage){
-    sadb = mek.message.listResponseMessage.singleSelectReply.selectedRowId
-    if (sadb.includes("bv0")){
+					if (listRM.includes("bv0")){
     
     if (!isGroup) return reply(mess.only.group)
 						if (!isWelkom) return reply('o recurso não stá ativo')
 						welkom.splice(from) // disable)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi desativado nesse grupo')
-					}}
+					}
 
 
+if (listRM.includes("!play")) {
+            reply('Baixando.. aguarde 🥃')
+                const ytbt = args.join(" ")
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)
+                 infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
+if (anu.error) return reply('deu erro bro')
+if (anu.duration > 1) return reply('Teste de limite de duração')
+                buffer = await getBuffer(anu.result.thumbnail)
+                lagu = await getBuffer(anu.result.url_video)
+                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
+}
 
 
 	/*
