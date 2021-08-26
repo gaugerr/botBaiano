@@ -1387,7 +1387,24 @@ const useLevel = getLevelingLevel(sender)
 	switch(command) {
 	
 	
-	
+	case 'viplist':
+
+					teks = '╭────*「 *VIPS👑* 」\n'
+					for (let V of vip) {
+						teks += `│+  @${V.split('@')[0]}\n`
+					}
+					teks += `│+ Total : ${vip.length}\n╰──────*「 *BOT BAIANO* 」*────`
+					client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": vip}})
+					break
+case 'banlist':
+
+					teks = '╭────*「 *USUÁRIOS BANIDOS❌* 」\n'
+					for (let V of ban) {
+						teks += `│+  @${V.split('@')[0]}\n`
+					}
+					teks += `│+ Total : ${ban.length}\n╰──────*「 *BOT BAIANO* 」*────`
+					client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": ban}})
+					break
 	
 	case 'ytsrc':     
 teks = body.slice(7)  
@@ -1421,10 +1438,39 @@ break
 	
 	
 	
+case 'addvip':
+if (!isGroup) return reply(mess.only.group)
+if (!isGroupAdmins) return reply(mess.only.admin)
+//if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
+if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return 
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+vip.push(`${mentioned}`)
+fs.writeFileSync('./json/vip.json', JSON.stringify(vip))
+susp = `💸🪙 @${mentioned[0].split('@')[0]}você virou Vip no bot 🪙💸`
+mentions(`${susp}`, mentioned, true)   
+break
+case 'rmvip':
+if (!isGroup) return reply(mess.only.group)
+if (!isGroupAdmins) return reply(mess.only.admin)
+//if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
+if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return 
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+pru = '.\n'
+for (let _ of mentioned) {
+pru += `@${_.split('@')[0]}\n`
+}
+vip.splice(`${mentioned}`)
+fs.writeFileSync('./json/vip.json', JSON.stringify(vip))
+susp = `❕ @${mentioned[0].split('@')[0]} foi removido da lista vip do bot :v ❕`
+mentions(`${susp}`, mentioned, true)   
+break	
 	
 	
-	
-	case 'addvip':
+/*	case 'addvip':
 if (!isGroup) return reply(mess.only.group)
 if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
 if (mek.message.extendedTextMessage === undefined || mek.message.extendedTextMessage === null) return 
@@ -1454,7 +1500,7 @@ fs.writeFileSync('./json/vip.json', JSON.stringify(vip))
 vip = `❎Lista vip limpa com sucesso❎`
 mentions(`${vip}`, mentioned, true)   
 break
-	
+	*/
 	case 'autostk':
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
@@ -1508,7 +1554,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                 buffer = await getBuffer(anu.result.thumbnail)
                 lagu = await getBuffer(anu.result.url_video)
                // client.sendMessage(from, buffer, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${anu.result.title}.mp3/n${anu.result.size}`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)}}}, caption: infomp3})
-                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': buffer} } }, ptt:true})
+                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
 
                 break
 
@@ -1912,7 +1958,16 @@ reply("erro ao executar comando")
 break
 
 
-	
+case 'baiano':
+if (args.length < 1) return reply(`Use ${prefix}simi texto`)
+try { 
+anu = await fetchJson(`https://api.simsimi.net/v1/?lang=pt&text=${q}`, {method: 'get'})
+if (anu.error) return reply(';-;')
+client.sendMessage(from, `${anu.success}`, text, {quoted: mek})
+} catch {
+reply('Não entendi, pode repetir?')
+}
+break	
 	
 
 
@@ -3142,27 +3197,29 @@ case 'fix':
 		case 'deploy':
 	              client.updatePresence(from, Presence.composing) 
 	              if (!isOwner) return reply(mess.only.ownerB)
-	                  setTimeout( () => {
-					reply('full deployment, starting worker:1') 
-					}, 60000)
-					setTimeout( () => {
-					reply('worker was started') 
-					}, 10000)
+	              const cmdgit = `git push heroku master`
 	              reply('deploying the bot on the heroku server..')
-	               const cmdgit = `git push heroku master`
-	               exec(cmdgit, (err, stdout) => {
+	              exec(cmdgit, (err, stdout) => {
 		           if(err) return client.sendMessage(from, "Comando errado", text, { quoted: mek })
 		           if (stdout) {
 			       client.sendMessage(from, stdout, text, { quoted: mek })
 		           }
-	           })
-	       
+	           })                  
+	             setTimeout( () => {	                 
+					reply('full deployment, starting worker:1') 					
+					}, 60000)
+			
+		         setTimeout( () => {
+					reply('worker was started') 
+					}, 75000)
+	              	               	             	       
                   break
 case 'kjj':
 
 					setTimeout( () => {
 					reply('worker started') 
 					}, 10000)
+					
 					setTimeout( () => {
 					reply('full deployment, starting worker:1') 
 					}, 20000)
