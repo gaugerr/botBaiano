@@ -1,23 +1,21 @@
 {
-  "name": "termux-whatsapp-bot",
-  "version": "0.0.2",
-  "description": "Only termux",
-  "main": "index.js",
+  "name": "botBaiano",
+  "version": "0.1",
+  "description": "Simple",
+  "main": "baiano.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [
     "termux",
     "whatsapp",
-    "bot",
-    "whatsapp",
     "bot"
   ],
-  "author": "NazwaS",
+  
+  "author": "gaugerr",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
@@ -44,10 +42,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NazwaS/termux-whatsapp-bot.git"
+    "url": "git+https://github.com/gaugerr/botBaiano.git"
   },
   "bugs": {
-    "url": "https://github.com/NazwaS/termux-whatsapp-bot/issues"
+    "url": "https://github.com/gaugerr/botBaiano/issues"
   },
-  "homepage": "https://github.com/NazwaS/termux-whatsapp-bot#readme"
+  "homepage": "https://github.com/gaugerr/botBaiano#readme"
 }
