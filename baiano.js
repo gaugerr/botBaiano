@@ -56,7 +56,7 @@ const axios = require('axios')
 const util = require('util');
 const request = require('request')
 const cd = 4.32e+7
-//const { Sticker } = require('wa-sticker-formatter')
+const { Sticker } = require('wa-sticker-formatter')
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
@@ -1310,6 +1310,13 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 	switch(command) {
 
 
+
+
+
+     
+
+
+
 case 'reversevid':
 
 if (!isQuotedVideo) return reply('Marque um vídeo')
@@ -1787,19 +1794,19 @@ reply('Use fotos/adesivos!')
 }
 await limitAdd(sender)
 break
-/*
+
 case 'stickerf': //by gauger
-if (!isQuotedSticker) return reply('Apenas figuriha tio')
+if (!isQuotedSticker) return reply('marque a fig')
 const sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 const media = await client.downloadAndSaveMediaMessage(sticker)
-gg = body.slice(10)
- txt1 = gg.split("/")[0];
-  txt2 = gg.split("/")[1];
+//gg = body.slice(10)
+// txt1 = gg.split("/")[0];
+//  txt2 = gg.split("/")[1];
 
    const stickerMetadata = {
         type: 'full',
-        pack: `${txt1}`,
-        author: `${txt2}`,
+        pack: `by gaugerrr`,
+        author: `💸`,
         categories: [
             '🌹'
         ]
