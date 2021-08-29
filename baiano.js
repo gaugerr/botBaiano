@@ -2483,8 +2483,8 @@ break
 
 
 	case 'fg':
-		       	       
-if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+		        reply('Comando de fig com problema, desativado por tempo indeterminado')	       
+/*if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
 const media = await client.downloadAndSaveMediaMessage(encmedia)                      
 rano = getRandom('.webp')
@@ -2532,7 +2532,7 @@ fs.unlinkSync(rano)
 })
 } else {
 reply(`Você precisa enviar ou marcar uma imagem ou vídeo com no máximo 10 segundos`)
-}
+} */
 break
 
            case 'tag':
@@ -3721,8 +3721,8 @@ case 'aviso':
 //FIGURINHA 
 				case 'f':
    
-       
-				if (isBanned) return reply('Banido!')
+       reply('Comando de fig com problema, desativado por tempo indeterminado')
+			/*	if (isBanned) return reply('Banido!')
 					await limitAdd(sender)
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -3776,7 +3776,7 @@ case 'aviso':
 							.save(ran)
 							} else {
 						reply(`Enviar imagem / vídeo / gif com legenda \n${prefix}sticker (duração do adesivo de vídeo de 1 a 9 segundos)`)
-					}
+					} */
 					
 					break
 
