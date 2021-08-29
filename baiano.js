@@ -56,7 +56,7 @@ const axios = require('axios')
 const util = require('util');
 const request = require('request')
 const cd = 4.32e+7
-const { Sticker } = require('wa-sticker-formatter')
+//const { Sticker } = require('wa-sticker-formatter')
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
@@ -1806,7 +1806,7 @@ reply('Use fotos/adesivos!')
 await limitAdd(sender)
 break
 
-case 'stickerf': //by gauger
+/*case 'stickerf': //by gauger
 if (!isQuotedSticker) return reply('marque a fig')
 const sticker = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 const media = await client.downloadAndSaveMediaMessage(sticker)
@@ -1826,7 +1826,7 @@ const media = await client.downloadAndSaveMediaMessage(sticker)
 
 client.sendMessage(from, sticker, sticker, {quoted: mek})
 break  
-
+*/
 
 case 'stickerfm':
 if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
@@ -2483,8 +2483,8 @@ break
 
 
 	case 'fg':
-		        reply('Comando de fig com problema, desativado por tempo indeterminado')	       
-/*if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
+		   //     reply('Comando de fig com problema, desativado por tempo indeterminado')	       
+if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
 const media = await client.downloadAndSaveMediaMessage(encmedia)                      
 rano = getRandom('.webp')
@@ -2532,7 +2532,7 @@ fs.unlinkSync(rano)
 })
 } else {
 reply(`Você precisa enviar ou marcar uma imagem ou vídeo com no máximo 10 segundos`)
-} */
+} 
 break
 
            case 'tag':
@@ -3721,8 +3721,8 @@ case 'aviso':
 //FIGURINHA 
 				case 'f':
    
-       reply('Comando de fig com problema, desativado por tempo indeterminado')
-			/*	if (isBanned) return reply('Banido!')
+  //     reply('Comando de fig com problema, desativado por tempo indeterminado')
+				if (isBanned) return reply('Banido!')
 					await limitAdd(sender)
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
@@ -3776,7 +3776,7 @@ case 'aviso':
 							.save(ran)
 							} else {
 						reply(`Enviar imagem / vídeo / gif com legenda \n${prefix}sticker (duração do adesivo de vídeo de 1 a 9 segundos)`)
-					} */
+					} 
 					
 					break
 
@@ -5398,11 +5398,10 @@ case 'plaquinha':
 					break
 
 case 'pmake':
-                  if (isGroup) return  fakegroup ('usuário vip nao tem permissao de explanar os comandos no grupo')
-				  
-                    if (args.length < 1) return fakegroup (mess.blank)
+       
+                    if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(7)
-					if (teks.length > 15) return fakegroup ('O texto é longo, até 15 caracteres')
+					if (teks.length > 15) return reply('O texto é longo, até 15 caracteres')
 					reply('*Estou fazendo, se der erro tente novamente ✓*')
 					buffer = await getBuffer(`https://ubbornag.sirv.com/Screenshot_20210513-151821.png?text.0.text=${teks}&text.0.position.x=-40%25&text.0.position.y=-65%25&text.0.size=30&text.0.color=000000&text.0.opacity=53&text.0.font.family=Shadows%20Into%20Light%20Two&text.0.outline.blur=15`)
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Ta na mão 😈'})
@@ -5410,7 +5409,7 @@ case 'pmake':
                   case 'pmake2':
                   if (isGroup) return reply('usuário vip nao tem permissao de explanar os comandos no grupo')
 			
-                    if (args.length < 1) return fakegroup (mess.blank)
+                    if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(7)
 					if (teks.length > 10) return reply('O texto é longo, até 10 caracteres')
 					reply('*Estou fazendo, se der erro tente novamente ✓*')
@@ -6785,10 +6784,7 @@ esp.c1 = "🔲"; esp.c2 = "🔲"; esp.c3 = "🔲"
 tttset.tttstatus = "off"
 tttset.autoEndTime = "off"
 }
-	
-	if (isCatalog){
-	reply('para d mandar esses catalogo q gay')
-	}
+
 	
 	
 	      /*                  if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
