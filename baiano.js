@@ -784,11 +784,10 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
             
 
             
-            if (isCmd && !isBanned) {
-             cmdadd()
-             addFilter(from) 
-             limitAdd(sender)
-             }
+           if (isCmd) cmdadd()   
+                    
+
+             
             
         
        if (isCmd && isBanned && isGroup) {
