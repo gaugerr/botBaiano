@@ -1820,11 +1820,11 @@ break
 case 'stickerfm':
 if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
                   const encmediia = JSON.parse(JSON.stringify(msg).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-                  const meidia = await cash.downloadAndSaveMediaMessage(encmediia, `./sticker/${sender}`)
+                  const meidia = await client.downloadAndSaveMediaMessage(encmediia, `./exif/${sender}`)
                   const webpWithMetadata = await WSF.setMetadata
                   cash.sendMessage(from, webpWithMetadata, MessageType.sticker, {quoted: msg, sendEphemeral: true, contextInfo: {"forwardingScore": 9999, "isForwarded": true}})
                   fs.unlinkSync(meidia)
-break */
+break 
 case 'quoted1':
 client.sendMessage(from, 'test', text, {quoted: ftroli2})
 break
