@@ -84,8 +84,8 @@ var esp = require('./lib/ttt/TTTconfig/tttframe.json');
 //-----------------------------------------------LOAD .js FILE-----------------------------------------------//
 
 const { nsfwloli } = require('./src/nsfwloli')
-const { ttthelp } = require('./lib/ttt/TTTconfig/ttthelp');
-const { tttme } = require('./lib/ttt/TTTconfig/tttme');
+const { ttthelp } = require('./lib/ttt/TTTconfig/ttthelp')
+const { tttme } = require('./lib/ttt/TTTconfig/tttme')
 
 //-------------------------------------------LOAD v-card--------------------------------------------------//
 
@@ -121,7 +121,7 @@ async function starts() {
         fs.writeFileSync('./gauger.json', JSON.stringify(client.base64EncodedAuthInfo(), null, '\t'))
 
 	client.on('group-participants-update', async (anu) => {
-	if(antifake.includes(anu.jid)) {
+	if (antifake.includes(anu.jid)) {
 	const mdata = await client.groupMetadata(anu.jid)
 			if (anu.action == 'add'){
 				num = anu.participants[0]
@@ -155,7 +155,7 @@ async function starts() {
 				} catch {
 					ppimg = './logos/.noPicure.jpg'
 				}
-				teks = `*Thauzinhoo otário _@${num.split('@')[0]}_, Não volte por favor*`
+				teks = `*Tchauzinho _@${num.split('@')[0]}_, Não volte por favor*`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			}
@@ -1314,9 +1314,18 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 
 
      
+case 'tourl':
+       var imgbb = require('imgbb-uploader')
+                    
+       ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+	                
+					                                      
+                        owgi = await client.downloadAndSaveMediaMessage(ger)
 
+                        anu = await imgbb("9d7a1bd760e2e3360dbfd40cec4d7ad7", owgi)
+                        reply(`${anu.display_url}`)
 
-
+break
 case 'reversevid':
 
 if (!isQuotedVideo) return reply('Marque um vídeo')
@@ -1981,7 +1990,7 @@ case 'metadinha':
                     });
                     await limitAdd(sender)
                     break
-                      case  'reset':
+         /*             case  'reset':
                     if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
 
                          fs.unlinkSync("./lib/jogodavelha/" + from + ".json");
@@ -1993,9 +2002,26 @@ case 'metadinha':
                          reply(`Não a nenhuma sessão em andamento...`);
 
                     }
-                    break
+                    break */
+    case  'reset':
+ 
+ if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
 
+                      if (isOwner) {                    
+                         fs.unlinkSync("./lib/jogodavelha/" + from + ".json")
+                         reply(`Jogo da velha resetado com sucesso nesse grupo!`)
+                         }
+                         
+                    if (isGroupAdmins) {                     
+                         fs.unlinkSync("./lib/jogodavelha/" + from + ".json")
+                         reply(`Jogo da velha resetado com sucesso nesse grupo!`)
+                         }
+                         
+                    } else {
+                     reply(`Não a nenhuma sessão em andamento...`)
+                    }
 
+break
 
                                                   
                           case 'comandos':
@@ -6817,7 +6843,7 @@ tttset.autoEndTime = "off"
 							.save(ran)
                            fs.unlinkSync(media)
                         }
-	*/
+	
 	
 		if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
 						const encmedia = mek
@@ -6870,7 +6896,7 @@ tttset.autoEndTime = "off"
 							.toFormat('webp')
 							.save(ran)
 							} 
-					
+					*/
 	
                         
 	
