@@ -1700,9 +1700,24 @@ get_result = await fetchJson(`http://brizas-api.herokuapp.com/sociais/ytplaymp3?
 get_result = get_result
 ini_buffer = await getBuffer(get_result.thumb)
 get_audio = await getBuffer(get_result.audio)
-client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${get_result.titulo}\nDuração: ${get_result.duration}\n`, 'jpegThumbnail': ini_buffer} } }, ptt:true})
+client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${get_result.titulo}\nDuração: ${get_result.duration}\n`, 'jpegThumbnail': ini_buffer} } }, ptt:true})
 
 break
+	
+	case 'playmp4':
+  
+  if (!isGroup) return reply(mess.only.group)
+					  if (args.length < 1) return reply('Cadê o nome do vídeo ?')
+            reply('Baixando.. aguarde 🥃')              
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${q}`)            
+if (anu.error) return reply('deu erro bro')
+if (anu.duration > 1) return reply('Teste de limite de duração')
+                buffer = await getBuffer(anu.result.thumbnail)
+                lagu = await getBuffer(anu.result.url_video)
+                client.sendMessage(from, lagu, video, { mimetype: 'video/mp4', quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': buffer} } }})
+
+                break
+
 	
 	case 'play':
   
@@ -1710,14 +1725,12 @@ break
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
             reply('Baixando.. aguarde 🥃')
                 const ytbt = args.join(" ")
-                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)
-                 infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)        
 if (anu.error) return reply('deu erro bro')
 if (anu.duration > 1) return reply('Teste de limite de duração')
                 buffer = await getBuffer(anu.result.thumbnail)
                 lagu = await getBuffer(anu.result.url_video)
-               // client.sendMessage(from, buffer, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${anu.result.title}.mp3/n${anu.result.size}`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)}}}, caption: infomp3})
-                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
+                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
 
                 break
 
@@ -2151,7 +2164,7 @@ break
 	
 
 
-case 'playmp4':
+/*case 'playmp4':
   
   
 					  if (args.length < 1) return reply('Cadê o nome do vídeo?')
@@ -2166,7 +2179,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
            //    client.sendMessage(from, buffer, image, {quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg","caption": `${anu.result.title}.mp3/n${anu.result.size}`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)}}}, caption: infomp3})
                 client.sendMessage(from, lagu, MessageType.video, {quoted: gauger, mimetype: 'video/mp4'})
                 break
-
+*/
 case 'play2':
 if (args.length == 0) return reply(`Exemplo: ${prefix + command} Musica Sad`)
 reply(mess.wait)
@@ -2766,7 +2779,7 @@ case 'gado':
 						mentions(`*Vc é do golpe?🤑🤪*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% GOLPISTA🤠🔥*`, mentioned, true)}
                 break
 
-case 'gay':          
+case 'gay': //by gauger 
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(5)]   
