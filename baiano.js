@@ -2144,6 +2144,9 @@ break
                     if (args.length < 1) return reply(`Escreva seu nome ou nick\nExemplo: ${prefix}registrar gauger`)
                    
                    const namaUser = body.slice(11)
+                   if (q.length < 1) {
+                   const namaUser = `${pushname}`
+                   }
                     const serialUser = createSerial(20)                
                     if (namaUser.length >= 60) return reply(`Seu nome é muito longo`)
      
@@ -2248,12 +2251,12 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                 break
                          case 'musica':
                               if (!isUser) return registroA() 
-                          if (isLimit) return reply(mess.limited)
+                          
                          if (args.length < 1) return reply('*Digite o nome da música desejada \n\nObs: a música demora até 2 minutos para ser enviada, paciência�?*')
 			mus = body.slice(6)
                 mus1 = await fetchJson(`https://api.zeks.me/api/ytplaymp3?q=${mus}&apikey=gaugerkkkxyz`, {method: 'get'})
                 
-               if (isLimit) return reply(mess.limited)
+               
                if (mus1.error) return reply(mus1.error)
                  muss = `*Musica encontrada!!*\nTitulo : ${mus1.result.title}\nTamanho : ${mus1.result.size}\nLink : ${mus1.result.source}\nA música está sendo enviada... Aguarde!!`
                 buffer = await getBuffer(mus1.result.thumbnail)
@@ -3080,7 +3083,7 @@ case 'amor':
 	
 	case 'attp':
 	if (!isUser) return registroA()
-	 if (isLimit) return reply(mess.limited)
+	 
 			     	if (args.length < 1) return reply(`Coloque o texto _\n\n*Exemplo ${prefix}attp atari*`)
                                 url = encodeURI(`https://api.xteam.xyz/attp?file&text=${body.slice(6)}`)
 		    		attp2 = await getBuffer(url)
@@ -3104,7 +3107,7 @@ let batans = global.batrei[global.batrei.length - 1]
     
                                     case 'antilink':     
                           if (!isUser) return registroA()                                       
-        if (isLimit) return reply(mess.limited)      
+              
                     if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -3140,7 +3143,7 @@ let batans = global.batrei[global.batrei.length - 1]
             
                 case 'tirargrave':    
                 if (!isUser) return registroA()
-                if (isLimit) return reply(mess.limited) 
+                 
                 if (!isQuotedAudio) return reply('*Marca um aúdio bro*')        
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3157,7 +3160,7 @@ let batans = global.batrei[global.batrei.length - 1]
 
 case 'estourar1':  
   if (!isUser) return registroA()
-   if (isLimit) return reply(mess.limited)
+   
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')           
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3174,7 +3177,7 @@ case 'estourar1':
 
 case 'estourar2':   
    if (!isUser) return registroA()
-  if (isLimit) return reply(mess.limited)
+  
       if (!isQuotedAudio) return reply('*Marca um aúdio bro*')       
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3192,7 +3195,7 @@ case 'estourar2':
 
                 case 'normal':      
          if (!isUser) return registroA()        
-       if (isLimit) return reply(mess.limited)          
+                 
                      if (!isQuotedAudio) return reply('*Marca um aúdio bro*')        
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3209,7 +3212,7 @@ case 'estourar2':
 
 			case 'slow':
 			if (!isUser) return registroA()
-		 if (isLimit) return reply(mess.limited)	
+		 	
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3226,7 +3229,7 @@ case 'estourar2':
 
 				case 'bebado':
 		if (!isUser) return registroA()		
-				 if (isLimit) return reply(mess.limited) 
+				  
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3242,7 +3245,7 @@ case 'estourar2':
 				break
 				case 'demonio':
 		if (!isUser) return registroA()		
-		 if (isLimit) return reply(mess.limited)		
+		 		
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3258,7 +3261,7 @@ case 'estourar2':
 				break
 				case 'grave':   
 			if (!isUser) return registroA()	      
-			 if (isLimit) return reply(mess.limited)	        
+			 	        
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3272,7 +3275,7 @@ case 'estourar2':
 					})
 					
 				break
- if (isLimit) return reply(mess.limited)
+ 
 				case 'diabolico':     
 				if (!isUser) return registroA()  
 		   if (!isQuotedAudio) return reply('*Marca um aúdio bro*')		          
@@ -3291,7 +3294,7 @@ case 'estourar2':
 
 				case 'estourar':    
 				if (!isUser) return registroA()
-			 if (isLimit) return reply(mess.limited)	    
+			 	    
 				   if (!isQuotedAudio) return reply('*Marca um aúdio bro*')         
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3314,7 +3317,7 @@ case 'estourar2':
 					break
 case 'esquilo':
 if (!isUser) return registroA()
- if (isLimit) return reply(mess.limited)
+ 
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3331,7 +3334,7 @@ if (!isUser) return registroA()
 
 case 'rapido':
 if (!isUser) return registroA()
- if (isLimit) return reply(mess.limited)
+ 
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3408,7 +3411,7 @@ if (!isUser) return registroA()
 				  case 'wa.me':
 				  case 'wame':
 				 if (!isUser) return registroA() 
-				   if (isLimit) return reply(mess.limited)
+				   
 				   barra = `/`
   client.updatePresence(from, Presence.composing) 
       options = {
@@ -3523,9 +3526,9 @@ break
 				if (!isUser) return registroA()
 				   client.updatePresence(from, Presence.recording) 
 				   if (args.length < 1) return client.sendMessage(from, `*Qual é a sigla do pais?*\n\n*Veja as siglas em:*\n*${prefix}siglas*`, text, {quoted: mek})
-				            if (isLimit) return reply(mess.limited)
+				            
                                     
-                                   if (isLimit) return reply(mess.limited)
+                                   
 					const gtts = require('./lib/gtts')(args[0])
 					if (args.length < 2) return client.sendMessage(from, 'Onde está o texto?', text, {quoted: mek})
 					dtt = body.slice(8)
@@ -3814,7 +3817,7 @@ if (!isUser) return registroA()
                 case 'qrcode':
                 if (!isUser) return registroA()
                  if (args.length < 1) return reply('*Cade o link?�?*')
-                if (isLimit) return reply(mess.limited)
+                
                 buff = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?data=${body.slice(8)}&size=1080%C3%971080`)
 				client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                                 
@@ -4063,7 +4066,7 @@ break*/
 
 				case 'foto':
 				if (!isUser) return registroA()
-				 if (isLimit) return reply(mess.limited)
+				 
 				    client.updatePresence(from, Presence.composing)
 	                                     
 					if (!isQuotedSticker) return reply('❌ Responda uma figurinha ❌')
@@ -4082,7 +4085,7 @@ break*/
 					break
                 	case 'tomp3':
                 	if (!isUser) return registroA()
-                	 if (isLimit) return reply(mess.limited)
+                	 
                 	client.updatePresence(from, Presence.composing) 
                          
 					if (!isQuotedVideo) return reply('❗Responda um video�?')
@@ -4117,7 +4120,7 @@ break*/
 
 				case 'fakereply':
 				if (!isUser) return registroA()
-				 if (isLimit) return reply(mess.limited)
+				 
 				if (args.length < 1) return reply(`*Uso correto:\n${prefix}calunia [marque alguém|mensagem|resposta]]\n\nExemplo : \n${prefix}calunia @tagmember|oie|oi mano`)
 				var fitn = body.slice(7)
 				mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
@@ -4242,7 +4245,7 @@ break*/
                    if (!isUser) return registroA()
                    data = await fetchJson(`https://mnazria.herokuapp.com/api/maps?search=${body.slice(5)}`)
                     
-                   if (isLimit) return reply(mess.limited)
+                   
                    hasil = await getBuffer(data.gambar)
                    client.sendMessage(from, hasil, image, {quoted: mek, caption: `Hasil Dari *${body.slice(5)}*`})
                    
@@ -6075,7 +6078,7 @@ if (!isUser) return registroA()
            if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/neko')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
@@ -6087,7 +6090,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/waifu')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
@@ -6099,7 +6102,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/smile')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
                              client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif',duration:10, thumbnail: null})
            
@@ -6109,7 +6112,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/hug')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
                   client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif',duration:10})
            
@@ -6121,7 +6124,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/cry')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
                client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif',duration:10, thumbnail: null})
            
@@ -6132,7 +6135,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/kiss')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
               client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif',duration:10, thumbnail: null})
            
@@ -6143,7 +6146,7 @@ if (!isUser) return registroA()
 	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/lick')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
 client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif', thumbnail: null})
            
@@ -6153,7 +6156,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 			            case 'nekonime':
 			            if (!isUser) return registroA()
 					      
-                                       if (isLimit) return reply(mess.limited)
+                                       
 					anu = await fetchJson(`https://mhankbarbar.herokuapp.com/api/nekonime`, {method: 'get'})
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, image,{quoted: mek, thumbnail: null})
@@ -6164,7 +6167,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 		
 		case 'nekofig':
 		if (!isUser) return registroA()
-		if (isLimit) return reply(mess.limited)
+		
 							cry = getRandom('.gif')
 
 					rano = getRandom('.webp')
@@ -6197,7 +6200,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
      case 'sexyloli':	
      if (!isUser) return registroA()
      if (!isNsfw) return reply(mess.only.nsfw)
-      if (isLimit) return reply(mess.limited)
+      
 				 data = fs.readFileSync('./src/nsfwloli.js');
                  jsonData = JSON.parse(data);
                  randIndex = Math.floor(Math.random() * jsonData.length);
@@ -6214,7 +6217,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 				     if (!isNsfw) return reply(mess.only.nsfw)	
            data = await fetchJson('https://waifu.pics/api/nsfw/waifu')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
@@ -6225,7 +6228,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)
            data = await fetchJson('https://waifu.pics/api/nsfw/blowjob')            
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
                              client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'video/gif',duration:10, thumbnail: null})
            
@@ -6237,7 +6240,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)			  
            data = await fetchJson('https://waifu.pics/api/nsfw/neko')            
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
@@ -6248,7 +6251,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)
            data = await fetchJson('https://waifu.pics/api/nsfw/trap')            
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
@@ -6903,7 +6906,7 @@ client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:
       if (messagesC.includes("petra")) {
                  data = await fetchJson('https://waifu.pics/api/sfw/waifu')
             
-           if (isLimit) return reply(mess.limited)
+           
            hasil = await getBuffer(data.url)
            client.sendMessage(from, hasil, image, {quoted: mek, caption:';)', thumbnail: null})
            
