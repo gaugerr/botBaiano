@@ -620,17 +620,8 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
         
 
 
-            //function balance
-            if (isGroup ) {
-            const checkMoneyUser = checkMoney(sender)
-            try {
-                if (checkMoneyUser === undefined) addATM(sender)
-                const uangsaku = Math.floor(Math.random() * 50)
-                addMoney(sender, uangsaku)
-            } catch (err) {
-                console.error(err)
-            }
-        } 
+         
+        
 
 
 
@@ -800,10 +791,23 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
      }     		    			
 
             
-            
+               if (isGroup ) {
+            const checkMoneyUser = checkMoney(sender)
+            try {
+                if (checkMoneyUser === undefined) addATM(sender)
+                const uangsaku = Math.floor(Math.random() * 50)
+                addMoney(sender, uangsaku)
+            } catch (err) {
+                console.error(err)
+            }
+        } 
+
 
             
            if (isCmd) cmdadd()   
+           
+           if (isCmd) await limitAdd(sender)     
+           
                                  
             
         
@@ -1332,7 +1336,9 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 
 
 case '4test':
+if (isLimited) return reply(mess.limited)
  if (!isUser) return registroA()
+ reply('ok')
  break
 
      
@@ -1748,7 +1754,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 	
 	case 'play':
   if (!isUser) return registroA()
-  if (!isGroup) return reply(mess.only.group)
+  
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
             reply('Baixando.. aguarde 🥃')
                 const ytbt = args.join(" ")

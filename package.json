@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "node baiano.js"
+    "start": "node baiano.js",
+    "on": "sh start.sh"
   },
   "keywords": [
     "termux",
