@@ -1337,7 +1337,7 @@ case '4test':
 
      
 case 'tourl':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
        var imgbb = require('imgbb-uploader')
                     
        ger = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
@@ -1350,7 +1350,7 @@ if (!isUser) return reply(mess.only.user)
 
 break
 case 'reversevid':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (!isQuotedVideo) return reply('Marque um vídeo')
 reply(mess.wait)
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1367,7 +1367,7 @@ break
 		
 //_EFEITO FAST PARA VIDEO  
 case 'fastvid':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (!isQuotedVideo) return reply('Marque um vídeo')
 reply(mess.wait)
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1384,7 +1384,7 @@ break
 		
 //_EFEITO SLOW PARA VIDEO  
 case 'slowvid':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (!isQuotedVideo) return reply('precisa ser video')
 reply(mess.wait)
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
@@ -1399,7 +1399,7 @@ fs.unlinkSync(ran)
 })
 break
 case 'nightcore':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 media = await client.downloadAndSaveMediaMessage(encmedia)
 ran = getRandom('.mp3')
@@ -1413,7 +1413,7 @@ fs.unlinkSync(ran)
 break   
 case 'apostar':
 
- if (!isUser) return reply(mess.only.user)          
+ if (!isUser) return registroA()          
            if (!isGroup) return reply(`SOMENTE EM GRUPOS`)
 		   const dinheiro = checkMoney(sender)
 		   const checkxpr = checkMoney(sender, dinheiro)
@@ -1436,7 +1436,7 @@ case 'apostar':
 			}
 			break
 case 'cassino':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 const stoy = [
 		'🍊 : 🍋 : 🔔',
 		'🍌 : 🍒 : 🍐',
@@ -1497,7 +1497,7 @@ else if (somtoy === '🍌 : 🍌 : 🍌') {yow = `[  🎰 | CASSINO ]\n---------
 */
 case 'pombinhos':
 case 'casal':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 					if (!isGroup) return reply(mess.only.group)
 						membr = []
 						const suamae11 = groupMembers
@@ -1512,7 +1512,7 @@ if (!isUser) return reply(mess.only.user)
 						mentions(teks, membr, true)
 					break
 					case 'gostosas':
-				if (!isUser) return reply(mess.only.user)
+				if (!isUser) return registroA()
       if (!isGroup) return reply(mess.only.group)
                         member = []
                         const p1 = groupMembers
@@ -1535,7 +1535,7 @@ if (!isUser) return reply(mess.only.user)
                         mentions(teks, member, true)
                                         break 	
 	case 'attp1':	//@Kratos æ„›
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp1?apikey=brizaloka&text=${teks}`)
@@ -1543,7 +1543,7 @@ send = await getBuffer(url)
 client.sendMessage(from, send, sticker, {quoted: mek})
 			     	break	     
 case 'attp2':	//@Kratos æ„›	
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp2?apikey=brizaloka&text=${teks}`)
@@ -1551,7 +1551,7 @@ send = await getBuffer(url)
 client.sendMessage(from, send, sticker, {quoted: mek})
 			     	break	
 	case 'attp3': //@Kratos æ„›	
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp3?apikey=brizaloka&text=${teks}`)
@@ -1559,7 +1559,7 @@ send = await getBuffer(url)
 client.sendMessage(from, send, sticker, {quoted: mek})
 			     	break	
 	case 'attp4': //@Kratos æ„›
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp4?apikey=brizaloka&text=${teks}`)
@@ -1567,7 +1567,7 @@ send = await getBuffer(url)
 client.sendMessage(from, send, sticker, {quoted: mek})
 			     	break	
 		case 'attp5':	//@Kratos æ„›
-	if (!isUser) return reply(mess.only.user)	
+	if (!isUser) return registroA()	
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp5?apikey=brizaloka&text=${teks}`)
@@ -1575,7 +1575,7 @@ send = await getBuffer(url)
 client.sendMessage(from, send, sticker, {quoted: mek})
 			     	break
 case 'attp6':	//@Kratos æ„›	
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (args.length < 1) return reply(`_Coloque o texto _\n\n*Exemplo ${prefix}sttc kratos*`)
 teks = body.slice(6)
 url = encodeURI(`http://brizas-api.herokuapp.com/ttp/attp6?apikey=brizaloka&text=${teks}`)
@@ -1585,7 +1585,7 @@ client.sendMessage(from, send, sticker, {quoted: mek})
 
 
 	case 'viplist':
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
 
 					teks = '╭────*「 *VIPS👑* 」\n'
 					for (let V of vip) {
@@ -1595,7 +1595,7 @@ client.sendMessage(from, send, sticker, {quoted: mek})
 					client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": vip}})
 					break
 case 'banlist':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 
 					teks = '╭────*「 *USUÁRIOS BANIDOS❌* 」\n'
 					for (let V of ban) {
@@ -1606,7 +1606,7 @@ if (!isUser) return reply(mess.only.user)
 					break
 	
 	case 'ytsrc':     
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
 teks = body.slice(7)  
 anu = await fetchJson(`http://brizas-api.herokuapp.com/sociais/youtubesrc?apikey=brizaloka&query=${teks}`)
 const objs = []
@@ -1638,7 +1638,7 @@ break
 	
 	
 	case 'gift':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 texto = body.slice(6)
 var tipo = texto.split("/")[0]
 var code = texto.split("/")[1]
@@ -1690,7 +1690,7 @@ break
 	
 
 	case 'autostk':
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
                     if (!isGroup) return reply(ptbr.group())
                     if (!isGroupAdmins) return reply(ptbr.admin())
                     if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}autostk 1 para ativar `)
@@ -1719,7 +1719,7 @@ break
 	
 	
 	case 'play1':
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
 if (args.length == 0) return reply(`Exemplo: ${prefix + command} Musica Sad`)
 reply('Baixando.. aguarde 🥃')
 query = args.join(" ")
@@ -1732,7 +1732,7 @@ client.sendMessage(from, get_audio, audio, { mimetype: Mimetype.mp4Audio, filena
 break
 	
 	case 'playmp4':
-  if (!isUser) return reply(mess.only.user)
+  if (!isUser) return registroA()
   if (!isGroup) return reply(mess.only.group)
 					  if (args.length < 1) return reply('Cadê o nome do vídeo ?')
             reply('Baixando.. aguarde 🥃')              
@@ -1747,7 +1747,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 
 	
 	case 'play':
-  if (!isUser) return reply(mess.only.user)
+  if (!isUser) return registroA()
   if (!isGroup) return reply(mess.only.group)
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
             reply('Baixando.. aguarde 🥃')
@@ -1763,18 +1763,18 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 
 
 case 'doc':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 tope = fs.readFileSync('./teste.html')
 client.sendMessage(from, tope, MessageType.document, {mimetype: 'text/html', title: 'teste'})
 break
 	
 case 'catalogo':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 catalogo(gaugerxyz)
 break
 	
 	case 'emoji':
-	if (!isUser) return reply(mess.only.user)
+	if (!isUser) return registroA()
             if (!q) return reply('Y el emoji?')
             qes = args.join(' ')
             emoji.get(`${qes}`).then(emoji => {
@@ -1794,7 +1794,7 @@ fs.writeFileSync('./json/giftcard.json', JSON.stringify(giftC))
    break
 
 case 'gift':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (args.lengh < 1) return reply('Cade o GiftCard?')
 if (!isGift) return reply('GifCard incorreto ou já foi usado')
 reply('GiftCard ativado com sucesso!')
@@ -1810,7 +1810,7 @@ break
 	
 	
 	case 'tban':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (!isGroup) return reply(mess.only.group)
 if (!isGroupAdmins) return reply(mess.only.admin)
 if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -1831,7 +1831,7 @@ break
 	
 	
 case 'smeme': case 'stickmeme':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 gh = body.slice(7)           
 var top = gh.split('/')[0]
 var bottom = gh.split('/')[1]
@@ -1874,7 +1874,7 @@ break
 */
 
 case 'stickerfm':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 if (!isQuotedSticker) return reply(`Menciona el sticker que quieres robar junto al comando *${prefix}robar*`)
                   const encmediia = JSON.parse(JSON.stringify(msg).replace('quotedM','m')).message.extendedTextMessage.contextInfo
                   const meidia = await client.downloadAndSaveMediaMessage(encmediia, `./exif/${sender}`)
@@ -1918,42 +1918,42 @@ break
 
 
 case 'coala':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/koala?apikey=apiteam`)
 buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
 case 'panda':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/panda?apikey=apiteam`)
 buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
 case 'raposakk':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/shiba?apikey=apiteam`)
 buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
 case 'gato':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/gato?apikey=apiteam`)
 buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
 case 'dog':
-if (!isUser) return reply(mess.only.user)
+if (!isUser) return registroA()
 team = await fetchJson (`https://api-team-of-hero.herokuapp.com/api/imagens/cachorro?apikey=apiteam&tipo=dog`)
 buffer = await getBuffer(team.resultado)
 client.sendMessage(from, buffer, image, {quoted: mek, thumbnail: null})
 break
 
 case 'femoji':
-  if (!isUser) return reply(mess.only.user)
+  if (!isUser) return registroA()
 reply(mess.wait)
 if (args.length == 0) return reply(`Usage: ${prefix + command} query\nExample: ${prefix + command} 😭`)
 emoji = args[0]
@@ -1968,7 +1968,7 @@ client.sendMessage(from, buffer, image, { quoted: mek })
 break
 
 case 'metadinha':
-     if (!isUser) return reply(mess.only.user)          
+     if (!isUser) return registroA()          
 			
 				reply(mess.wair)
 				anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/ppcouple?apikey=dappakntlll`) 
@@ -1980,7 +1980,7 @@ case 'metadinha':
 				break
 	/*-------------[ Tictactoe Handler ]-------------*/
                 case 'jogodavelha':
-             if (!isUser) return reply(mess.only.user) 
+             if (!isUser) return registroA() 
 						if(!isGroup) return reply('comando apenas para grupos')
                     if (fs.existsSync(`./lib/jogodavelha/${from}.json`)) {
                          const boardnow = setGame(`${from}`);
@@ -2057,7 +2057,7 @@ case 'metadinha':
                     }
                     break */
     case  'reset':
-      if (!isUser) return reply(mess.only.user) 
+      if (!isUser) return registroA() 
  if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
 
                       if (isOwner) {                    
@@ -2080,7 +2080,7 @@ break
                           case 'comandos':
                
                                 
-         if (!isUser) return reply(mess.only.user)            
+         if (!isUser) return registroA()            
              
                             
              client.sendMessage(from, gaugerxyz, text, { quoted: gauger, contextInfo: {forwardingScore: 508, isForwarded: true}})		
@@ -2100,7 +2100,7 @@ reply(`${wa_version}\n${mcc}\n${mnc}\n${os_version}\n${device_manufacturer}\n${d
 
 break 	
 	case 'perfil':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
   
                     const usLevel = getLevelingLevel(sender)
                     const usXp = getLevelingXp(sender)
@@ -2177,7 +2177,7 @@ você se registrou, digite ${prefix}menu para listar meus comandos`
 
 	
 	case 'simi':
-	     if (!isUser) return reply(mess.only.user) 
+	     if (!isUser) return registroA() 
 if (args.length < 1) return reply(`Use ${prefix}simi texto`)
 try { 
 anu = await fetchJson(`https://simsumi.herokuapp.com/api?text=${encodeURIComponent(body.slice(5))}`, {method: 'get'})
@@ -2190,7 +2190,7 @@ break
 
 
 case 'baiano':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 if (args.length < 1) return reply(`Use ${prefix}simi texto`)
 try { 
 anu = await fetchJson(`https://api.simsimi.net/v1/?lang=pt&text=${q}`, {method: 'get'})
@@ -2220,7 +2220,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                 break
 */
 case 'play2':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 if (args.length == 0) return reply(`Exemplo: ${prefix + command} Musica Sad`)
 reply(mess.wait)
 query = args.join(" ")
@@ -2232,7 +2232,7 @@ get_audio = await getBuffer(get_result.video)
 client.sendMessage(from, get_audio, audio, { mimetype: 'video/mp4', filename: `audio.mp3`, quoted: mek})
 break
 case 'playa':
-       if (!isUser) return reply(mess.only.user) 
+       if (!isUser) return registroA() 
   if (!isGroup) return reply(mess.only.group)
 					  if (args.length < 1) return reply('Cadê o nome da música ?')
                 reply('🔎 Procurando música, aguarde...🔎')
@@ -2247,7 +2247,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                 client.sendMessage(from, lagu, MessageType.audio, {quoted: gauger, mimetype: 'audio/mp4', ptt:true})
                 break
                          case 'musica':
-                              if (!isUser) return reply(mess.only.user) 
+                              if (!isUser) return registroA() 
                           if (isLimit) return reply(mess.limited)
                          if (args.length < 1) return reply('*Digite o nome da música desejada \n\nObs: a música demora até 2 minutos para ser enviada, paciência�?*')
 			mus = body.slice(6)
@@ -2279,7 +2279,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                     break
             //levEL ATUAL
                    case 'level':
-                         if (!isUser) return reply(mess.only.user) 
+                         if (!isUser) return registroA() 
                     if (!isLevelingOn) return reply(`❌ Leveis não ativados no grupo, por favor ative com o comando:\n${prefix}leveis 1`)
                     const userLevel = getLevelingLevel(sender)
                     const userXp = getLevelingXp(sender)
@@ -2302,7 +2302,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 //-----------------------------------------------------------------MODOS ON/OFF--------------------------------------------------------------------//
 
 	case 'antifake':
-          if (!isUser) return reply(mess.only.user) 
+          if (!isUser) return registroA() 
      if (isBanned) return reply(mess.banned)
        if (!isGroup) return reply(mess.only.group)
                 if (!isBotGroupAdmins) return reply(`[📍] O BOT PRECISA SER ADMIN`)
@@ -2328,7 +2328,7 @@ break
 
 
                 case 'leveis':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
                     if (!isGroup) return reply(mess.only.group)
 
                     if (!isGroupAdmins) return reply('so adm pd usar')
@@ -2383,7 +2383,7 @@ break
 
 
                                 case 'bv':
-                                    if (!isUser) return reply(mess.only.user)  
+                                    if (!isUser) return registroA()  
 					if (!isGroup) return reply(mess.only.group)
 					if (args.length < 1) return reply('digite 1 para ativar')
 					if (Number(args[0]) === 1) {
@@ -2400,7 +2400,7 @@ break
 					}
                                         break
                                 case 'antilink':
-                   if (!isUser) return reply(mess.only.user)                   
+                   if (!isUser) return registroA()                   
                                 	if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -2421,7 +2421,7 @@ break
 					                    break
 				
                                  case 'nsfw':
-                                      if (!isUser) return reply(mess.only.user) 
+                                      if (!isUser) return registroA() 
                                  if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)				
 					if (args.length < 1) return reply('Digite 1 para ativar')
@@ -2443,7 +2443,7 @@ break
 //-------------------------------------------------------------------------GRUPOS-------------------------------------------------------------------------//
 
 case 'kickgp': 
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
    if (!isGroup) return reply(mess.only.group)
 
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -2471,7 +2471,7 @@ break
 
 
 case 'ban':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 if (!isGroup) return reply(mess.only.group)
 if (!isGroupAdmins) return reply(mess.only.admin)
 //if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
@@ -2487,7 +2487,7 @@ susp = `🚫@${mentioned[0].split('@')[0]} foi banido e você não poderá mais 
 mentions(`${susp}`, mentioned, true)   
 break
 case 'unban':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 if (!isGroup) return reply(mess.only.group)
 if (!isGroupAdmins) return reply(mess.only.admin)
 //if (!isOwner) return reply('*Este comando só pode ser usado pelo o dono 🌚🤙🏼 * ')
@@ -2512,7 +2512,7 @@ var txt2 = txt.split("/")[1];
 client.sendMessage(`${txt1}@s.whatsapp.net`, ${txt2}, text
   */
   case 'sugest':
-       if (!isUser) return reply(mess.only.user) 
+       if (!isUser) return registroA() 
   	if (args.length < 2) return reply('*Cade a sugestão?*')
   	if (args.length > 300) return reply('*Máximo de 300 caracteres*')
   reply('*Sua sugestão foi enviada ao meu dono com sucesso!*')
@@ -2523,7 +2523,7 @@ break
 
   
   case 'report':
-       if (!isUser) return reply(mess.only.user) 
+       if (!isUser) return registroA() 
   	if (args.length < 2) return reply('*Quer reportar oque?*')
   	if (args.length > 100) return reply('*Máximo de 100 caracteres*')
   reply('*Seu report foi enviado ao meu dono com sucesso!*')
@@ -2534,7 +2534,7 @@ break
 
   
   case 'convite':
-       if (!isUser) return reply(mess.only.user) 
+       if (!isUser) return registroA() 
   	if (args.length < 2) return reply('*Cade o link?*')
   	if (args.length > 50) return reply('*Máximo de 50 caracteres*')
   reply('*Seu convite foi envjado e será analisado..\nSe for aceito o bot irá entrar no seu grupo*')
@@ -2545,7 +2545,7 @@ break
 
 
 	case 'fg':
-	     if (!isUser) return reply(mess.only.user) 
+	     if (!isUser) return registroA() 
 		   //     reply('Comando de fig com problema, desativado por tempo indeterminado')	       
 if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
@@ -2599,7 +2599,7 @@ reply(`Você precisa enviar ou marcar uma imagem ou vídeo com no máximo 10 seg
 break
 
            case 'tag':
-               if (!isUser) return reply(mess.only.user)  
+               if (!isUser) return registroA()  
             if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
             encmedia = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
             file = await client.downloadAndSaveMediaMessage(encmedia, filename = getRandom())
@@ -2678,7 +2678,7 @@ break
 
 
 case 'tomp4': // by lindow
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 if ((isMedia && !mek.message.videoMessage || isQuotedSticker) && args.length == 0) {
 const encmediaaa = isQuotedSticker ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 const mediaaa = await client.downloadAndSaveMediaMessage(encmediaaa)
@@ -2691,7 +2691,7 @@ fs.unlinkSync(mediaaa)
 break
 case 'swm':
 	    case 'stickerwm':
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
 			        if (type === 'imageMessage' || isQuotedImage){
                     var kls = body.slice(5)
                     var pack = kls.split('/')[0]
@@ -2740,7 +2740,7 @@ if (!isOwner) return reply('Isso é só pro meu dono')
 */
 	
 		case 'safada':        
-		     if (!isUser) return reply(mess.only.user) 
+		     if (!isUser) return registroA() 
              client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 200)}`            	 
 			 body = [body.slice(8)]   
@@ -2760,7 +2760,7 @@ if (!isOwner) return reply('Isso é só pro meu dono')
 	
 	
 		case 'cringe':         
-		      if (!isUser) return reply(mess.only.user) 
+		      if (!isUser) return registroA() 
 	         client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 101)}`
 			 body = [body.slice(8)]   
@@ -2779,7 +2779,7 @@ if (!isOwner) return reply('Isso é só pro meu dono')
                 break											
 						
 	case 'safadeza':         
-	      if (!isUser) return reply(mess.only.user) 
+	      if (!isUser) return registroA() 
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 200)}`
 			 body = [body.slice(10)]   
@@ -2798,7 +2798,7 @@ if (!isOwner) return reply('Isso é só pro meu dono')
                 break															
 						
 case 'gado':    
-           if (!isUser) return reply(mess.only.user) 
+           if (!isUser) return registroA() 
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(6)]   
@@ -2817,7 +2817,7 @@ case 'gado':
                 break
      
                				             case 'golpe':     
-               				      if (!isUser) return reply(mess.only.user)                  
+               				      if (!isUser) return registroA()                  
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(6)]   
@@ -2836,7 +2836,7 @@ case 'gado':
                 break
 
 case 'gay': //by gauger 
-     if (!isUser) return reply(mess.only.user) 
+     if (!isUser) return registroA() 
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(5)]   
@@ -2854,7 +2854,8 @@ case 'gay': //by gauger
 						mentions(`*Tu é mano?😳😌*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% GAY🌈🤭*`, mentioned, true)}
                 break
 
-case 'lgbt':          
+case 'lgbt':       
+  if (!isUser) return registroA() 
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(6)]   
@@ -2872,7 +2873,8 @@ case 'lgbt':
 						mentions(`*Vc é desse país 🏳️‍�??*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% LGBT🌈🤭*`, mentioned, true)}
                 break
 
-case 'lesbica':          
+case 'lesbica':         
+ if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(9)]   
@@ -2890,7 +2892,8 @@ case 'lesbica':
 						mentions(`*You like girls?💞🤭*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% LÉSBICA🤭😛*`, mentioned, true)}
                 break
 
-case 'gatinho':          
+case 'gatinho':      
+    if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(9)]   
@@ -2908,7 +2911,8 @@ case 'gatinho':
 						mentions(`*Miawww😼👀*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% GATINHO💘😻*`, mentioned, true)}
                 break
 
-case 'gatinha':          
+case 'gatinha':         
+ if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(9)]   
@@ -2926,7 +2930,8 @@ case 'gatinha':
 						mentions(`*Miawww😼👀*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% GATINHA💘😻*`, mentioned, true)}
                 break
                 
-       case 'perfect':          
+       case 'perfect':    
+        if (!isUser) return registroA()     
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(9)]   
@@ -2944,7 +2949,8 @@ case 'gatinha':
 						mentions(`*Perfeição? será?🤔*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% PERFEITO(A)🤩🥳*`, mentioned, true)}
                 break         
 
-case 'lerdeza':          
+case 'lerdeza':      
+    if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 120)}`
 			 body = [body.slice(9)]   
@@ -2964,7 +2970,8 @@ case 'lerdeza':
 
 
 
-case 'gostosa':          
+case 'gostosa':       
+ if (!isUser) return registroA()  
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 200)}`
 			 body = [body.slice(9)]   
@@ -2982,7 +2989,8 @@ case 'gostosa':
 						mentions(`*Uiiii gostosa on🔥🔥*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% GOSTOSA😏🥵*`, mentioned, true)}
                 break
 
-case 'chato':          
+case 'chato':       
+   if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 100)}`
 			 body = [body.slice(7)]   
@@ -3000,7 +3008,8 @@ case 'chato':
 						mentions(`*KKK chatão em😑*\n\n*_@${mentioned[0].split('@')[0]}_ Você é ${random}% CHATO🤨*`, mentioned, true)}
                 break
 
-case 'amor':          
+case 'amor':    
+      if (!isUser) return registroA()
               client.updatePresence(from, Presence.composing) 
             	 random = `${Math.floor(Math.random() * 110)}`
 			 body = [body.slice(6)]   
@@ -3020,6 +3029,7 @@ case 'amor':
                 break
 
 	        case 'ship':
+	        if (!isUser) return registroA()
 	           client.updatePresence(from, Presence.composing)	
 	        if(args.length < 1) return reply('*Escreva 2 nomes!*\n\n*Exemplo: .ship joão e maria*')
 	      body = [body.slice(6)]   
@@ -3029,6 +3039,7 @@ case 'amor':
 	      break
 
 	      case 'ppp':		
+	      if (!isUser) return registroA()
 
 					const ta =['penso','passo','pego','PEGOO DMS😍','penso..','passokk','passo com ctz','pegaria todo dia ain','penso com carinho😏']
 					const ka = ta[Math.floor(Math.random() * ta.length)]
@@ -3046,6 +3057,7 @@ case 'amor':
     
     
     		case 'dado':
+    		if (!isUser) return registroA()
 			ranp = getRandom('.png')
 			rano = getRandom('.webp')
 		        random = `${Math.floor(Math.random() * 6)}`
@@ -3067,6 +3079,7 @@ case 'amor':
 			
 	
 	case 'attp':
+	if (!isUser) return registroA()
 	 if (isLimit) return reply(mess.limited)
 			     	if (args.length < 1) return reply(`Coloque o texto _\n\n*Exemplo ${prefix}attp atari*`)
                                 url = encodeURI(`https://api.xteam.xyz/attp?file&text=${body.slice(6)}`)
@@ -3077,6 +3090,7 @@ case 'amor':
 				 			
 			
  	case 'bateria':
+ 	if (!isUser) return registroA()
 let batans = global.batrei[global.batrei.length - 1]
   batter =`🔋 : ${batans}%`
  url = encodeURI(`https://api.xteam.xyz/attp?file&text=${batter}`)
@@ -3088,7 +3102,8 @@ let batans = global.batrei[global.batrei.length - 1]
     
     
     
-                                    case 'antilink':                                  
+                                    case 'antilink':     
+                          if (!isUser) return registroA()                                       
         if (isLimit) return reply(mess.limited)      
                     if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3111,8 +3126,9 @@ let batans = global.batrei[global.batrei.length - 1]
 					}
 					break
     
-                case 'speed':
+                case 'speed':                               
                 case 'ping':        
+               if (!isUser) return registroA() 
                     client.updatePresence(from, Presence.composing) 
 				uptime = process.uptime()
                     client.sendMessage(from, `Speed: *${latensi.toFixed(4)} _Segundos_*\nDispositivo: *Samsung*\nRAM: *4/64*\nRede: *45mbps*\nTipo do bot: *Termux Somente*\n\n*O bot esteve ativo por*\n*${kyun(uptime)}*`, text, { quoted: mek})
@@ -3123,6 +3139,7 @@ let batans = global.batrei[global.batrei.length - 1]
 
             
                 case 'tirargrave':    
+                if (!isUser) return registroA()
                 if (isLimit) return reply(mess.limited) 
                 if (!isQuotedAudio) return reply('*Marca um aúdio bro*')        
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3138,7 +3155,8 @@ let batans = global.batrei[global.batrei.length - 1]
 					
 				break
 
-case 'estourar1':    
+case 'estourar1':  
+  if (!isUser) return registroA()
    if (isLimit) return reply(mess.limited)
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')           
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3154,7 +3172,8 @@ case 'estourar1':
 					
 				break
 
-case 'estourar2':      
+case 'estourar2':   
+   if (!isUser) return registroA()
   if (isLimit) return reply(mess.limited)
       if (!isQuotedAudio) return reply('*Marca um aúdio bro*')       
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3171,7 +3190,8 @@ case 'estourar2':
 				break
 
 
-                case 'normal':       
+                case 'normal':      
+         if (!isUser) return registroA()        
        if (isLimit) return reply(mess.limited)          
                      if (!isQuotedAudio) return reply('*Marca um aúdio bro*')        
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3188,6 +3208,7 @@ case 'estourar2':
 				break
 
 			case 'slow':
+			if (!isUser) return registroA()
 		 if (isLimit) return reply(mess.limited)	
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 				encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3202,7 +3223,9 @@ case 'estourar2':
 				})
 				
 				break
+
 				case 'bebado':
+		if (!isUser) return registroA()		
 				 if (isLimit) return reply(mess.limited) 
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3218,6 +3241,7 @@ case 'estourar2':
 					
 				break
 				case 'demonio':
+		if (!isUser) return registroA()		
 		 if (isLimit) return reply(mess.limited)		
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3232,7 +3256,8 @@ case 'estourar2':
 					})
 					
 				break
-				case 'grave':         
+				case 'grave':   
+			if (!isUser) return registroA()	      
 			 if (isLimit) return reply(mess.limited)	        
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3248,7 +3273,8 @@ case 'estourar2':
 					
 				break
  if (isLimit) return reply(mess.limited)
-				case 'diabolico':       
+				case 'diabolico':     
+				if (!isUser) return registroA()  
 		   if (!isQuotedAudio) return reply('*Marca um aúdio bro*')		          
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -3262,7 +3288,9 @@ case 'estourar2':
 					})
 					
 				break
+
 				case 'estourar':    
+				if (!isUser) return registroA()
 			 if (isLimit) return reply(mess.limited)	    
 				   if (!isQuotedAudio) return reply('*Marca um aúdio bro*')         
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3278,12 +3306,14 @@ case 'estourar2':
 					
 				break	
 				case 'kkx':
+				if (!isUser) return registroA()
 				 if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					media = await client.downloadAndSaveMediaMessage(encmedia)
 					client.sendMessage(from, media, audio, {mimetype: 'audio/mp4', duration:9999999, ptt:true, quoted: mek})
 					break
 case 'esquilo':
+if (!isUser) return registroA()
  if (isLimit) return reply(mess.limited)
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3300,6 +3330,7 @@ case 'esquilo':
 				       break
 
 case 'rapido':
+if (!isUser) return registroA()
  if (isLimit) return reply(mess.limited)
    if (!isQuotedAudio) return reply('*Marca um aúdio bro*')
 					encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
@@ -3321,6 +3352,7 @@ case 'rapido':
                   
  
 				case 'rebaixar':
+			if (!isUser) return registroA()	
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
@@ -3341,7 +3373,7 @@ case 'rapido':
 					break
                                
                         case 'getadm':
-               
+               if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
                                          
 					if (!isGroup) return reply(mess.only.group)
@@ -3353,6 +3385,7 @@ case 'rapido':
           
                   case 'promover':
                   case 'promote':
+                  if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
                                          
 					if (!isGroup) return reply(mess.only.group)
@@ -3374,6 +3407,7 @@ case 'rapido':
 					break
 				  case 'wa.me':
 				  case 'wame':
+				 if (!isUser) return registroA() 
 				   if (isLimit) return reply(mess.limited)
 				   barra = `/`
   client.updatePresence(from, Presence.composing) 
@@ -3390,11 +3424,13 @@ case 'rapido':
 			
               case 'owner':
                 case 'creator':
+            
                   client.sendMessage(from, {displayname: "Jeff", vcard: vcard}, MessageType.contact, { quoted: mek})
                client.sendMessage(from, 'Contato do dono, ou https://wa.me/555180614158',MessageType.text, { quoted: mek} )
                 break
 	
 	case 'cmd':
+	if (!isUser) return registroA()
 	              client.updatePresence(from, Presence.composing) 
 	              if (!isOwner) return reply(mess.only.ownerB)
 	               const cmd = body.slice(5)
@@ -3407,6 +3443,7 @@ case 'rapido':
                   break
 
 case 'fix':
+if (!isUser) return registroA()
 	              client.updatePresence(from, Presence.composing) 
 	              if (!isOwner) return reply(mess.only.ownerB)
 	               const cmdgt = `git add . && git commit -am "melhorias adicionadas"`
@@ -3419,6 +3456,7 @@ case 'fix':
                   break
 
 		case 'deploy':
+		if (!isUser) return registroA()
 	              client.updatePresence(from, Presence.composing) 
 	              if (!isOwner) return reply(mess.only.ownerB)
 	              const cmdgit = `git push heroku master`
@@ -3439,6 +3477,7 @@ case 'fix':
 	              	               	             	       
                   break
 case 'kjj':
+if (!isUser) return registroA()
 
 					setTimeout( () => {
 					reply('worker started') 
@@ -3448,8 +3487,10 @@ case 'kjj':
 					reply('full deployment, starting worker:1') 
 					}, 20000)
 break
+
 		
 				case 'testime':
+				if (!isUser) return registroA()
 					setTimeout( () => {
 					client.sendMessage(from, 'Tempo limite', text) // ur cods
 					}, 30000) // 1000 = 1s,
@@ -3469,6 +3510,7 @@ break
 					break
 
 				case 'blocklist':
+				if (!isUser) return registroA()
 					teks = '*Esta é a lista de números bloqueados :\n*'
 					for (let block of blocked) {
 						teks += `~> @${block.split('@')[0]}\n`
@@ -3478,6 +3520,7 @@ break
 					break
 
 				case 'tts':
+				if (!isUser) return registroA()
 				   client.updatePresence(from, Presence.recording) 
 				   if (args.length < 1) return client.sendMessage(from, `*Qual é a sigla do pais?*\n\n*Veja as siglas em:*\n*${prefix}siglas*`, text, {quoted: mek})
 				            if (isLimit) return reply(mess.limited)
@@ -3504,6 +3547,7 @@ break
 				case 'listadmins':
 				case 'adminlist':
 				case 'admins':
+				if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
                                          
 					if (!isGroup) return reply(mess.only.group)
@@ -3517,7 +3561,7 @@ break
 					break
 
              case 'img': 
-
+if (!isUser) return registroA()
 				    client.updatePresence(from, Presence.composing) 
 				    txt = [body.slice(5)]
 				    data = await fetchJson(`https://fdciabdul.tech/api/pinterest?keyword=${txt}`)
@@ -3529,7 +3573,9 @@ break
 				    break
 				    
      
+     
 				case 'setprefix':
+				if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					if (!isOwner) return reply(mess.only.ownerB)
@@ -3542,6 +3588,7 @@ break
  
 break
 				case 'block':
+				if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isOwner) return reply(mess.only.ownerB)
@@ -3549,6 +3596,7 @@ break
 					client.sendMessage(from, `Pedidos recebidos, bloquear ${body.slice(8)}@c.us`, text)
 					break
 				case 'marcar':
+				if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
                      
@@ -3564,6 +3612,7 @@ break
 					
 					break
                 case 'marcar2':
+                if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3576,7 +3625,11 @@ break
 					}
 					client.sendMessage(from, '╔══✪�? Mention All 〙✪══\n╠➥'+teks+'╚═�? - - - - �?', text, {quoted: mek})
 					break
+
+
+
                 case 'marcar3':
+                if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3589,7 +3642,9 @@ break
 					}
 					client.sendMessage(from, '╔══✪�? Mention All 〙✪══\n╠➥'+teks+'╚═�? - - - - - �?', text, {detectLinks: false, quoted: mek})
 					break
+
                         case 'marcar4':
+                        if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3603,6 +3658,7 @@ break
 					client.sendMessage(from, '╔══✪�? Mention All 〙✪══\n╠➥'+teks+'╚═�? - - - - - �?', text, {quoted: mek})
 					break
                 case 'marcar5':
+                if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3616,12 +3672,16 @@ break
 					reply('╔══✪�? Mention All 〙✪══\n╠➥'+teks+'╚═�? - - - - - �?')
 					break
 				case 'bugarbot':
+				if (!isUser) return registroA()
 					var pc = body.slice(6)
 					var nomor = pc.split("|")[0];
 					var pesan = pc.split("|")[1];
 					client.sendMessage(nomor+'@s.whatsapp.net', pesan, text)
 					break
+
+
 				case 'setppbot':
+				if (!isUser) return registroA()
 				client.updatePresence(from, Presence.composing) 
 				if (!isQuotedImage) return reply(`Kirim gambar dengan caption ${prefix}setbotpp atau tag gambar yang sudah dikirim`)
 					if (!isOwner) return reply(mess.only.ownerB)
@@ -3631,6 +3691,7 @@ break
 					reply('*Obrigado pelo novo perfil😃*')
 					break
 	case 'tm':
+	if (!isUser) return registroA()
 					if (!isOwner) return reply('Quem é você?')
 					if (args.length < 1) return reply('.......')
 					anu = await client.chats.all()
@@ -3649,6 +3710,7 @@ break
 					}
 					break
 case 'aviso':
+if (!isUser) return registroA()
 					if (!isOwner) return reply('Quem é você?')
 					if (args.length < 1) return reply('.......')
 					anu = await client.chats.all()
@@ -3668,6 +3730,7 @@ case 'aviso':
 					break
 
                      case 'sairgp':
+                     if (!isUser) return registroA()
                     if (!isGroup) return reply(mess.only.group)
                     if (!isOwner) return reply('*vc não é o dono porra')
                      setTimeout( () => {
@@ -3682,6 +3745,7 @@ case 'aviso':
 
                     case 'ownergp':
 				  case 'ownergroup':
+				  if (!isUser) return registroA()
                client.updatePresence(from, Presence.composing) 
               options = {
           text: `O proprietario do grupo é : @${from.split("-")[0]}`,
@@ -3692,6 +3756,7 @@ case 'aviso':
  
 
 				case 'add':
+				if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3709,6 +3774,7 @@ case 'aviso':
 
 				case 'remover':
 				case 'kick':
+				if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 				if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3736,6 +3802,7 @@ case 'aviso':
                  case 'linkgp':
 				case 'linkgrup':
 				case 'linkgc':
+				if (!isUser) return registroA()
 				    client.updatePresence(from, Presence.composing) 
 				    if (!isGroup) return reply(mess.only.group)
                                       
@@ -3745,6 +3812,7 @@ case 'aviso':
 					client.sendMessage(from, yeh, text, {quoted: mek, detectLinks: false})
 					break
                 case 'qrcode':
+                if (!isUser) return registroA()
                  if (args.length < 1) return reply('*Cade o link?�?*')
                 if (isLimit) return reply(mess.limited)
                 buff = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?data=${body.slice(8)}&size=1080%C3%971080`)
@@ -3758,6 +3826,7 @@ case 'aviso':
 
 			case 'fechargp':
 			case 'group close':
+			if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3772,6 +3841,7 @@ case 'aviso':
 					break
                 case 'abrirgp':
                 case 'group open':
+                if (!isUser) return registroA()
 					client.updatePresence(from, Presence.composing) 
 					if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
@@ -3787,6 +3857,7 @@ case 'aviso':
 
 //FIGURINHA 
 				case 'f':
+				if (!isUser) return registroA()
    
   //     reply('Comando de fig com problema, desativado por tempo indeterminado')
 				if (isBanned) return reply('Banido!')
@@ -3991,6 +4062,7 @@ break*/
 			*/
 
 				case 'foto':
+				if (!isUser) return registroA()
 				 if (isLimit) return reply(mess.limited)
 				    client.updatePresence(from, Presence.composing)
 	                                     
@@ -4009,6 +4081,7 @@ break*/
 					
 					break
                 	case 'tomp3':
+                	if (!isUser) return registroA()
                 	 if (isLimit) return reply(mess.limited)
                 	client.updatePresence(from, Presence.composing) 
                          
@@ -4032,6 +4105,7 @@ break*/
                      case 'apagar':
 					case 'del':
 					case 'delete':
+					if (!isUser) return registroA()
      			if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isGroup) return reply(mess.only.group)                                         
 					client.deleteMessage(from, { id: mek.message.extendedTextMessage.contextInfo.stanzaId, remoteJid: from, fromMe: true })
@@ -4040,7 +4114,9 @@ break*/
 
                 
 
+
 				case 'fakereply':
+				if (!isUser) return registroA()
 				 if (isLimit) return reply(mess.limited)
 				if (args.length < 1) return reply(`*Uso correto:\n${prefix}calunia [marque alguém|mensagem|resposta]]\n\nExemplo : \n${prefix}calunia @tagmember|oie|oi mano`)
 				var fitn = body.slice(7)
@@ -4053,7 +4129,9 @@ break*/
 					break
 
        
+       
                                 case 'clearall':
+                     if (!isUser) return registroA()
 					if (!isOwner) return reply('*Vc não é meu dono🤪�?')
 					anu = await client.chats.all()
 					client.setMaxListeners(25)
@@ -4064,6 +4142,7 @@ break*/
 					break
 
 				case 'clone':
+				if (!isUser) return registroA()
 					if (!isGroup) return reply(mess.only.group)
 					if (!isOwner) return reply('*Comando só pode ser usado pelo gauger, pois ele clona a foto de perfil do bot�?*')
 					if (args.length < 1) return reply('Qual a tag de quem voce deseja clonar?')
@@ -4080,17 +4159,17 @@ break*/
 					}
 					break
 
-case 'bal':
-  reply(`Agora é ${prefix}money`)
                     
-                                        break
+                                      
                                 
                                 case 'money':
+                                if (!isUser) return registroA()
                                 const kantong = checkMoney(sender)
                                       const moneyy = `❏ *Nome* : ${pushname}\n  ❏ *Numero* : ${sender.split("@")[0]}\n  ❏ *Dinheiro* : ${kantong}`
      reply(moneyy)
                                         break
                                 case 'buylimite':
+                                if (!isUser) return registroA()
                                         if (args.length < 1) return reply(`Qual é o limite que você quer comprar?\n\ndigite ${prefix}buylimite 1 por exemplo\n\nCertifique-se de ter dinheiro suficiente, mana! \n\nComo verificar dinheiro: .bal`)
                                          
                                         payout = body.slice(10)
@@ -4103,12 +4182,14 @@ case 'bal':
                                                 await reply(`*PAGAMENTO CONCLUIDO*\n\n*remetente* : Admin\n*receptor* : ${pushname}\n*compra nominal* : ${payout} \n *limite de preço* : ${koinPerlimit}/limit\n *o resto do seu dinheiro* : ${checkMoney(sender)}\n\nprocesso bem sucedido com número de pagamento`)
                                         }
                                         break
-                                case 'limite':                                        
+                                case 'limite':   
+                          if (!isUser) return registroA()                                           
                                         checkLimit(sender)
                                         break
 
                                                                              
                                  case 'setname':
+                                 if (!isUser) return registroA()
                           if (args.length < 1) return reply('*Digite o nome que quer dar ao grupo�?*')       
                                         if (!isGroup) return reply(mess.only.group)
 			                if (!isGroupAdmins) return reply(mess.only.admin)
@@ -4116,7 +4197,9 @@ case 'bal':
                                         client.groupUpdateSubject(from, `${body.slice(9)}`)
                                         client.sendMessage(from, 'Sucesso, alterar o nome do grupo', text, {quoted: mek})
 				        break
+
                                 case 'setdesc':
+                                if (!isUser) return registroA()
                                 if (args.length < 1) return reply('*Digite a descrição que quer adicionar ao grupo�?*')
                          if (!isGroup) return reply(mess.only.group)
 			                if (!isGroupAdmins) return reply(mess.only.admin)
@@ -4135,6 +4218,7 @@ case 'bal':
 			
  			            			
 				case 'ocr':
+				if (!isUser) return registroA()
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -4153,15 +4237,9 @@ case 'bal':
 					}
 					break
 
-
-
-				
-                    
-
-                  	
-				
-	
+				                                    				
                    case 'map':
+                   if (!isUser) return registroA()
                    data = await fetchJson(`https://mnazria.herokuapp.com/api/maps?search=${body.slice(5)}`)
                     
                    if (isLimit) return reply(mess.limited)
@@ -4175,6 +4253,7 @@ case 'bal':
 
 
 case 'hidetag':
+if (!isUser) return registroA()
                 client.updatePresence(from, Presence.composing) 
                  
                 if (!isGroup) return reply(mess.only.group)
@@ -4199,6 +4278,7 @@ case 'hidetag':
 			
 
          case 'missing':		
+         if (!isUser) return registroA()
                             	
 	   reply(mess.wait)
             		
@@ -4224,7 +4304,7 @@ case 'hidetag':
 
 			case 'figulixo':
 
-                           
+                 if (!isUser) return registroA()          
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4262,7 +4342,7 @@ case 'hidetag':
 
                     break                              
 
-                    
+                    if (!isUser) return registroA()
 
                     case 'figurip':
 
@@ -4314,7 +4394,7 @@ case 'hidetag':
                 case 'figulgbt':
 
                     		
-
+if (!isUser) return registroA()
                     var imgbb = require('imgbb-uploader')
 
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
@@ -4367,7 +4447,7 @@ case 'hidetag':
 
                
 
-                    
+                    if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4420,7 +4500,7 @@ case 'hidetag':
                                       
 
                 case 'figublur':
-
+if (!isUser) return registroA()
                     	
 
                     var imgbb = require('imgbb-uploader')
@@ -4474,7 +4554,7 @@ case 'hidetag':
                       
 
                 case 'figupalito':
-
+if (!isUser) return registroA()
                     		
                      var imgbb = require('imgbb-uploader')
 
@@ -4516,7 +4596,7 @@ case 'hidetag':
 
                 case 'figuface':
 
-
+if (!isUser) return registroA()
                      var imgbb = require('imgbb-uploader')
 
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
@@ -4557,7 +4637,7 @@ case 'hidetag':
 
                     case 'figuquadro':
 
-             
+             if (!isUser) return registroA()
 
                      var imgbb = require('imgbb-uploader')
 
@@ -4600,7 +4680,7 @@ case 'hidetag':
                 
                 case 'figuwanted':
 
-                    	
+                    	if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4652,7 +4732,7 @@ case 'hidetag':
 
                     case 'figuwasted':
 
-            
+if (!isUser) return registroA()
 
 
                     var imgbb = require('imgbb-uploader')
@@ -4707,7 +4787,7 @@ case 'hidetag':
 
                 case 'figuarma':
 
-                    	
+                    if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4760,7 +4840,7 @@ case 'hidetag':
                     
 
                 case 'figudrip':
-
+                if (!isUser) return registroA()
                     		
                     var imgbb = require('imgbb-uploader')
 
@@ -4812,7 +4892,7 @@ case 'hidetag':
 
                      case 'figuinvert':
 
-      
+if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4865,6 +4945,7 @@ case 'hidetag':
                     
 
                 case 'figupreso':
+                if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -4919,6 +5000,7 @@ case 'hidetag':
                 case 'figushit':
 
 
+if (!isUser) return registroA()
                     var imgbb = require('imgbb-uploader')
 
                     if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
@@ -4970,7 +5052,7 @@ case 'hidetag':
   
 
                 case 'figutriggerr':
-
+if (!isUser) return registroA()
                   
                     var imgbb = require('imgbb-uploader')
 
@@ -5022,7 +5104,7 @@ case 'hidetag':
 
                       case 'figupet':               
 
-                    	
+                    	if (!isUser) return registroA()
 
                     var imgbb = require('imgbb-uploader')
 
@@ -5080,50 +5162,62 @@ case 'hidetag':
          
          
 case 'desligar':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./audios/fdp.mp3');
 client.sendMessage(from, tujuh, MessageType.audio, {quoted: mek, mimetype: 'audio/mp4', ptt:true})
 break
 case 'say1':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/say1.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'say2':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/say2.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'say3':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/mek3.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'mek4':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/mek4.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'xxx1':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/xxx1.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'xxx2':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/xxx2.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'teto1':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/teto1.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'edit1':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/edit1.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'edit2':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/edit2.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'edit3':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/edit3.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break
 case 'edit4':
+if (!isUser) return registroA()
 tujuh = fs.readFileSync('./videos/edit4.mp4');
 client.sendMessage(from, tujuh, video, {quoted: mek, mimetype: 'video/mp4', ptt:true})
 break					
@@ -5137,9 +5231,11 @@ break
 													
 		
 case 'ttthelp':
+if (!isUser) return registroA()
 		client.sendMessage(from, ttthelp(prefix) , text, {quoted: mek})
                 break
-case 'ttt':				
+case 'ttt':		
+		if (!isUser) return registroA()
 if (!isGroup) {
 reply('Apenas em Grupos')
 } else if (tttset.tttstatus == "on") {
@@ -5178,12 +5274,14 @@ tttset.autoEndTime = "on"
 }
 break	
 case 'tttme':
+if (!isUser) return registroA()
 if (!isGroup) return reply('Apenas em Grupos')
 const checkTTTIdMe = getTTTId(sender)
 if (checkTTTIdMe === undefined) addTTTId(sender)
 client.sendMessage(from, tttme(pushname, getTTTwins(sender), getTTTdefeats(sender), getTTTties(sender), getTTTpoints(sender)), text, {quoted:mek})
 break	
 case 'tttrank':
+if (!isUser) return registroA()
 if (!isGroup) return reply('Apenas em Grupos')
 tictactoe.sort((a, b) => (a.points < b.points) ? 1 : -1)
 mentioned_jid = []
@@ -5202,7 +5300,8 @@ console.log(err)
 await client.sendMessage(from, `Humm, é necessário que no mínimo 3 pessoas tenham jogado...`, text, {quoted: mek})
 }
 break	
-case 'coord' :
+case 'coord':
+if (!isUser) return registroA()
 tttset.playertest = sender
 if (!isGroup) {
 reply('Apenas em grupos')
@@ -5413,6 +5512,7 @@ break
 
 
 				case 'marvel':
+				if (!isUser) return registroA()
 				if (args.length < 1) return reply(mess.twotxt)
 					var gh = body.slice(8)
 					var txt1 = gh.split("/")[0];
@@ -5425,7 +5525,7 @@ break
 
 
 case 'plaquinha2':
-       
+       if (!isUser) return registroA()
                     if (args.length < 1) return reply(mess.onetxt)
 			
 					if (q.length > 15) return reply('O texto é longo, até 15 caracteres')
@@ -5434,7 +5534,7 @@ case 'plaquinha2':
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Ta na mão 😈'})
 					break
                   case 'plaquinha':
-                  
+                  if (!isUser) return registroA()
                     if (args.length < 1) return reply(mess.onetxt)			
 					if (q.length > 10) return reply('O texto é longo, até 10 caracteres')
 					reply('*Estou fazendo, se der erro tente novamente ✓*')
@@ -5442,6 +5542,7 @@ case 'plaquinha2':
 					client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Toma ai 😈💅 '})
 					break
 					case 'bpink':
+					if (!isUser) return registroA()
                   if (args.length < 1) return reply(mess.onetxt)
               
                 data = await getBuffer(`https://docs-jojo.herokuapp.com/api/blackpink?text=${body.slice(7)}`)
@@ -5452,7 +5553,7 @@ case 'plaquinha2':
                 break
 			
 		case '3dtext':
-	
+	if (!isUser) return registroA()
 		if (args.length < 1) return reply(mess.onetxt)
                 data = await await getBuffer(`https://docs-jojo.herokuapp.com/api/text3d?text=${body.slice(8)}`)
            
@@ -5462,6 +5563,7 @@ case 'plaquinha2':
 
 
                                    		case 'pornhub':
+                                   		if (!isUser) return registroA()
                           		
  if (args.length < 1) return reply(mess.twotxt)
 			    nobg = `${body.slice(9)}`
@@ -5474,7 +5576,7 @@ case 'plaquinha2':
 					break
 
 			    case 'glogo':
-			   
+			   if (!isUser) return registroA()
 			         if (args.length < 1) return reply(mess.twotxt) 
 			    dark = `${body.slice(7)}`
 			    da = dark.split("/")[0];
@@ -5486,6 +5588,7 @@ case 'plaquinha2':
 			    break  
 
                 case 'bitext':
+                if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(7)
 			
@@ -5495,6 +5598,7 @@ if (args.length < 1) return reply(mess.onetxt)
 					break
 
         case 'caderno':
+        if (!isUser) return registroA()
            if (args.length < 1) return reply(mess.onetxt)
 					nul = body.slice(9)
 		
@@ -5504,6 +5608,7 @@ if (args.length < 1) return reply(mess.onetxt)
 				break			
 			
 			   case 'chatlogo':
+			   if (!isUser) return registroA()
 		if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(10)
 					if (teks.length > 8) return reply('O texto é longo, até 8 caracteres')
@@ -5513,6 +5618,7 @@ if (args.length < 1) return reply(mess.onetxt)
 					break
 
 case 'leao':
+if (!isUser) return registroA()
      if (args.length < 1) return reply(mess.onetxt)
 					teks = body.slice(6)
 					if (teks.length > 9) return reply('O texto é longo, até 9 caracteres')
@@ -5524,7 +5630,7 @@ case 'leao':
 
 
 					case 'modern':
-			      
+			    if (!isUser) return registroA()  
 					if (args.length < 1) return reply(mess.onetxt)
 					ligh = body.slice(8)
 					if (ligh.length > 10) return reply('Teksnya kepanjangan, maksimal 9 karakter')
@@ -5537,7 +5643,7 @@ case 'leao':
 
 
 case 'naruto':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.me/api/naruto?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5546,7 +5652,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break
 
 case 'matrix':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.me/api/matrix?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5555,7 +5661,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break
 
 case 'neon':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(6)
 imagelogo = await getBuffer(`https://api.zeks.me/api/bneon?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5565,7 +5671,7 @@ break
 
 
 case 'breakwall':
-  
+if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.me/api/breakwall?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5574,7 +5680,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break
 
 case 'vidro':
- 
+ if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.me/api/dropwater?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5583,7 +5689,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break
 
 case 'wolflogo':
- 
+ if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
@@ -5594,7 +5700,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'crossfire':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.me/api/crosslogo?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5603,7 +5709,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'flametext':
- 
+ if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.me/api/flametext?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5612,7 +5718,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'silktext':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.me/api/silktext?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5622,7 +5728,7 @@ break
 
 
 case 'bokeh':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.me/api/glowtext?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5631,6 +5737,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'pubg':
+if (!isUser) return registroA()
   if (args.length < 1) return reply(mess.twotxt)
 txt = body.slice(6)
 var teks = txt.split("/")[0];
@@ -5641,7 +5748,7 @@ client.sendMessage(from, send, image)
 break
 
 case 'cslogo':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(8)
 imagelogo = await getBuffer(`https://api.zeks.me/api/cslogo?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5650,7 +5757,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'night':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.me/api/lithgtext?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5661,7 +5768,7 @@ break
 
 
 case 'inverno':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
 imagelogo = await getBuffer(`https://api.zeks.me/api/crismes?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5670,7 +5777,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'snow':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(6)
 var txt1 = gh.split("/")[0];
@@ -5681,7 +5788,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'pinkpaper':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twoxt)
 gh = body.slice(11)
 var txt1 = gh.split("/")[0];
@@ -5692,7 +5799,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'spark':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.me/api/tfire?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5701,7 +5808,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'beach':
-  
+ if (!isUser) return registroA() 
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(7)
 imagelogo = await getBuffer(`https://api.zeks.me/api/sandw?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5710,7 +5817,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'fogolivre':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(11)
 imagelogo = await getBuffer(`https://api.zeks.me/api/epep?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5720,7 +5827,7 @@ break
 
 
 case 'ytgolden':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.me/api/gplaybutton?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5730,7 +5837,7 @@ break
 
 
 case '3dtextb':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(9)
 imagelogo = await getBuffer(`https://api.zeks.me/api/text3dbox?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5739,7 +5846,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'avengers':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(10)
 var txt1 = gh.split("/")[0];
@@ -5750,7 +5857,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'texto3d2':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.onetxt)
 texto = body.slice(10)
 imagelogo = await getBuffer(`https://api.zeks.me/api/text3d?apikey=gaugerkkkxyz&text=${texto}`)
@@ -5758,7 +5865,7 @@ client.sendMessage(from, imagelogo, image, {quoted: mek, thumbnail: null, captio
 break 
 
 case 'phlogo':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
@@ -5769,7 +5876,7 @@ break
 
 
 case 'glitch':
-  
+  if (!isUser) return registroA()
 if (args.length < 1) return reply(mess.twotxt)
 gh = body.slice(8)
 var txt1 = gh.split("/")[0];
@@ -5780,6 +5887,7 @@ break
 
 
 case 'glitch1':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(8)
                       teks1 = teks.split("|")[0];
@@ -5790,6 +5898,7 @@ case 'glitch1':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'glitch2':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(9)
                       reply('[❗]ESPERE ...')
@@ -5798,6 +5907,7 @@ case 'glitch2':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'toxic':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(6)
                       reply('[❗]ESPERE ...')
@@ -5807,6 +5917,7 @@ case 'toxic':
                       break
 
 case 'transformer':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(12)
                       reply('[❗]ESPERE ...')
@@ -5814,7 +5925,9 @@ case 'transformer':
                       buff = await getBuffer(anu.resultado)
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
+
                       case 'graffiti':
+                      if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(9)
                       teks1 = teks.split("|")[0];
@@ -5826,6 +5939,7 @@ case 'transformer':
                       break
                      
 case 'thunder':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(9)
                       reply('[❗]ESPERE ...')
@@ -5834,6 +5948,7 @@ case 'thunder':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'harrypotter':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(12)
                       reply('[❗]ESPERE ...')
@@ -5843,6 +5958,7 @@ case 'harrypotter':
                       break
 
 case 'neon3d':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(7)
                       reply('[❗]ESPERE ...')
@@ -5851,6 +5967,7 @@ case 'neon3d':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'horrorblood':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(12)
                       reply('[❗]ESPERE ...')
@@ -5859,6 +5976,7 @@ case 'horrorblood':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'neondevil':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(10)
                       reply('[❗]ESPERE ...')
@@ -5867,6 +5985,7 @@ case 'neondevil':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'graffiti2':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(10)
                       reply('[❗]ESPERE ...')
@@ -5875,6 +5994,7 @@ case 'graffiti2':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
                       case 'dropwater':
+                      if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(10)
                       reply('[❗]ESPERE ...')
@@ -5883,6 +6003,7 @@ case 'graffiti2':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
                       case 'glow':
+                      if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(6)
                       reply('[❗]ESPERE ...')
@@ -5891,6 +6012,7 @@ case 'graffiti2':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'captainamerica':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(15)
                       reply('[❗]ESPERE ...')
@@ -5899,6 +6021,7 @@ case 'captainamerica':
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
 case 'jokerlogo':
+if (!isUser) return registroA()
                       if (args.length < 1) return reply('Cadê o texto?')
                       teks = body.slice(10)
                       reply('[❗]ESPERE ...')
@@ -5906,17 +6029,9 @@ case 'jokerlogo':
                       buff = await getBuffer(anu.resultado)
                       client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
                       break
-              /*        case 'marvel':
-                      if (args.length < 1) return reply('Cadê o texto?')
-                      teks = body.slice(7)
-                      teks1 = teks.split("|")[0];
-                      teks2 = teks.split("|")[1];
-                      reply('[❗]ESPERE ...')
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/marvel?apikey=apiteam&texto1=${teks1}&texto2={teks2}`)
-                      buff = await getBuffer(team.resultado)
-                      client.sendMessage(from, buff, image, {quoted: mek, thumbnail:null})
-                      break */
+  
                       case 'space':
+                      if (!isUser) return registroA()
                       team = body.slice(6)
                       teks1 = team.split("|")[0];
                       teks2 = team.split("|")[1];
@@ -5925,14 +6040,9 @@ case 'jokerlogo':
                       hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
                       client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
                       break
-           /*           case 'lavatext':
-                      team = body.slice(9)
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/lava-text?apikey=apiteam&texto1=${team}`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
-                      break */
+   
                       case 'magma':
+                      if (!isUser) return registroA()
                       team = body.slice(6)
                       team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/magma-text?apikey=apiteam&texto=${team}`)
                       of = await getBuffer(team.resultado)
@@ -5940,6 +6050,7 @@ case 'jokerlogo':
                       client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
                       break
                       case 'matrix':
+                      if (!isUser) return registroA()
                       team = body.slice(7)
                       team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/matrix-text?texto=${team}&apikey=apiteam`)
                       of = await getBuffer(team.resultado)
@@ -5947,28 +6058,21 @@ case 'jokerlogo':
                       client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
                       break
                       case 'breakwall':
+                      if (!isUser) return registroA()
                       team = body.slice(11)
                       team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/break-wall?apikey=apiteam&texto=${team}`)
                       of = await getBuffer(team.resultado)
                       hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
                       client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
                       break
-           /*           case 'avengers':
-                      team = body.slice(10)
-                      teks1 = team.split("|")[0];
-                      teks2 = team.split("|")[1];                  
-                      team = await fetchJson(`https://api-team-of-hero.herokuapp.com/api/textpro/avengers-logo?texto1=${teks1}&texto2=${teks2}&apikey=apiteam`)
-                      of = await getBuffer(team.resultado)
-                      hero = await getBuffer(`https://i.ibb.co/3h6M64p/48bb51875d47.jpg`)
-                      client.sendMessage(from, of, image, {quoted: mek, thumbnail: null})
-                      break
-*/
+
 //---------------------------------------------------------------IMAGENS-ANIME----------------------------------------------------------------------//
 
 
 
           
            case 'animeneko':
+           if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/neko')
             
            if (isLimit) return reply(mess.limited)
@@ -5980,6 +6084,7 @@ case 'jokerlogo':
 
        
 	case 'animewaifu':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/waifu')
             
            if (isLimit) return reply(mess.limited)
@@ -5991,6 +6096,7 @@ case 'jokerlogo':
 
 
 	case 'smile':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/smile')
             
            if (isLimit) return reply(mess.limited)
@@ -6000,6 +6106,7 @@ case 'jokerlogo':
            break					
 
 	case 'hug':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/hug')
             
            if (isLimit) return reply(mess.limited)
@@ -6011,6 +6118,7 @@ case 'jokerlogo':
            				
         
 	case 'cry':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/cry')
             
            if (isLimit) return reply(mess.limited)
@@ -6021,6 +6129,7 @@ case 'jokerlogo':
    					
    			
 	case 'kiss':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/kiss')
             
            if (isLimit) return reply(mess.limited)
@@ -6031,6 +6140,7 @@ case 'jokerlogo':
 //client.sendMessage(from, mp4, MessageType.video, {mimetype: 'video/gif', filename: `stick.gif`, quoted: mek, caption: '✅'})
        
 	case 'lick':
+	if (!isUser) return registroA()
            data = await fetchJson('https://waifu.pics/api/sfw/lick')
             
            if (isLimit) return reply(mess.limited)
@@ -6041,6 +6151,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 			
 			    
 			            case 'nekonime':
+			            if (!isUser) return registroA()
 					      
                                        if (isLimit) return reply(mess.limited)
 					anu = await fetchJson(`https://mhankbarbar.herokuapp.com/api/nekonime`, {method: 'get'})
@@ -6049,7 +6160,10 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
                                         
 					break
 		
+		
+		
 		case 'nekofig':
+		if (!isUser) return registroA()
 		if (isLimit) return reply(mess.limited)
 							cry = getRandom('.gif')
 
@@ -6081,6 +6195,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 
 
      case 'sexyloli':	
+     if (!isUser) return registroA()
      if (!isNsfw) return reply(mess.only.nsfw)
       if (isLimit) return reply(mess.limited)
 				 data = fs.readFileSync('./src/nsfwloli.js');
@@ -6095,6 +6210,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 					
 								
 					case 'waifu':
+					if (!isUser) return registroA()
 				     if (!isNsfw) return reply(mess.only.nsfw)	
            data = await fetchJson('https://waifu.pics/api/nsfw/waifu')
             
@@ -6106,6 +6222,7 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
 														
 																	
 			case 'blowjob':
+			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)
            data = await fetchJson('https://waifu.pics/api/nsfw/blowjob')            
            if (isLimit) return reply(mess.limited)
@@ -6115,7 +6232,9 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
            break																	
 																							
 				
+				
 			case 'neko':
+			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)			  
            data = await fetchJson('https://waifu.pics/api/nsfw/neko')            
            if (isLimit) return reply(mess.limited)
@@ -6123,8 +6242,10 @@ client.sendMessage(from, hasil, MessageType.video, {quoted: mek, mimetype: 'vide
            client.sendMessage(from, hasil, image, {quoted: mek, thumbnail: null})
            
            break																
-																	
+								
+															
 			case 'trap':
+			if (!isUser) return registroA()
 			     if (!isNsfw) return reply(mess.only.nsfw)
            data = await fetchJson('https://waifu.pics/api/nsfw/trap')            
            if (isLimit) return reply(mess.limited)
@@ -6345,11 +6466,46 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
         caption: 'kkk'})
 }
 
+if (messagesC.includes("buttontest")) {
+const buttons = [{
+                    "buttonId": 'registro', 
+                    "buttonText": {
+                        "displayText": "registrar📍"
+                    },
+                    "type": "NATIVE_FLOW"
+                },
+                {
+                "buttonId": 'registro1', 
+                    "buttonText": {
+                        "displayText": "registrar📍"
+                    },
+                    "type": "NATIVE_FLOW"
+                },
+                {
+                "buttonId": 'registro2', 
+                    "buttonText": {
+                        "displayText": "registrar📍"
+                    },
+                    "type": "NATIVE_FLOW"
+                }
+               ]
+buttonsMessage = {
+contentText: ' ',
+footerText: ' ',
+buttons, headerType: 1
+}
+await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage)
+
+}
+
 
 /*prep = await client.prepareMessageFromContent(from, { buttonsMessage }, {})
 client.relayWAMessage(prep)
 }
 */
+
+
+
 if (buttonsRM === 'menu✅') {
 if (!isUser) return reply(`❌Usuário não registrado, por favor, faça seu registro com o comando ${prefix}registrar ou clique no botão registrar📍❌`)  
            
