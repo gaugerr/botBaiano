@@ -571,8 +571,8 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
                 var tuser = '*Membro comum🗿*'
             }            
             
-            if(pushname === undefined || isBot) {
-            var pushname = '*botBaiano🔥*'
+            if (pushname === undefined && isBot) {
+             pushname = 'bot'
             }
             
             
@@ -808,9 +808,7 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
            
            if (isCmd) await limitAdd(sender)     
            
-                                 
-            
-        
+                                                    
        if (isCmd && isBanned && isGroup) {
             console.log(`\x1b[1;31m${hr}`, '\x1b[1;37m[\x1b[1;31m➻\x1b[1;37m]', color('BAN:', 'white'), color(pushname, 'red'), color(' COMANDO', 'white'), color('➻', 'red'), color(`${command}`, 'red'), color('NO GRUPO', 'white'), color(groupName, 'red'))
 
@@ -1333,7 +1331,68 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 
 	switch(command) {
 
+case 'rank':
+              if (!isGroup) return reply(mess.only.group)
+              if (!isLevelingOn) return await reply('O recurso de nivelamento não foi ativado!') 
+              const resp = level
+            level.sort((a, b) => (a.xp < b.xp) ? 1 : -1)
+              let leaderboard =  '-----[ *ENTRE OS MELHORES* ]----\n\n'
+              try {
+              for (let i = 0; i < 10; i++) {
+              var roles = 'Bronze  I🥉'
+              if (resp[i].level <= 5) {
+              roles = 'Bronze  Il🥉'
+              } else if (resp[i].level <= 10) {
+              roles = 'Bronze  Ill🥉'
+              } else if (resp[i].level <= 15) {
+              roles = 'Prata I🥈'
+              } else if (resp[i].level <= 20) {
+              roles = 'Prata Il🥈'
+              } else if (resp[i].level <= 21) { 
+              roles = 'Prata Ill🥈'
+              } else if (resp[i].level <= 22) {
+              roles = 'Ouro I🥇'
+              } else if (resp[i].level <= 23) {
+              roles = 'Ouro Il🥇'
+              } else if (resp[i].level <= 24) {
+              roles = 'Ouro Ill🥇'
+              } else if (resp[i].level <= 26) {
+              roles = 'Campeão I🏆'
+              } else if (resp[i].level <= 28) {
+              roles = 'Campeão lI🏆'
+              } else if (resp[i].level <= 30) {
+              roles = 'Campeão Ill🏆'
+              } else if (resp[i].level <= 32) {
+              roles = 'Diamante I 💎'
+              } else if (resp[i].level <= 34) {
+              roles = 'Diamante Il 💎'
+              } else if (resp[i].level <= 36) {
+              roles = 'Diamante llI 💎'
+              } else if (resp[i].level <= 38) {
+              roles = 'Mestre I 🐂'
+              } else if (resp[i].level <= 40) {
+              roles = 'Mestre Il 🐂'
+              } else if (resp[i].level <= 42) {
+              roles = 'Mestre Ill 🐂'
+              } else if (resp[i].level <= 44) {
+              roles = 'Mítico🔮'
+              } else if (resp[i].level <= 46) {
+              roles = 'Glória Mítica🔮'
+              } else if (resp[i].level <= 50) {
+              roles = 'Grande Mestre🛐'
+              } else if (resp[i].level >= 777) {
+                patt = '*😈 𝗗𝗢𝗡𝗢 😈*'
+              }
+ 
 
+              leaderboard += `➸ ${i + 1}. wa.me/${level[i].id.replace('@s.whatsapp.net', '')}\n➸ *Xp :* ${level[i].xp}\n➸ *Level :* ${level[i].level}\n➸ *Patente :* ${roles}\n\n`
+}
+              reply(leaderboard)
+              } catch (err) {
+              console.error(err)
+              reply('_Precisa de pelo menos 10 usuários que possuam um nível no banco de dados!_')
+}
+              break
 
 case '4test':
 if (isLimited) return reply(mess.limited)
@@ -1854,7 +1913,7 @@ sendStickerFromUrl(from, `${anu1}`)
 } else {
 reply('Use fotos/adesivos!')
 }
-await limitAdd(sender)
+
 break
 
 /*case 'stickerf': //by gauger
@@ -2047,7 +2106,7 @@ case 'metadinha':
                               mentionedJid: [sender, argss[1].replace("@", "") + "@s.whatsapp.net"],
                          },
                     });
-                    await limitAdd(sender)
+                    
                     break
          /*             case  'reset':
                     if (fs.existsSync("./lib/jogodavelha/" + from + ".json")) {
@@ -2147,15 +2206,9 @@ break
 
                 case 'registrar':
                     if (isUser) return reply('✅Você já está registrado✅')
-                    if (args.length < 1) return reply(`Escreva seu nome ou nick\nExemplo: ${prefix}registrar gauger`)
-                   
-                   const namaUser = body.slice(11)
-                   if (q.length < 1) {
-                   const namaUser = `${pushname}`
-                   }
-                    const serialUser = createSerial(20)                
-                    if (namaUser.length >= 60) return reply(`Seu nome é muito longo`)
-     
+                                   
+       const serialUser = createSerial(20)                
+ 
                     veri = sender
                     try {
                         ppimg = await client.getProfilePicture(`${sender.split('@')[0]}@s.whatsapp.net`)
@@ -2168,20 +2221,18 @@ break
 ╔════════════════
 ╠≽️ Dia: ${date}
 ╠≽️ Hora: ${hr}
-╠≽️ Nome de usuário: @${sender.split("@")[0]}
-╠≽️ Nome de registro: ${namaUser}
-╠≽️ Seu link wame: wa.me/${sender.split("@")[0]}
+╠≽️ Nome de registro: ${pushname}
+╠≽️ Seu link wame: https://wa.me/${sender.split("@")[0]}
 ╠≽️ Número: ${sender.split("@")[0]}
 ╚════════════════
 você se registrou, digite ${prefix}menu para listar meus comandos`
                     daftarimg = await getBuffer(ppimg)
-                    addRegisteredUser(sender, namaUser, time, serialUser)
+                    addRegisteredUser(sender, `${pushname}`, time, serialUser)
                     client.sendMessage(from, captionnya, text, {
                         quoted: mek,
                         contextInfo: {
                             mentionedJid: [sender]
-                        }
-                    })
+                         }})
                     break
 
 	
@@ -2311,11 +2362,10 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 //-----------------------------------------------------------------MODOS ON/OFF--------------------------------------------------------------------//
 
 	case 'antifake':
-          if (!isUser) return registroA() 
-     if (isBanned) return reply(mess.banned)
-       if (!isGroup) return reply(mess.only.group)
-                if (!isBotGroupAdmins) return reply(`[📍] O BOT PRECISA SER ADMIN`)
-					try {														 
+                    if (!isUser) return registroA() 
+                    if (isBanned) return reply(mess.banned)
+                    if (!isGroup) return reply(mess.only.group)
+                    if (!isBotGroupAdmins) return reply(`[📍] O BOT PRECISA SER ADMIN`) 
 					if (args.length < 1) return reply('Hmmmm')
 					if (Number(args[0]) === 1) {
 						if (isAntiFake) return reply('Ja esta ativo')
@@ -2328,62 +2378,28 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 						reply('Desativou com sucesso o recurso de antifake neste grupo✔️')
  					} else {
 						reply('1 para ativar, 0 para desativar')
- 					}
- 					} catch {
-						reply('Deu erro, tente novamente :/')
- 					}
-     await limitAdd(sender)
+ 					} 	
+     
 break
 
 
-                case 'leveis':
-     if (!isUser) return registroA() 
+        case 'leveis':
+                    if (!isUser) return registroA() 
                     if (!isGroup) return reply(mess.only.group)
-
                     if (!isGroupAdmins) return reply('so adm pd usar')
-
                     if (args.length < 1) return reply(`Digite da forma correta:\nComando: ${prefix}leveis 1 para ativar `)
-
                     if (Number(args[0]) === 1) {
-
-                        if (isLevelingOn) return reply('❎O recurso LEVEIS já está ativado no grupo❎')
-
+                    if (isLevelingOn) return reply('❎O recurso LEVEIS já está ativado no grupo❎')
                         leveling.push(from)
-
                         fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))
-
                         reply('✅O recurso LEVEIS foi ativado✅')
-
                     } else if (Number(args[0]) === 0) {
-
                         if (!isLevelingOn) return reply('❎O recurso LEVEIS não está ativado no grupo❎')
-
-                    //    let position = false
-
-                     //   Object.keys(leveling).forEach((i) => {
-
-               //             if (leveling[i] === from) {
-
-                    //          position = i
-
-                   //         }
-
-                      //  })
-
-               //         if (position !== false) {
-
-                            leveling.splice(from)
-
-                            fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))
-
-                        
-
+                        leveling.splice(from)
+                        fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))                 
                         reply('❌O recurso LEVEIS foi desativado❌')
-
                     } else {
-
                         reply(`Digite da forma correta:\nComando: ${prefix}leveis 1, para ativar e 0 para desativar`)
-
                     }
 
                     break
@@ -2391,12 +2407,12 @@ break
 
 
 
-                                case 'bv':
-                                    if (!isUser) return registroA()  
+          case 'bv':
+                    if (!isUser) return registroA()  
 					if (!isGroup) return reply(mess.only.group)
 					if (args.length < 1) return reply('digite 1 para ativar')
 					if (Number(args[0]) === 1) {
-						if (isWelkom) return reply('o recurso está ativo')
+				    if (isWelkom) return reply('o recurso está ativo')
 						welkom.push(from)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('bv foi ativado nesse grupo')
@@ -2408,9 +2424,11 @@ break
 						reply('digite 1 para ativar, 0 para desativar o recurso')
 					}
                                         break
-                                case 'antilink':
-                   if (!isUser) return registroA()                   
-                                	if (!isGroup) return reply(mess.only.group)
+
+
+     case 'antilink':
+                    if (!isUser) return registroA()                   
+                    if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
 					if (args.length < 1) return reply('digite 1 para ativar ')
@@ -2420,26 +2438,26 @@ break
 						reply('Grupo anti-link ativado com sucesso neste grupo ✔️')
 					} else if (Number(args[0]) === 0) {
 						if (!isAntiLink) return reply('O modo de grupo anti-link foi desabilitado ')
-						//var ini = anti.indexOf(from)
 						antilink.splice(from)
 						fs.writeFileSync('./json/antilink.json', JSON.stringify(antilink))
 						reply('Desativar grupo anti-link com sucesso neste grupo ✔️')
 					} else {
 						reply('1 para ativar, 0 para desativar ')
 					}
-					                    break
+					break
 				
-                                 case 'nsfw':
-                                      if (!isUser) return registroA() 
-                                 if (!isGroup) return reply(mess.only.group)
+	   case 'nsfw':
+                    if (!isUser) return registroA() 
+                    if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)				
 					if (args.length < 1) return reply('Digite 1 para ativar')
 					if (Number(args[0]) === 1) {
-						if (isNsfw) return reply('O recurso está ativo')
+		        	if (isNsfw) return reply('O recurso está ativo')
 						nsfw.push(from)
 						fs.writeFileSync('./json/nsfw.json', JSON.stringify(nsfw))
 						reply('O recurso nsfw foi ativado nesse grupo')
 					} else if (Number(args[0]) === 0) {
+					    if (!isNsfw) return reply('Recurso no está ativado')
 						nsfw.splice(from)
 						fs.writeFileSync('./json/nsfw.json', JSON.stringify(nsfw))
 						reply('O recurso nsfw foi desativado nesse grupo')
@@ -3870,7 +3888,7 @@ if (!isUser) return registroA()
    
   //     reply('Comando de fig com problema, desativado por tempo indeterminado')
 				if (isBanned) return reply('Banido!')
-					await limitAdd(sender)
+					
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -6457,13 +6475,9 @@ await client.sendMessage(from, gbuttonan, MessageType.buttonsMessage, {
 	if (!isUser) return registroA()
 logo = fs.readFileSync('./logos/.menu.jpg')
 xyz = await client.prepareMessage(from, logo, MessageType.image, {thumbnail:null})
-const buttons = [{
-                    "buttonId": 'registro', 
-                    "buttonText": {
-                        "displayText": "registrar📍"
-                    },
-                    "type": "RESPONSE"
-                }]
+const buttons = [
+    {buttonId: 'registro', buttonText: {displayText: 'registrar📍'}, type: 1}
+                 ]
 buttonsMessage = {
 imageMessage: xyz.message.imageMessage,
 contentText: `*Clique no botão registrar, e então aproveite o bot ;)\n\n${gaugerxyz}`,
@@ -6474,45 +6488,6 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
         thumbnail: fs.readFileSync('./logos/.menu.jpg'),
         caption: 'kkk'})
 }
-
-if (messagesC.includes("buttontest")) {
-const buttons = [{
-                    "buttonId": 'registro', 
-                    "buttonText": {
-                        "displayText": "registrar📍"
-                    },
-                    "type": "NATIVE_FLOW"
-                },
-                {
-                "buttonId": 'registro1', 
-                    "buttonText": {
-                        "displayText": "registrar📍"
-                    },
-                    "type": "NATIVE_FLOW"
-                },
-                {
-                "buttonId": 'registro2', 
-                    "buttonText": {
-                        "displayText": "registrar📍"
-                    },
-                    "type": "NATIVE_FLOW"
-                }
-               ]
-buttonsMessage = {
-contentText: ' ',
-footerText: ' ',
-buttons, headerType: 1
-}
-await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage)
-
-}
-
-
-/*prep = await client.prepareMessageFromContent(from, { buttonsMessage }, {})
-client.relayWAMessage(prep)
-}
-*/
-
 
 
 if (buttonsRM === 'menu✅') {
@@ -6628,66 +6603,54 @@ listMessage = {
                    if (!isGroup) return reply(mess.only.group)
                     if (!isGroupAdmins) return reply('so adm pd usar')           
                         if (isLevelingOn) return reply('❎O recurso LEVEIS já está ativado no grupo❎')
-
                         leveling.push(from)
-
                         fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))
-
                         reply('✅O recurso LEVEIS foi ativado✅')
                         }
 
                    
                     
-if (listRM.includes("leveis0")){
-    
-             if (!isLevelingOn) return reply('❎O recurso LEVEIS não está ativado no grupo❎')
-                        let position = false
-                        Object.keys(leveling).forEach((i) => {
-                            if (leveling[i] === from) {
-                                position = i
-                            }
-                        })
-                        if (position !== false) {
-                            leveling.splice(position, 1)
-                            fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))
-                        }
-                        reply('❌O recurso LEVEIS foi desativado❌')
+       if (listRM.includes("leveis0")){
+   
+             if (!isLevelingOn) return reply('*✅ O recurso de boas-vindas já está ativo ;) ✅*')
+                            leveling.splice(from)
+                            fs.writeFileSync('./json/leveling.json', JSON.stringify(leveling))        
+                        reply('*❌ O recurso de Leve foi desativado :( ❌*')
                         }
 
-if (listRM.includes("antilink1")){
+       if (listRM.includes("antilink1")){
 
-	if (!isGroup) return reply(mess.only.group)
+	     if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
-					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-					
+					if (!isBotGroupAdmins) return reply(mess.only.Badmin)		
+					if(isAntiLink) return reply ('*✅ O recurso de Anti-Link já está ativo ;) ✅*')		
 						antilink.push(from)
 						fs.writeFileSync('./json/antilink.json', JSON.stringify(antilink))
-						reply('Grupo anti-link ativado com sucesso neste grupo ✔️')
+						reply('*✅ O recurso de Anti-Link foi ativado ;) ✅*️')
 						}
 						
 						
 	if (listRM.includes("antilink0")){
     
-    					if (!isGroup) return reply(mess.only.group)
+    	      if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)							
-						if (!isantilink) return reply('O modo de grupo anti-link foi desabilitado ')
-						var ini = anti.indexOf(from)
-						antilink.splice(ini, 1)
+						if (!isAntiLink) return reply('*❌ O recurso de Anti-Link não está ativo :( ❌*')	
+						antilink.splice(from)
 						fs.writeFileSync('./json/antilink.json', JSON.stringify(antilink))
-						reply('Desativar grupo anti-link com sucesso neste grupo ✔️')
-}
+						reply('*❌ O recurso de Anti-Link foi desativado :( ❌*️')
+            }
 
 						
 	if (listRM.includes("antifake1")){
 
 	if (!isGroup) return reply(mess.only.group)
-					if (!isGroupAdmins) return reply(mess.only.admin)
+	    if (!isGroupAdmins) return reply(mess.only.admin)
 				if (!isBotGroupAdmins) return reply(mess.only.Badmin)				
-						if (isAntiFake) return reply('Ja esta ativo')
+						if (isAntiFake) return reply('*✅ O recurso de AntiFake já está ativo ;) ✅*')
 						antifake.push(from)
 						fs.writeFileSync('./json/antifake.json', JSON.stringify(antifake))
-						reply('Ativou com sucesso o recurso de antifake neste grupo✔️')
+						reply('*✅ O recurso de Anti-Fake foi ativado ;) ✅*️')
 						}
 						
 						if (listRM.includes("antifake0")){
@@ -6695,30 +6658,30 @@ if (listRM.includes("antilink1")){
     if (!isGroup) return reply(mess.only.group)
 					if (!isGroupAdmins) return reply(mess.only.admin)
 					if (!isBotGroupAdmins) return reply(mess.only.Badmin)			
-	 					if (!isAntiFake) return reply('Já está desativado')
+	 					if (!isAntiFake) return reply('*❌ O recurso de Anti-Fake não está ativo :( ❌*')
 						antifake.splice(from)
 						fs.writeFileSync('./json/antifake.json', JSON.stringify(antifake))
-						reply('Desativou com sucesso o recurso de antifake neste grupo✔️')
+						reply('*❌ O recurso de Anti-Fake foi desativado :( ❌*️')
  				}
 
 
 					if (listRM.includes("bv1")){
     
     if (!isGroup) return reply(mess.only.group)
-						if (isWelkom) return reply('o recurso está ativo')
+						if (isWelkom) return reply('*✅ O recurso de Boas-Vindas já está ativo ;) ✅*')
 						welkom.push(from)
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
-						reply('bv foi ativado nesse grupo')
+						reply('*✅ O recurso de Boas-Vindas foi ativado ;) ✅*')
 						}
 						
 						
-					if (listRM.includes("bv0")){
+				if (listRM.includes("bv0")){
     
     if (!isGroup) return reply(mess.only.group)
-						if (!isWelkom) return reply('o recurso não stá ativo')
-						welkom.splice(from) // disable)
+						if (!isWelkom) return reply('*❌ O recurso de Boas-Vindas não está ativo :( ❌*')
+						welkom.splice(from) 
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
-						reply('bv foi desativado nesse grupo')
+						reply('*❌ O recurso de Boas-Vindas foi desativado :( ❌*')
 					}
 
 
@@ -6735,25 +6698,6 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 }
 
 
-	/*
-if (example == 'example 2') {
-reply('test')
-}
-		 const buttons = [
-  {buttonId: 'id1', buttonText: {displayText: 'Button 1'}, type: 1},
-  {buttonId: 'id2', buttonText: {displayText: 'Button 2'}, type: 1}
-]
-
-const buttonMessage = {
-    contentText: "Hi it's button message",
-    footerText: 'Hello World',
-    buttons: buttons,
-    headerType: 1
-}
-
-const sendMsg = await cash.sendMessage(from, buttonMessage, MessageType.buttonsMessage)	
-			*/
-	
 	
 	
 				if (messagesC.includes("puta")){
@@ -6978,116 +6922,7 @@ tttset.autoEndTime = "off"
 }
 
 	
-	
-	      /*                  if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
-                            const encmedia = mek
-                      const media = await client.downloadAndSaveMediaMessage(encmedia)
-						ran = getRandom('.webp')
-						await ffmpeg(`./${media}`)
-							.input(media)
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								reply(mess.stikga)
-							})
-							.on('end', function () {
-								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								client.sendMessage(from, buffer, sticker, {quoted: mek})
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-                        }
-                        
-                        if ((isGroup && isMedia & isAuto && !mek.message.imageMessage || isQuotedVideo)) {
-                            const encmedia = mek					
-						const media = await client.downloadAndSaveMediaMessage(encmedia)
-						ran = getRandom('.webp')
-						reply(mess.wait) 
-						await ffmpeg(`./${media}`)
-							.inputFormat(media.split('.')[1])
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(mess.stikga)
-							})
-							.on('end', function () {
-								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								client.sendMessage(from, buffer, sticker, {quoted: mek})
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-                           fs.unlinkSync(media)
-                        }
-	
-	
-		if (isGroup && isMedia && isAuto && !mek.message.videoMessage || isQuotedImage) {
-						const encmedia = mek
-						const media = await client.downloadAndSaveMediaMessage(encmedia)
-						ran = getRandom('.webp')
-						await ffmpeg(`./${media}`)
-							.input(media)
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								reply(mess.stikga)
-							})
-							.on('end', function () {
-								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								client.sendMessage(from, buffer, sticker, {quoted: mek})
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-					} else if (isGroup && isMedia & isAuto && !mek.message.imageMessage || isQuotedVideo)   {
-						const encmedia = mek
-						const media = await client.downloadAndSaveMediaMessage(encmedia)
-						ran = getRandom('.webp')
-						reply(mess.wait) 
-						await ffmpeg(`./${media}`)
-							.inputFormat(media.split('.')[1])
-							.on('start', function (cmd) {
-								console.log(`Started : ${cmd}`)
-							})
-							.on('error', function (err) {
-								console.log(`Error : ${err}`)
-								fs.unlinkSync(media)
-								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(mess.stikga)
-							})
-							.on('end', function () {
-								console.log('Finish')
-								buffer = fs.readFileSync(ran)
-								client.sendMessage(from, buffer, sticker, {quoted: mek})
-								fs.unlinkSync(media)
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)
-							} 
-					*/
-	
+		
                         
 	
 }
