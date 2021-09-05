@@ -2018,7 +2018,6 @@ break
         case 'stf':
 				if (!isUser) return registroA()
    
-					const createSticker = require('wa-sticker-formatter')
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -2034,6 +2033,7 @@ break
 								reply(mess.stikga)
 							})
 							.on('end', async function () {
+							const createSticker = require('wa-sticker-formatter')
       console.log('Finish')
       const MatadataFix3 = {
         type: 'full',
@@ -2069,6 +2069,7 @@ break
 								reply(mess.stikga)
 							})
 							.on('end', async function () {
+							const createSticker = require('wa-sticker-formatter')
       console.log('Finish')
       const MatadataFix4 = {
         type: 'full',
