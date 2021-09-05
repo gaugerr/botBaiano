@@ -39,8 +39,7 @@
     "request": "^2.81.0",
     "spinnies": "^0.5.1",
     "emoji-api": "^1.0.2",
-    "tiktok-scraper": "^1.4.7",
-    "wa-sticker-formatter": "^4.0.3"
+    "tiktok-scraper": "^1.4.7"
   },
   "repository": {
     "type": "git",

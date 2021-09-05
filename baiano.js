@@ -38,7 +38,7 @@ const { WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC } = require('./li
 const { validmove, setGame } = require('./lib/jogodavelha.js')
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI()
-const createSticker = require('wa-sticker-formatter')
+//const createSticker = require('wa-sticker-formatter')
 
 //-------------------------------------LOAD npm PACKAGE-----------------------------------------------//
 
@@ -57,7 +57,6 @@ const axios = require('axios')
 const util = require('util');
 const request = require('request')
 const cd = 4.32e+7
-
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
@@ -608,9 +607,7 @@ const amountXp = Math.trunc(Math.random() * 20) * currentLevel
                                     mentionedJid: [namelv]
                                 }
                             }
-                            client.sendMessage(from, lvup, text, {
-                                quoted: mek
-                            })
+                       //    client.sendMessage(from, lvup, text, {quoted: mek})
                         }
                     } catch (err) {
                         console.error(err)
@@ -1330,6 +1327,40 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 `                                      
 
 	switch(command) {
+	
+	
+	
+	
+	case 'roubar': 
+   if (!isUser) return registroA() 
+   if (!isGroup) return reply(mess.only.group)
+   if (!isGroupAdmins) return reply(mess.only.admin)
+   if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+   if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return;
+  if (mek.message.extendedTextMessage.contextInfo.participant === undefined) {
+ // entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
+  if (exe1.groupadmins> 1) {
+var M_exe = []
+for (let cut of exe1) {
+M_exe.push(cut)
+}
+client.groupRemove(from, M_exe)
+reply('a')
+} else {
+client.groupRemove(from, [exe1[0]])
+reply('b')
+}
+} else {
+exe1 = mek.message.extendedTextMessage.contextInfo.participant
+client.groupRemove(from, [exe1])
+reply('c')
+}
+ client.sendMessage("Alvo removido com sucesso")
+
+break
+	
+	
+	
 
 case 'rank':
               if (!isGroup) return reply(mess.only.group)
@@ -1503,7 +1534,7 @@ client.sendMessage(from, fs.readFileSync('./logos/.roletawin.jpg'), image, {quot
 			}
 			break*/
 
-case 'apostar':
+case 'roleta':
 
  if (!isUser) return registroA()          
            if (!isGroup) return reply(`SOMENTE EM GRUPOS`)
@@ -1515,16 +1546,16 @@ case 'apostar':
 			if (Number(args[0]) >= checkxpr || Number(args[0]) >= dinheiro) return reply(`Você não pode apostar uma quantidade de dinheiro maior do que a você tem, e nosso limite de apostas é de ${quantidader} dinheiro por vez!\n\nSeu dinheiro: ${checkxpr}`)
 			if (Number(args[0]) < 1000) return reply(`O minimo para se apostar é de 1000 dinheiro`)
 			if (isNaN(args[0])) return reply('Para apostar use apenas números, nada de inserir letras, a menos que queira perder todo o XP que tenha.')
-		    const roletarussa = ['1','2','2']
+		    const roletarussa = ['1','1','2','2']
 			const double = roletarussa[Math.floor(Math.random() * roletarussa.length)]         
 			const nrolxp = Number(-args[0])
 			const prolxp = Number(args[0])
            if (double == 1) {
-					await reply(`🔪BANG!!!💣\n\nVocê perdeu na roleta-russa, causando uma perca de ${nrolxp} em seu dinheiro.`)
-					confirmATM(sender, nrolxp)
+					client.sendMessage(from, fs.readFileSync('./logos/.roletalose.jpg'), image, {quoted: mek, caption: `💥BANG!!!☠️\n\nVocê não sobreviveu na roleta-russa, causando uma perca de ${nrolxp} em seu dinheiro`, thumbnail: null})
+					addMoney(sender, nrolxp)
 				//	addKoinUser('556181496039@s.whatsapp.net', prolxp)
 		   } else if (double == 2) {
-					await reply(`🙌🏻SALVO😇\n\nVocê não levou um tiro e ganhou ${prolxp} dinheiro`)
+					client.sendMessage(from, fs.readFileSync('./logos/.roletawin.jpg'), image, {quoted: mek, caption: `*⭐Parabéns!✨*\n\n*Você não levou um tiro e ganhou ${prolxp} dinheiro*`, thumbnail: null})	
 					addMoney(sender, prolxp)
 			}
 			break
@@ -2652,15 +2683,14 @@ break
 //-------------------------------------------------------------------------GRUPOS-------------------------------------------------------------------------//
 
 case 'kickgp': 
-     if (!isUser) return registroA() 
+   if (!isUser) return registroA() 
    if (!isGroup) return reply(mess.only.group)
-
-					if (!isGroupAdmins) return reply(mess.only.admin)
-					if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return;
-if (mek.message.extendedTextMessage.contextInfo.participant === undefined) {
-entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
-if (exe1.groupadmins> 1) {
+   if (!isGroupAdmins) return reply(mess.only.admin)
+   if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+   if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return;
+  if (mek.message.extendedTextMessage.contextInfo.participant === undefined) {
+ // entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
+  if (exe1.groupadmins> 1) {
 var M_exe = []
 for (let cut of exe1) {
 M_exe.push(cut)
