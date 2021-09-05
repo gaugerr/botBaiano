@@ -56,7 +56,7 @@ const axios = require('axios')
 const util = require('util');
 const request = require('request')
 const cd = 4.32e+7
-//const { Sticker } = require('wa-sticker-formatter')
+const createSticker = require('wa-sticker-formatter')
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
@@ -1942,6 +1942,78 @@ reply('Use fotos/adesivos!')
 }
 
 break
+case 'sticker':
+        case 'stiker':
+        case 's':
+        if (!isGroup) return
+        if (isMedia && !mek.message.videoMessage || isQuotedImage) {
+      const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+      const media = await client.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+      reply('please wait')
+      await ffmpeg(`${media}`)
+      .input(media)
+      .on('start', function (cmd) {
+      console.log(`Started : ${cmd}`)
+      })
+      .on('error', function (err) {
+      console.log(`Error : ${err}`)
+      fs.unlinkSync(media)
+      reply('error')
+        })
+      .on('end', async function () {
+      console.log('Finish')
+      const MatadataFix3 = {
+        type: 'full',
+        pack: 'PACK NAME',
+        author: 'AUTOR NAME',
+        categories: [
+            '🌹'
+        ]
+        }
+      const sticker4s = await createSticker(`./sticker/${sender}.webp`, MatadataFix3)
+      client.sendMessage(from, sticker4s, MessageType.sticker, {quoted: mek})
+      fs.unlinkSync(media)  
+      fs.unlinkSync(`./sticker/${sender}.webp`)  
+      })
+      .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+      .toFormat('webp')
+      .save(`./sticker/${sender}.webp`)
+      } else if ((isMedia && mek.message.videoMessage.fileLength < 10000000 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.fileLength < 10000000)) {
+      const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
+      const media = await client.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+      reply('❬❗❭ *_Esᴘᴇʀᴀ ᴇɴ ᴘʀᴏᴄᴇsᴏ.._*')
+      await ffmpeg(`${media}`)
+      .inputFormat(media.split('.')[4])
+      .on('start', function (cmd) {
+      console.log(`Started : ${cmd}`)
+      })
+      .on('error', function (err) {
+      console.log(`Error : ${err}`)
+      fs.unlinkSync(media)
+      tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+      })
+      .on('end', async function () {
+      console.log('Finish')
+      const MatadataFix4 = {
+        type: 'full',
+        pack: 'PACK NAME',
+        author: 'AUTOR NAME',
+        categories: [
+            '🌹'
+        ]
+        }
+      const sticker5s = await createSticker(`./sticker/${sender}.webp`, MatadataFix4)
+      client.sendMessage(from, sticker5s, MessageType.sticker, {quoted: mek})
+      fs.unlinkSync(media)
+      fs.unlinkSync(`./sticker/${sender}.webp`)
+      })
+      .addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+      .toFormat('webp')
+      .save(`./sticker/${sender}.webp`)
+          } else {
+      reply(`please mention a picture`)
+      }
+        break
 
 /*case 'stickerf': //by gauger
 if (!isQuotedSticker) return reply('marque a fig')
