@@ -56,7 +56,7 @@ const axios = require('axios')
 const util = require('util');
 const request = require('request')
 const cd = 4.32e+7
-const createSticker = require('wa-sticker-formatter')
+
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
@@ -1942,7 +1942,7 @@ reply('Use fotos/adesivos!')
 }
 
 break
-case 'sticker':
+/*case 'sticker':
         case 'stiker':
         case 's':
         if (!isGroup) return
@@ -2013,12 +2013,12 @@ case 'sticker':
           } else {
       reply(`please mention a picture`)
       }
-       break
+       break */
 
         case 'stf':
 				if (!isUser) return registroA()
    
-					
+					const createSticker = require('wa-sticker-formatter')
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
