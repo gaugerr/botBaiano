@@ -38,6 +38,7 @@ const { WinnerX, WinnerO, Tie, IA, IAmove1, IAalter, priorityC } = require('./li
 const { validmove, setGame } = require('./lib/jogodavelha.js')
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI()
+const createSticker = require('wa-sticker-formatter')
 
 //-------------------------------------LOAD npm PACKAGE-----------------------------------------------//
 
@@ -2033,7 +2034,7 @@ break
 								reply(mess.stikga)
 							})
 							.on('end', async function () {
-							const createSticker = require('wa-sticker-formatter')
+			
       console.log('Finish')
       const MatadataFix3 = {
         type: 'full',
@@ -2069,7 +2070,7 @@ break
 								reply(mess.stikga)
 							})
 							.on('end', async function () {
-							const createSticker = require('wa-sticker-formatter')
+				
       console.log('Finish')
       const MatadataFix4 = {
         type: 'full',
