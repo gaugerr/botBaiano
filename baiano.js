@@ -226,7 +226,7 @@ client.on('CB:action,,battery', json => {
             const tescuk = ["0@s.whatsapp.net"]
             const q = args.join(' ')           
             sender = mek.key.fromMe ? client.user.jid : mek.key.remoteJid.endsWith('@g.us') ? mek.participant : mek.key.remoteJid
- const senderfix = mek.key.fromMe ? client.user.jid : isGroup ? mek.participant : mek.key.remoteJid
+
         // teste
 			mess = {
 				wait: 'Aguarde.. 🥃',			
@@ -407,7 +407,7 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
 			
 							
 	       
-
+const senderfix = mek.key.fromMe ? client.user.jid : isGroup ? mek.participant : mek.key.remoteJid
             
       
             
