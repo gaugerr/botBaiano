@@ -29,7 +29,7 @@ const { webp2gifFile } = require("./lib/gif.js")
 const { cmdadd } = require('./lib/totalcmd.js')
 const { addMetadata } = require('./lib/addMetadata.js')
 const { payLimit, limitAdd, checkLimit, isLimit } = require('./lib/limit.js')
-const { addATM, addMoney, checkMoney, confirmMoney } = require('./lib/money.js')
+const { addATM, addMoney, payMoney, checkMoney, confirmATM } = require('./lib/money.js')
 const { getLevelingXp, getLevelingId, addLevelingXp, addLevelingLevel, addLevelingId, getLevelingLevel, getUserRank, addCooldown, leveltab } = require('./lib/leveling.js')
 const { getRegisterNo, getRegisterName, getRegisterSerial, getRegisterTime, getRegisteredRandomId, addRegisteredUser, createSerial, checkRegisteredUser } = require('./lib/register.js')
 const { wait, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, banner, start, info, success, close } = require('./lib/functions.js')
@@ -126,7 +126,7 @@ async function starts() {
 			if (anu.action == 'add'){
 				num = anu.participants[0]
 				if (!num.split('@')[0].startsWith(55)) {
-				client.sendMessage(mdata.id, '👮🏻‍♀️Números fakes não são permitidos, apenas +55👮🏻‍♀️️', MessageType.text)							
+			//	client.sendMessage(mdata.id, '👮🏻‍♀️Números fakes não são permitidos, apenas +55👮🏻‍♀️️', MessageType.text)							
 				setTimeout(async function () {
 							console.log(color('[','white'), color('!','red'), color(']','white'), color('BANINDO O NÚMERO FAKE...','red'))
 				client.groupRemove(mdata.id, [num])
@@ -231,7 +231,7 @@ client.on('CB:action,,battery', json => {
 			mess = {
 				wait: 'Aguarde.. 🥃',			
 				twotxt: `Precido de 2 textos para essa logo, use da seguinte forma\n${prefix}${command} texto/texto`,
-				onetxt: `Precido de um textos para essa logo, use da seguinte forma\n${prefix}${command} texto`,									
+				onetxt: `Precido de um texto para essa logo, use da seguinte forma\n${prefix}${command} texto`,									
 		        error: 'Erro, tente novamente',
 		        limited : 'Desculpe mas você está limitado, usou todos os comandos disponíveis por hoje',			        			
 				only: {
@@ -556,7 +556,7 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
                 patt = 'God IV🕴'
             } else if (nivelAtual === 40) {
                 patt = 'God V🕴'
-            } else if (nivelAtual >= 777) {
+            } else if (nivelAtual >= 77777) {
                 patt = '*😈 𝗗𝗢𝗡𝗢 😈*'
             }
 
@@ -577,9 +577,6 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
             
             
         
-        
-                                                                                   
-                                    
             //_XP COM LEVELING ATIVO
                if (!mek.key.fromMe) {
                 if (isGroup && isLevelingOn && !isBanned) {
@@ -587,8 +584,10 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
                     const checkId = getLevelingId(sender)
                     try {
                         if (currentLevel === undefined && checkId === undefined) addLevelingId(sender)
-                        const amountXp = Math.floor(Math.random() * (15 - 25 + 1) + 15) 
-                        const requiredXp = 5 * Math.pow(currentLevel, (5 / 2)) + 50 * currentLevel + 100 
+                        
+                  
+const amountXp = Math.trunc(Math.random() * 20) * currentLevel         
+                    const requiredXp = 7 * Math.round(currentLevel) * 13 * currentLevel 
                         const getLevel = getLevelingLevel(sender)
                         const namelv = checkId
                         addLevelingXp(sender, amountXp)
@@ -598,7 +597,7 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
                                 text: `    ════❖LEVEL UP❖════
       ➣ Nome: @${namelv.split('@')[0]}
   ╭╼╾╼╾╼╾╼╾╼╾╼╾╼
-  │➣ XP: ${getLevelingXp(sender)}
+  │➣ XP: ${getLevelingXp(sender)}/${requiredXp}
   │➣ Level: ${getLevel} -> ${getLevelingLevel(sender)}
   │➣ Patente: ${patt}
   ╰╼╾╼╾╼╾╼╾╼╾╼╾╼
@@ -616,8 +615,8 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
                         console.error(err)
                     }
                 }
-            }   
-        
+            }
+
 
 
          
@@ -1381,7 +1380,7 @@ case 'rank':
               } else if (resp[i].level <= 50) {
               roles = 'Grande Mestre🛐'
               } else if (resp[i].level >= 777) {
-                patt = '*😈 𝗗𝗢𝗡𝗢 😈*'
+                roles = '*😈 𝗗𝗢𝗡𝗢 😈*'
               }
  
 
@@ -1476,6 +1475,33 @@ client.sendMessage(from, hah, audio, {mimetype: 'audio/mp4', ptt:true, quoted: m
 fs.unlinkSync(ran)
 })
 break   
+ /* case 'roleta':
+		if (!isUser) return registroA()               
+           if (!isGroup) return reply(`SOMENTE EM GRUPOS`)           
+		   const dinheiro = checkMoney(sender)
+		   const checkxpr = checkMoney(sender, dinheiro)
+		   const quantidader = `10000`
+			if (checkxpr <= quantidader) return reply(`Você não possui licença para jogar, obtenha uma quando tiver ${quantidader} de dinheiro.\n\nSeu dinheiro: ${checkxpr}`)
+			if (args.length !== 1) return reply('Especifique a quantidade de dinheiro para apostar.')
+			if (Number(args[0]) >= checkxpr || Number(args[0]) >= dinheiro) return reply(`Você não pode apostar uma quantidade de dinheiro maior do que a você tem, e nosso limite de apostas é de ${quantidader} dinheiro por vez!\n\nSeu dinheiro: ${checkxpr}`)
+			if (Number(args[0]) < 1000) return reply(`O minimo para se apostar é de 1000 dinheiro`)
+			if (isNaN(args[0])) return reply('Para apostar use apenas números, nada de inserir letras, a menos que queira perder todo o XP que tenha.')
+			const roletarussa = ['1','2','2']
+			const double = roletarussa[Math.floor(Math.random() * roletarussa.length)]         
+		    const doublek = Math.floor(Math.random() * 2) + 1
+			
+			const prolxp = q[Math.floor(Math.random() * 2)]
+           if (double == 1) {
+					 client.sendMessage(from, fs.readFileSync('./logos/.roletalose.jpg'), image, {quoted: mek, caption: `💥BANG!!!☠️\n\nVocê não sobreviveu na roleta-russa, causando uma perca de ${nrolxp} em seu dinheiro`, thumbnail: null})
+					payMoney(sender, q) 										
+				//	addMoney('555180614158@s.whatsapp.net', prolxp)
+				
+		   } else if (double == 2) {		   
+client.sendMessage(from, fs.readFileSync('./logos/.roletawin.jpg'), image, {quoted: mek, caption: `*⭐Parabéns!✨*\n\n*Você não levou um tiro e ganhou ${prolxp} dinheiro*`, thumbnail: null})					
+					addMoney(sender, prolxp)
+			}
+			break*/
+
 case 'apostar':
 
  if (!isUser) return registroA()          
@@ -1485,19 +1511,20 @@ case 'apostar':
 		   const quantidader = `10000`
 			if (checkxpr <= quantidader) return reply(`Você não possui licença para jogar, obtenha uma quando tiver ${quantidader} de dinheiro.\n\nSeu dinheiro: ${checkxpr}`)
 			if (args.length !== 1) return reply('Especifique a quantidade de dinheiro para apostar.')
-			if (Number(args[0]) >= checkxpr || Number(args[0]) >= dinheiro) return reply(`Você não pode apostar uma quantidade de dinheiro maior do que a você tem, /*e nosso limite de apostas é de ${quantidader} dinheiro por vez!*/\n\nSeu dinheiro: ${checkxpr}`)
+			if (Number(args[0]) >= checkxpr || Number(args[0]) >= dinheiro) return reply(`Você não pode apostar uma quantidade de dinheiro maior do que a você tem, e nosso limite de apostas é de ${quantidader} dinheiro por vez!\n\nSeu dinheiro: ${checkxpr}`)
 			if (Number(args[0]) < 1000) return reply(`O minimo para se apostar é de 1000 dinheiro`)
 			if (isNaN(args[0])) return reply('Para apostar use apenas números, nada de inserir letras, a menos que queira perder todo o XP que tenha.')
-		    const double = Math.floor(Math.random() * 2) + 1
+		    const roletarussa = ['1','2','2']
+			const double = roletarussa[Math.floor(Math.random() * roletarussa.length)]         
 			const nrolxp = Number(-args[0])
-			const prolxp = double + Number(args[0])
+			const prolxp = Number(args[0])
            if (double == 1) {
 					await reply(`🔪BANG!!!💣\n\nVocê perdeu na roleta-russa, causando uma perca de ${nrolxp} em seu dinheiro.`)
-					addMoney(sender, nrolxp, dinheiro)
+					confirmATM(sender, nrolxp)
 				//	addKoinUser('556181496039@s.whatsapp.net', prolxp)
 		   } else if (double == 2) {
 					await reply(`🙌🏻SALVO😇\n\nVocê não levou um tiro e ganhou ${prolxp} dinheiro`)
-					addMoney(sender, prolxp, dinheiro)
+					addMoney(sender, prolxp)
 			}
 			break
 case 'cassino':
@@ -2344,8 +2371,10 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
                     const userLevel = getLevelingLevel(sender)
                     const userXp = getLevelingXp(sender)
                 //    const userTime = getRegisterTime(sender)
-                    if (userLevel === undefined && userXp === undefined) return reply('não registrado, em testes')
-                    const requiredXp = 5 * Math.pow(userLevel, (5 / 2)) + 50 * userLevel + 100
+                    if (userLevel === undefined && userXp === undefined) return addLevelingId(sender)
+        
+                 const requiredXp = 7 * Math.round(userLevel) * 13 * userLevel 
+
                     client.sendMessage(from, leveltab(pushname, userLevel, userXp, patt), text, {
                             quoted: mek,
                             contextInfo: {
@@ -2363,7 +2392,7 @@ if (anu.duration > 1) return reply('Teste de limite de duração')
 
 	case 'antifake':
                     if (!isUser) return registroA() 
-                    if (isBanned) return reply(mess.banned)
+                
                     if (!isGroup) return reply(mess.only.group)
                     if (!isBotGroupAdmins) return reply(`[📍] O BOT PRECISA SER ADMIN`) 
 					if (args.length < 1) return reply('Hmmmm')
@@ -3886,8 +3915,6 @@ if (!isUser) return registroA()
 				case 'f':
 				if (!isUser) return registroA()
    
-  //     reply('Comando de fig com problema, desativado por tempo indeterminado')
-				if (isBanned) return reply('Banido!')
 					
 				if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
