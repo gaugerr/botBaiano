@@ -296,7 +296,7 @@ client.on('CB:action,,battery', json => {
 		      }
 		const ofrply = await getBuffer(pporang)
 		//	if (antibot === true) return
-const gauger = { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `Olá ${pushname}\n⎇ ${command}\n`, 'jpegThumbnail': ofrply} } }
+const gauger = { key: { fromMe: false, participant: "5511996535902@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `Olá ${pushname}\n⎇ ${command}\n`, 'jpegThumbnail': ofrply} } }
 
 		const catalogo = (teks) => {
              res = client.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 321, "message": teks, "footerText": "*_© Dcode Denpa_*", "thumbnail": ofrply, "surface": 'CATALOG'}}, {quoted: mek})
@@ -1336,10 +1336,10 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
    if (!isGroup) return reply(mess.only.group)
    if (!isGroupAdmins) return reply(mess.only.admin)
    if (!isBotGroupAdmins) return reply(mess.only.Badmin)
-   if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return;
+   if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return
   if (mek.message.extendedTextMessage.contextInfo.participant === undefined) {
  // entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
-  if (exe1.groupadmins> 1) {
+/*  if (exe1.groupadmins> 1) {
 var M_exe = []
 for (let cut of exe1) {
 M_exe.push(cut)
@@ -1349,13 +1349,13 @@ reply('a')
 } else {
 client.groupRemove(from, [exe1[0]])
 reply('b')
-}
-} else {
+} */
+
 exe1 = mek.message.extendedTextMessage.contextInfo.participant
 client.groupRemove(from, [exe1])
 reply('c')
 }
- client.sendMessage("Alvo removido com sucesso")
+
 
 break
 	
