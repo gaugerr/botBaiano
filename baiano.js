@@ -20,6 +20,7 @@ const {
 
 //------------------------------------------LOAD .js FILE--------------------------------------------------//
 
+//const { addUser, addMsg, getUserId, getUserMsg } = require('./lib/msgcount.js')
 const { convertSticker } = require('./lib/swm.js')
 const { isFiltered, addFilter } = require('./lib/antispam.js')
 const { fetchJson } = require('./lib/fetcher.js')
@@ -60,6 +61,7 @@ const cd = 4.32e+7
 
 //-----------------------------------------LOAD .json FILE-------------------------------------------------//
 
+const countMessages = JSON.parse(fs.readFileSync('./json/cmessages.json'))
 const antilink = JSON.parse(fs.readFileSync('./json/antilink.json'))
 const ban = JSON.parse(fs.readFileSync('./json/banned.json'))
 const welkom = JSON.parse(fs.readFileSync('./json/welkom.json'))
@@ -77,10 +79,8 @@ const tictactoe = JSON.parse(fs.readFileSync('./lib/ttt/tictactoe.json'))
 const giftC = JSON.parse(fs.readFileSync('./json/giftcard.json'))
 const atsticker = JSON.parse(fs.readFileSync('./json/atsticker.json'))
 const vip = JSON.parse(fs.readFileSync('./json/vip.json'))
-            
 var tttset = require('./lib/ttt/TTTconfig/tttset.json');
-var esp = require('./lib/ttt/TTTconfig/tttframe.json');
-
+var esp = require('./lib/ttt/TTTconfig/tttframe.json');         
 //-----------------------------------------------LOAD .js FILE-----------------------------------------------//
 
 const { nsfwloli } = require('./src/nsfwloli')
@@ -265,6 +265,7 @@ client.on('CB:action,,battery', json => {
 			const isAntiLink = isGroup ? antilink.includes(from) : false
             const isSimi = isGroup ? samih.includes(from) : false
             const isAntiFake = isGroup ? antifake.includes(from) : false
+            const isCMessages = isGroup ? countMessages.includes(from) : false
             const isAuto = isGroup ? atsticker.includes(from) : true
             const isUser = checkRegisteredUser(sender)
             const isBanned = ban.includes(sender)
@@ -351,7 +352,7 @@ await client.sendMessage(from, buttonsMessage, MessageType.buttonsMessage, {
 				client.sendMessage(hehe, teks, text)
 			}
 			const mentions = (teks, memberr, id) => {
-		  		(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
+		  		(id == null || id == undefined || id == false) ? client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}}) : client.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": memberr}})
 			}
             const sendImage = (teks) => {
 		         client.sendMessage(from, teks, image, {quoted:mek})
@@ -428,7 +429,7 @@ const senderfix = mek.key.fromMe ? client.user.jid : isGroup ? mek.participant :
                 case 10: waktoo = '𝗕𝗼𝗺 𝗗𝗶𝗮🌝'; break;
                 case 11: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌞'; break;
                 case 12: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌞'; break;
-                case 13: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌞'; break;
+                case 13: waktoo = 'sla kk fds'; break;
                 case 14: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌞'; break;
                 case 15: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌝'; break;
                 case 16: waktoo = '𝗕𝗼𝗮 𝗧𝗮𝗿𝗱𝗲🌝'; break;
@@ -617,8 +618,6 @@ const amountXp = Math.trunc(Math.random() * 20) * currentLevel
 
 
 
-         
-        
 
 
 
@@ -788,7 +787,7 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
      }     		    			
 
             
-               if (isGroup ) {
+               if (isGroup) {
             const checkMoneyUser = checkMoney(sender)
             try {
                 if (checkMoneyUser === undefined) addATM(sender)
@@ -801,9 +800,110 @@ Sua vez : @${moving.turn == "X" ? moving.X : moving.O}
 
 
             
-           if (isCmd) cmdadd()   
+           if (isCmd) cmdadd()              
+           if (isCmd) limitAdd(sender)    
+      //     if (isCmd) addFilter(from)
+      
            
-           if (isCmd) await limitAdd(sender)     
+            
+           if (isGroup) {
+           
+           const msg = JSON.parse(fs.readFileSync(`./json/mensagens/${from}.json`))
+           
+        const getUserId = (sender) => {
+            let position = false
+            Object.keys(msg).forEach((i) => {
+                if (msg[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return msg[position].id
+            }
+        }
+  const addMsg = (sender) => {
+            let position = false
+            Object.keys(msg).forEach((i) => {
+                if (msg[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                msg[position].msgs += 1
+                fs.writeFileSync(`./json/mensagens/${from}.json`, JSON.stringify(msg))
+            }
+        }
+        
+        const addCmd = (sender) => {
+            let position = false
+            Object.keys(msg).forEach((i) => {
+                if (msg[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                msg[position].cmds += 1
+                fs.writeFileSync(`./json/mensagens/${from}.json`, JSON.stringify(msg))
+            }
+        }
+        const addUser = (sender) => {
+                const obj = {id: sender, msgs : 0, cmds : 0}
+            msg.push(obj)
+            fs.writeFileSync(`./json/mensagens/${from}.json`, JSON.stringify(msg))
+        }
+                 
+        const getUserMsg = (sender) => {
+            let position = false
+            Object.keys(msg).forEach((i) => {
+                if (msg[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return msg[position].msgs
+            }
+        }
+        
+        const getUserCmd = (sender) => {
+            let position = false
+            Object.keys(msg).forEach((i) => {
+                if (msg[i].id === sender) {
+                    position = i
+                }
+            })
+            if (position !== false) {
+                return msg[position].cmds
+            }
+        }
+                               
+        if (isGroup) {
+           const checkUserId = getUserId(sender)
+           
+           try {                   
+           if (checkUserId === undefined) addUser(sender)
+           if (isCMessages) {
+           if (isCmd) addCmd(sender)
+           addMsg(sender)
+           }
+           } catch (err) {
+           console.log(err)
+           }
+        }
+        
+        if (messagesC.includes('!msgs')) {
+	if (!isCMessages) return reply('Contador não ativado, ative com as opções em !modos')
+	if (!isUser) return registroA()
+	if (!isGroup) return reply(mess.only.group)
+	const msg = getUserMsg(sender)
+	const cmds = getUserCmd(sender)
+	const tmsg = `*Olá ${pushname}\nVocê tem um total de ${msg} mensagens e ${cmds} comandos usados no grupo _${groupName}_*`
+	reply(tmsg)
+
+              }            
+         }         
+                  
+                  
+      
            
                                                     
        if (isCmd && isBanned && isGroup) {
@@ -1330,34 +1430,78 @@ if (!isCmd && isGroup) console.log(`\x1b[1;32m${hr}`, '\x1b[1;37m[\x1b[1;32m➻\
 	
 	
 	
+	case 'exec':
+try{
+msgmarcada = mek.message.extendedTextMessage.contextInfo.quotedMessage.corversation || mek.message.extendedTextMessage.contextInfo.quotedMessage.extendedTextMessage.text;					
+return eval([msgmarcada])
+}catch (err){
+e = String(err)
+reply(e)
+}
+break
 	
-	case 'roubar': 
+	
+	
+	
+/*	case 'roubar': 
+const mmsg = getUserMsg(sender)
+	if (mmsg <= '100') return reply(`Você precisa ter no mínimo 100 mensagens para roubar a casa do amiguinho!\nVeja suas mensagens com ${prefix}msgs`)
+	const moneyWw = Math.ceil(Math.random() * 10000)
    if (!isUser) return registroA() 
    if (!isGroup) return reply(mess.only.group)
-   if (!isGroupAdmins) return reply(mess.only.admin)
-   if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+   
    if (mek.message.extendedTextMessage === null || mek.message.extendedTextMessage === undefined) return
   if (mek.message.extendedTextMessage.contextInfo.participant === undefined) {
- // entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
-/*  if (exe1.groupadmins> 1) {
+ entah = mek.message.extendedTextMessage.contextInfo.mentionedJid
+  if (exe1.groupadmins > 1) {
 var M_exe = []
 for (let cut of exe1) {
 M_exe.push(cut)
 }
-client.groupRemove(from, M_exe)
-reply('a')
+client.groupMakeAdmin(from, M_exe)
 } else {
-client.groupRemove(from, [exe1[0]])
-reply('b')
-} */
-
-exe1 = mek.message.extendedTextMessage.contextInfo.participant
-client.groupRemove(from, [exe1])
-reply('c')
+client.groupMakeAdmin(from, [exe1[0]])
 }
+} else {
+exe1 = mek.message.extendedTextMessage.contextInfo.participant
+client.groupMakeAdmin(from, [exe1])
+}
+ client.sendMessage("Alvo removido com sucesso")
 
+break           
+*/
 
+case 'roubar':
+   const kmsg = getUserMsg(sender)
+    if (args.length < 1) return reply(`Marque quem você quer roubar!, ${prefix}roubar @tag`)
+	if (kmsg <= '100') return reply(`Você precisa ter no mínimo 100 mensagens para tentar roubar a casa do amiguinho!\nVeja suas mensagens com ${prefix}msgs`)
+	 moneyW = Math.ceil(Math.random() * 10000)
+   if (!isUser) return registroA() 
+   if (!isGroup) return reply(mess.only.group)
+   const wmon = Number(moneyW[0])
+   const lmon = Number(-moneyW[0])
+ kaj = ['1','2']
+ rnumb = kaj[Math.floor(Math.random() * kaj.length)]
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+if (rnumb == 1) {
+mentions(`💸Você roubou com sucesso a casa do _@${mentioned[0].split('@')[0]}_, achando _R$${moneyW}_ em um baú💰`, mentioned, true)
+addMoney(sender, wmon)
+addMoney(mentioned, lmon)
+} else if (rnumb == 2) {
+mentions(`🚷 ️_@${mentioned[0].split('@')[0]}_ te pegou no flagra e chamou a policia, você teve que pagar R$${moneyW} em indenizações para ele🚨`, mentioned, true)
+addMoney(mentioned, wmon)
+addMoney(sender, lmon)
+}
 break
+
+
+
+
+case 'teste1':
+mentioned = mek.message.extendedTextMessage.contextInfo.mentionedJid
+reply(`@${mentioned[0].split('@s.whatsapp.net')[0]}`)
+break
+
 	
 	
 	
@@ -1541,12 +1685,12 @@ case 'roleta':
 		   const dinheiro = checkMoney(sender)
 		   const checkxpr = checkMoney(sender, dinheiro)
 		   const quantidader = `10000`
-			if (checkxpr <= quantidader) return reply(`Você não possui licença para jogar, obtenha uma quando tiver ${quantidader} de dinheiro.\n\nSeu dinheiro: ${checkxpr}`)
+			//if (checkxpr <= quantidader) return reply(`Você não possui licença para jogar, obtenha uma quando tiver ${quantidader} de dinheiro.\n\nSeu dinheiro: ${checkxpr}`)
 			if (args.length !== 1) return reply('Especifique a quantidade de dinheiro para apostar.')
 			if (Number(args[0]) >= checkxpr || Number(args[0]) >= dinheiro) return reply(`Você não pode apostar uma quantidade de dinheiro maior do que a você tem, e nosso limite de apostas é de ${quantidader} dinheiro por vez!\n\nSeu dinheiro: ${checkxpr}`)
 			if (Number(args[0]) < 1000) return reply(`O minimo para se apostar é de 1000 dinheiro`)
 			if (isNaN(args[0])) return reply('Para apostar use apenas números, nada de inserir letras, a menos que queira perder todo o XP que tenha.')
-		    const roletarussa = ['1','1','2','2']
+		    const roletarussa = ['1','2']
 			const double = roletarussa[Math.floor(Math.random() * roletarussa.length)]         
 			const nrolxp = Number(-args[0])
 			const prolxp = Number(args[0])
@@ -6535,6 +6679,7 @@ reply(e)
 }
 
 
+
 /*	if (budy.startsWith('€')){
 if (!isOwner) return reply('somente meu criador')
 var konsol = budy.slice(2)
@@ -6788,19 +6933,22 @@ client.relayWAMessage(prep)
  {title: 'Ativar Boas Vindas✅', rowId:"bv1"},
  {title: 'Desativar Boas Vindas❌', rowId:"bv0"} 
 ]
-
-
+ rows4 = [
+ {title: 'Ativar Contador✅', rowId:"cm1"},
+ {title: 'Desativar Contador❌', rowId:"cm0"} 
+]
 
 sections = [
 {title: "Antifake: só permite números +55 de entrarem no grupo", rows: rows},
 {title: "Antilink: da ban em quem enviar links de grupos/tiktok/kwai", rows: rows1},
 {title: "Leveis: ativa o sistema de leveis/xp/patente", rows: rows2},
-{title: "Boas Vindas: mensagem quando alguém sai/entra no grupo", rows: rows3}
+{title: "Boas Vindas: mensagem quando alguém sai/entra no grupo", rows: rows3},
+{title: "Contador de Mensagens: conta mensagens dos membros", rows: rows4}
  ]
 
 listMessage = {
- buttonText: 'Clique aqui',
- description: "*❎ Modos ✅*",
+ buttonText: '◉ ¯\_(ツ)_/¯ ◉',
+ description: "*❎  Modos  ✅*",
  sections: sections, 
  listType: 1
  }
@@ -6883,31 +7031,51 @@ listMessage = {
 						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
 						reply('*✅ O recurso de Boas-Vindas foi ativado ;) ✅*')
 						}
-						
+																					
 						
 				if (listRM.includes("bv0")){
     
     if (!isGroup) return reply(mess.only.group)
-						if (!isWelkom) return reply('*❌ O recurso de Boas-Vindas não está ativo :( ❌*')
-						welkom.splice(from) 
-						fs.writeFileSync('./json/welkom.json', JSON.stringify(welkom))
+    	if (!isGroupAdmins) return reply(mess.only.admin)
+						if (!isCMessages) return reply('*❌ O recurso de Boas-Vindas não está ativo :( ❌*')
+				        welkom.splice(from) 
+						fs.writeFileSync('./json/cmessages.json', JSON.stringify(welkom))
 						reply('*❌ O recurso de Boas-Vindas foi desativado :( ❌*')
 					}
 
+if (listRM.includes("cm0")){
+    
+    if (!isGroup) return reply(mess.only.group)
+						if (!isCMessages) return reply('*❌ O Contador de Mensagens não está ativo :( ❌*')
+					countMessages.splice(from) 
+						fs.writeFileSync('./json/cmessages.json', JSON.stringify(countMessages))
+						reply('*❌ O Contator de Mensagens foi desativado :( ❌*')
+					}
+					
+										if (listRM.includes("cm1")){
+    
+    if (!isGroup) return reply(mess.only.group)
+    	if (!isGroupAdmins) return reply(mess.only.admin)
+						if (isCMessages) return reply('*✅ O Contador de Mensagens já está ativo ;) ✅*')
+						countMessages.push(from)
+						fs.writeFileSync('./json/cmessages.json', JSON.stringify(countMessages))
+						reply('*✅ O Contador de Mensagens foi ativado ;) ✅*')
+						}
+
 
 if (listRM.includes("!play")) {
+              
+
             reply('Baixando.. aguarde 🥃')
                 const ytbt = args.join(" ")
-                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)
-                 infomp3 = `𒊹︎︎︎𝐄𝐍𝐕𝐈𝐀𝐍𝐃𝐎 𝐒𝐔𝐀 𝐌𝐔𝐒𝐈𝐂𝐀 𝐀𝐆𝐔𝐀𝐑𝐃𝐄🎬`
+                anu = await fetchJson(`https://api.zeks.me/api/ytplaymp4?apikey=gaugerkkkxyz&q=${ytbt}`)        
 if (anu.error) return reply('deu erro bro')
 if (anu.duration > 1) return reply('Teste de limite de duração')
                 buffer = await getBuffer(anu.result.thumbnail)
                 lagu = await getBuffer(anu.result.url_video)
-                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, duration:999, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
+                client.sendMessage(from, lagu, MessageType.audio, { mimetype: Mimetype.mp4Audio, filename: `audio.mp3`, quoted: { key: { fromMe: false, participant: "0@s.whatsapp.net", ...(from ? { remoteJid: "555196741133-1490367661@g.us" } : {}) }, message: { 'imageMessage': { 'caption': `⎇ ${anu.result.title}\n`, 'jpegThumbnail': await getBuffer(anu.result.thumbnail)} } }, ptt:true})
+
 }
-
-
 	
 	
 				if (messagesC.includes("puta")){
